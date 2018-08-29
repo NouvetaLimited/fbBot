@@ -1,7 +1,7 @@
 'use strict'
 
 const express= require('express');
-const bosyParser= require('bodyParser');
+const bodyParser= require('bodyParser');
 const request= require('request');
 
 const app = express();
