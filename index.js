@@ -29,7 +29,7 @@ res.send ("HI welcome")
  * token
  */
 
-const  token = "EAANb0QutBe8BAJyjQjPOvKJSXgBNZBZC5CDM4fKoA6EhScJiIZBYbqhl1JXVm557jBAZCWR1sH3M1h1JxtzeDI8oeFEs82PMduYZClHLVDtMZA8InZCK4ZCtcZBEzXKs6gn35zhaxiadzZBYiilwTtc1hZBZBZBGiCABIoRVTzZAJKCvMBJBX9usZCHcPDZA"
+let token = "EAANb0QutBe8BAJyjQjPOvKJSXgBNZBZC5CDM4fKoA6EhScJiIZBYbqhl1JXVm557jBAZCWR1sH3M1h1JxtzeDI8oeFEs82PMduYZClHLVDtMZA8InZCK4ZCtcZBEzXKs6gn35zhaxiadzZBYiilwTtc1hZBZBZBGiCABIoRVTzZAJKCvMBJBX9usZCHcPDZA"
 
 /**
  * FACEBOOK
@@ -43,7 +43,7 @@ app.get('/webhook/', function (req, res){
 });
 
 app.post('/webhook/', function(req, res){
-     let messaging_events =  req.body.entry[0].messaging_events
+     let messaging_events =  req.body.entry[0].messaging
     for (let i = 0; 1 < messaging_events.length; i++){
          let event = messaging_events[i]
         let sender = event.sender.id
@@ -59,10 +59,10 @@ function sendText(sender, text){
     let messageData = {text: text}
     request({
         url: "https://graph.facebook.com/v2.6/me/messages",
-        qs : {access_token, token} ,
+        qs : {access_token : token},
         method: "POST" ,
         json: {
-            receipt: {id: sender},
+            recipient: {id: sender},
             message: messageData
         }
     }, function(error, response, body) {
@@ -71,7 +71,7 @@ function sendText(sender, text){
         } else if (response.body.error) {
             console.log("response body error")
         }
-    }) 
+    })
 
 }
 
