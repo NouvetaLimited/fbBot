@@ -31,7 +31,7 @@ res.send ("HI welcome")
 
 app.get('/webhook/', function (req, res){
     if(req.query['hub.verify_token']==="chirchir"){
-        res.send(req.query['hub.verify_token'])
+        res.send(req.query['hub.challenge'])
     }
     res.send('wrong token')
 });
