@@ -47,9 +47,9 @@ app.post('/webhook/', function(req, res){
     for (let i = 0; i < messaging_events.length; i++){
          let event = messaging_events[i];
         let sender = event.sender.id;
-        if(event.message === 'Get Started'){
+        if(event.message === 'hi'){
              let text = event.message.text;
-            sendText(sender,"Welcome to my bot")
+            sendText(sender,"hi how may i help you")
         }
     }
     res.sendStatus(200);
