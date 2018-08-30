@@ -1,19 +1,19 @@
 'use strict'
 
-const express= require('express');
-const bodyParser= require('body-parser');
-const request= require('request');
+const express= require('express')
+const bodyParser= require('body-parser')
+const request= require('request')
 
-const app = express();
+const app = express()
 
 /*
 allow to process data
  */
 
-app.set('port',(process.env.PORT  || 5000));
+app.set('port',(process.env.PORT  || 5000))
 
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
 
 
 /*
@@ -23,13 +23,13 @@ ROUTES
 app.get('/' , function (req, res){
 
 res.send ("HI welcome")
-});
+})
 
 /**
  * token
  */
 
-let token = "EAANb0QutBe8BAJyjQjPOvKJSXgBNZBZC5CDM4fKoA6EhScJiIZBYbqhl1JXVm557jBAZCWR1sH3M1h1JxtzeDI8oeFEs82PMduYZClHLVDtMZA8InZCK4ZCtcZBEzXKs6gn35zhaxiadzZBYiilwTtc1hZBZBZBGiCABIoRVTzZAJKCvMBJBX9usZCHcPDZA"
+let token = 'EAANb0QutBe8BAJoZCi6LtIRaRdQMsE8nWM2ZC37lWJam85lx4kG0sVRvUIWBjaXYRgZC9QOg8TYf4zaR4oPKnnGMnZBtpkByHIZCioDoeouQJ1n904Q3khQV46pXGwZAUPxymmLJi3B8KK9AnfhQk6IZBd4kZCqZAiZA2YrqLCfxcQeeaelACSBNoa',
 
 /**
  * FACEBOOK
@@ -40,7 +40,7 @@ app.get('/webhook/', function (req, res){
         res.send(req.query['hub.challenge'])
     }
     res.send('wrong token')
-});
+})
 
 app.post('/webhook/', function(req, res){
      let messaging_events =  req.body.entry[0].messaging
