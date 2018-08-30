@@ -66,10 +66,10 @@ app.post('/webhook/', function(req, res){
 function decideMessage(sender, text1){
     let text = text1.toLowerCase()
      if(text.includes("summer")){
-        sendImageMessage(sender, "test")
+        sendImageMessage(sender)
 
      }else if(text.includes("winter")){
-        sendGenericMessage(sender, "test")
+        sendGenericMessage(sender)
      }else{
         sendText(sender, "I like fall")
          sendButtonMessage(sender, "im here")
@@ -138,7 +138,6 @@ function sendImageMessage(sender){
 }
 function sendGenericMessage(sender){
     let messageData= {
-        "message": {
             "attachment": {
                 "type": "template",
                 "payload": {
@@ -169,7 +168,6 @@ function sendGenericMessage(sender){
                 }
             }
         }
-    }
         sendRequest(sender, messageData)
 
 }
