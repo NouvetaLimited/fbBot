@@ -66,7 +66,8 @@ app.post('/webhook/', function(req, res){
 function decideMessage(sender, text1){
     let text = text1.toLowerCase()
      if(text.includes("summer")){
-        sendImageMessage(sender)
+        // sendImageMessage(sender)
+        sendPersistent(sender)
 
      }else if(text.includes("winter")){
         sendGenericMessage(sender)
@@ -130,7 +131,6 @@ function sendImageMessage(sender){
             "type":"image",
             "payload":{
                 "url":"http://www.messenger-rocks.com/image.jpg",
-                "is_reusable":true
             }
         }
     }
@@ -169,6 +169,58 @@ function sendGenericMessage(sender){
             }
         }
         sendRequest(sender, messageData)
+
+}
+function sendPersistent(sender){
+  let messageData= {
+  "persistent_menu":[
+    {
+      "locale":"default",
+      "composer_input_disabled": true,
+      "call_to_actions":[
+        {
+          "title":"My Account",
+          "type":"nested",
+          "call_to_actions":[
+            {
+              "title":"Pay Bill",
+              "type":"postback",
+              "payload":"PAYBILL_PAYLOAD"
+            },
+            {
+              "title":"History",
+              "type":"postback",
+              "payload":"HISTORY_PAYLOAD"
+            },
+            {
+              "title":"Contact Info",
+              "type":"postback",
+              "payload":"CONTACT_INFO_PAYLOAD"
+            }
+          ]
+        },
+        {
+          "type":"web_url",
+          "title":"Latest News",
+          "url":"http://www.messenger.com/",
+          "webview_height_ratio":"compact"
+        }
+      ]
+    },
+    {
+      "locale":"zh_CN",
+      "composer_input_disabled":false,
+      "call_to_actions":[
+        {
+          "title":"Pay Bill",
+          "type":"postback",
+          "payload":"PAYBILL_PAYLOAD"
+        }
+      ]
+    }
+  ]
+}
+sendRequest(sender, messageData)
 
 }
 
