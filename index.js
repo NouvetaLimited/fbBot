@@ -69,12 +69,14 @@ app.post('/webhook/', function(req, res){
 
 function decideMessage(sender, text1){
     let text = text1.toLowerCase()
-     if(text.includes("Get Started")){
+     if(text.includes("get started")){
          sendText(sender, "Hi, My name is Kunta. I am National Bank of Kenya's virtual agent. Press the buttons bellow to choose the service you want?")
          sendButtonMessage(sender,"choose one")
+         quickReply(sender)
 
-     }else if(text.includes("create")){
-        sendGenericMessage(sender)
+     }else if(text.includes("exists")){
+        //sendGenericMessage(sender)
+        sendButtonMessage2(sender,"hare are services available for a registered user")
      }else{
         sendText(sender, "I like fall")
          sendButtonMessage(sender, "im here")
@@ -91,7 +93,7 @@ function sendButtonMessage(sender, text){
                 "buttons":[
                     {
                         "type":"postback",
-                        "title":"user",
+                        "title":"Im a user",
                         "payload":"exists"
                     },
                     {
@@ -105,6 +107,47 @@ function sendButtonMessage(sender, text){
     }
      sendRequest(sender, messageData)
 }
+// the user second buttons
+function sendButtonMessage(sender, text){
+    let messageData={
+        "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text":text,
+                "buttons":[
+                    {
+                        "type":"postback",
+                        "title":"Load my account",
+                        "payload":"load"
+                    },
+                    {
+                        "type":"postback",
+                        "title":"check balance",
+                        "payload":"balance"
+                    },
+                    {
+                        "type":"postback",
+                        "title":"pay merchant",
+                        "payload":"merchant"
+                    }
+
+                ]
+            }
+        }
+    }
+     sendRequest(sender, messageData)
+}
+//quickReply
+function quickReply(sender){
+  let messageData={
+    {
+  "content_type":"user_phone_number"
+ }
+  }
+  sendRequest(sender, messageData);
+}
+
 
 function sendRequest(sender, messageData) {
     request({
