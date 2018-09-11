@@ -70,8 +70,6 @@ app.post('/webhook/', function(req, res){
 
 function decideMessage(sender, text1){
     let text = text1.toLowerCase()
-    let phoneNumber
-    let amount
      if(text.includes("get started")){
          sendText(sender, "Hi, My name is Kunta. I am National Bank of Kenya's virtual agent. Press the buttons bellow to choose the service you want?")
          sendButtonMessage(sender,"choose one")
@@ -85,16 +83,16 @@ function decideMessage(sender, text1){
        quickReply(sender)
      }
      else if(text.includes("254")){
-        phoneNumber = text
+      let  phoneNumber = text
        sendText(sender,"send the amount you'll wish to deposit starting with a then the amount. for example for 500 enter a500")
      }
      else if(text.includes("a")){
        sendText(sender,"Youll receive a push notification shortly")
-        amount = text
-       axios.post(`https://payme.ticketsoko.com/api/index.php?function=CustomerPayBillOnline&PayBillNumber=175555&Amount=amount&PhoneNumber=phoneNumber&AccountReference=tickets&TransactionDesc=yolo`)
+        let amount = text
+       axios.post(`https://payme.ticketsoko.com/api/index.php?function=CustomerPayBillOnline&PayBillNumber=175555&Amount=amount&PhoneNumber=254715428709&AccountReference=tickets&TransactionDesc=yolo`)
   .then(function (response) {
     console.log(response);
-    console.log(phoneNumber);
+    console.log("This is me",phoneNumber);
   })
   .catch(function (error) {
     console.log(error);
