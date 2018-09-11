@@ -141,9 +141,7 @@ function sendButtonMessage(sender, text){
 //quickReply
 function quickReply(sender){
   let messageData={
-    {
   "content_type":"user_phone_number"
- }
   }
   sendRequest(sender, messageData);
 }
