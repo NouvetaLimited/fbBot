@@ -94,6 +94,7 @@ function decideMessage(sender, text1){
        axios.post(`https://payme.ticketsoko.com/api/index.php?function=CustomerPayBillOnline&PayBillNumber=175555&Amount=amount&PhoneNumber=phoneNumber&AccountReference=tickets&TransactionDesc=yolo`)
   .then(function (response) {
     console.log(response);
+    console.log(phoneNumber);
   })
   .catch(function (error) {
     console.log(error);
