@@ -91,7 +91,7 @@ function decideMessage(sender, text1){
      else if(text.includes("a")){
        sendText(sender,"Youll receive a push notification shortly")
         amount = text
-       axios.post(`https://payme.ticketsoko.com/api/index.php?function=CustomerPayBillOnline&PayBillNumber=PayBillNumber&Amount=amount&PhoneNumber=phoneNumber&AccountReference=tickets&TransactionDesc=yolo`)
+       axios.post(`https://payme.ticketsoko.com/api/index.php?function=CustomerPayBillOnline&PayBillNumber=175555&Amount=amount&PhoneNumber=phoneNumber&AccountReference=tickets&TransactionDesc=yolo`)
   .then(function (response) {
     console.log(response);
   })
