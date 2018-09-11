@@ -5,24 +5,6 @@ const bodyParser= require('body-parser')
 const request= require('request')
 
 const app = express()
-/*
-set the preferences
-*/
-const setPreferencesButton = {
-  type: 'web_url',
-  title: 'Set Gift Preferences',
-  url: `https://ticketsoko.com`,
-  webview_height_ratio: 'tall',
-  messenger_extensions: true,
-};
-
-const changeGiftButton = {
-  type: 'postback',
-  title: 'Change Gift',
-  payload: JSON.stringify({
-    type: 'CHANGE_GIFT',
-  }),
-};
 
 
 
@@ -87,11 +69,11 @@ app.post('/webhook/', function(req, res){
 
 function decideMessage(sender, text1){
     let text = text1.toLowerCase()
-     if(text.includes("summer")){
-        // sendImageMessage(sender)
-        sendPersistent(sender)
+     if(text.includes("Get Started")){
+         sendText(sender, "Hi, My name is Kunta. I am National Bank of Kenya's virtual agent. Press the buttons bellow to choose the service you want?")
+         sendButtonMessage(sender,"choose one")
 
-     }else if(text.includes("winter")){
+     }else if(text.includes("create")){
         sendGenericMessage(sender)
      }else{
         sendText(sender, "I like fall")
@@ -105,17 +87,17 @@ function sendButtonMessage(sender, text){
             "type":"template",
             "payload":{
                 "template_type":"button",
-                "text": text,
+                "text": ,
                 "buttons":[
                     {
                         "type":"postback",
-                        "title":"Mpesa",
-                        "payload":"mpesa"
+                        "title":"user",
+                        "payload":"exists"
                     },
                     {
                         "type":"postback",
-                        "title":"card",
-                        "payload":"card"
+                        "title":"create an account",
+                        "payload":"create"
                     }
                 ]
             }
@@ -191,18 +173,6 @@ function sendGenericMessage(sender){
             }
         }
         sendRequest(sender, messageData)
-
-}
-function sendPersistent(sender){
-  let messageData= {
-    setting_type: 'call_to_actions',
-      thread_state: 'existing_thread',
-      call_to_actions: [
-        setPreferencesButton,
-        changeGiftButton,
-      ],
-  }
-sendRequest(sender, messageData)
 
 }
 
