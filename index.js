@@ -72,17 +72,17 @@ function decideMessage(sender, text1){
      if(text.includes("get started")){
          sendText(sender, "Hi, My name is Kunta. I am National Bank of Kenya's virtual agent. Press the buttons bellow to choose the service you want?")
          sendButtonMessage(sender,"choose one")
-         quickReply(sender)
 
      }else if(text.includes("exists")){
         //sendGenericMessage(sender)
         sendButtonMessage2(sender,"Here are services available for a registered user")
      }
      else if(text.includes("load")){
-       sendText(sender,"You can load your account using Mpesa. Enter your phone number below")
+       sendText(sender,"You can load your account using Mpesa. Enter your phone number below Or if its a different Number enter on the editor")
+       quickReply(sender)
      }
-     else{
-        sendText(sender, "I didn't understand. You can try rephrasing.Try using the buttons")
+     else if(text.includes("254715428709")){
+       sendText(sender,'test')
      }
 }
 
@@ -144,7 +144,7 @@ function sendButtonMessage2(sender, text){
 //quickReply
 function quickReply(sender){
   let messageData={
-      "text": "Here is a quick reply!",
+      "text": "Select your Phone number",
       "quick_replies":[
         {
           "content_type":"user_phone_number"
