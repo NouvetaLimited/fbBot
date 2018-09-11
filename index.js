@@ -89,7 +89,7 @@ function decideMessage(sender, text1){
        sendText(sender,"send the amount you'll wish to deposit starting with a then the amount. for example for 500 enter a500")
      }
      else if(text.includes("a")){
-       sendText(sender,"Youll receive a push notification shortly"
+       sendText(sender,"Youll receive a push notification shortly")
         amount = text
        axios.post('https://payme.ticketsoko.com/api/index.php?function=CustomerPayBillOnline', {
          PayBillNumber: 175555,
