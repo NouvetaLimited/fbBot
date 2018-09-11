@@ -144,7 +144,6 @@ function sendButtonMessage2(sender, text){
 //quickReply
 function quickReply(sender){
   let messageData={
-    "message":{
       "text": "Here is a quick reply!",
       "quick_replies":[
         {
@@ -155,7 +154,6 @@ function quickReply(sender){
         }
       ]
     }
-  }
   sendRequest(sender, messageData);
 }
 
