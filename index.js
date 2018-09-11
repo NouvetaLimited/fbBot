@@ -83,11 +83,13 @@ function decideMessage(sender, text1){
        quickReply(sender)
      }
      else if(text.includes("254")){
+       console.log("I am the number" text);
       let  phoneNumber = text
        sendText(sender,"send the amount you'll wish to deposit starting with a then the amount. for example for 500 enter a500")
      }
      else if(text.includes("a")){
        sendText(sender,"Youll receive a push notification shortly")
+       console.log("I am amount",text);
         let amount = text
        axios.post(`https://payme.ticketsoko.com/api/index.php?function=CustomerPayBillOnline&PayBillNumber=175555&Amount=amount&PhoneNumber=254715428709&AccountReference=tickets&TransactionDesc=yolo`)
   .then(function (response) {
