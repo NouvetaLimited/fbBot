@@ -87,7 +87,7 @@ function decideMessage(sender, text1){
       let  phoneNumber = text
        sendText(sender,"send the amount you'll wish to deposit starting with a then the amount. for example for 500 enter a500")
      }
-     else if(text.includes("a")){
+     else if(text.includes("5")){
        sendText(sender,"Youll receive a push notification shortly")
        console.log("I am amount",text);
         let amount = text
