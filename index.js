@@ -76,10 +76,13 @@ function decideMessage(sender, text1){
 
      }else if(text.includes("exists")){
         //sendGenericMessage(sender)
-        sendButtonMessage2(sender,"hare are services available for a registered user")
-     }else{
-        sendText(sender, "I like fall")
-         sendButtonMessage(sender, "im here")
+        sendButtonMessage2(sender,"Here are services available for a registered user")
+     }
+     else if(text.includes("load")){
+       sendText(sender,"You can load your account using Mpesa. Enter your phone number below")
+     }
+     else{
+        sendText(sender, "I didn't understand. You can try rephrasing.Try using the buttons")
      }
 }
 
@@ -108,7 +111,7 @@ function sendButtonMessage(sender, text){
      sendRequest(sender, messageData)
 }
 // the user second buttons
-function sendButtonMessage(sender, text){
+function sendButtonMessage2(sender, text){
     let messageData={
         "attachment":{
             "type":"template",
@@ -141,7 +144,17 @@ function sendButtonMessage(sender, text){
 //quickReply
 function quickReply(sender){
   let messageData={
-  "content_type":"user_phone_number"
+    "message":{
+      "text": "Here is a quick reply!",
+      "quick_replies":[
+        {
+          "content_type":"user_phone_number"
+        },
+        {
+          "content_type":"location"
+        }
+      ]
+    }
   }
   sendRequest(sender, messageData);
 }
