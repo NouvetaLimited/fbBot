@@ -83,7 +83,7 @@ function decideMessage(sender, text1){
        quickReply(sender)
      }
      else if(text.includes("254")){
-       console.log("I am the number" text);
+       console.log("I am the number", text);
       let  phoneNumber = text
        sendText(sender,"send the amount you'll wish to deposit starting with a then the amount. for example for 500 enter a500")
      }
