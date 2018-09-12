@@ -206,8 +206,7 @@ function quickReplyAcc(sender){
        "payload":"book",
        //"image_url":"http://example.com/img/red.png"
      }
-
-
+   ]
     }
   sendRequest(sender, messageData);
 }
