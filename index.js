@@ -76,11 +76,14 @@ function decideMessage(sender, text1){
 
      }else if(text.includes("exists")){
         //sendGenericMessage(sender)
-        sendButtonMessage2(sender,"Here are services available for a registered user")
+        sendButtonMessage2(sender,"Choose the service youll like to use")
      }
      else if(text.includes("load")){
        //sendText(sender,"You can load your account using Mpesa. Enter your phone number below Or if its a different Number enter on the editor")
        quickReply(sender)
+     }
+     else if(text.includes("acc")){
+       quickReplyAcc(sender)
      }
      else if(text.includes("254")){
        console.log("I am the number", text);
@@ -112,13 +115,13 @@ function sendButtonMessage(sender, text){
                 "buttons":[
                     {
                         "type":"postback",
-                        "title":"Im a user",
+                        "title":"I have an account",
                         "payload":"exists"
                     },
                     {
                         "type":"postback",
-                        "title":"create an account",
-                        "payload":"create"
+                        "title":"Im not a NBK customer",
+                        "payload":"not"
                     }
                 ]
             }
@@ -137,18 +140,18 @@ function sendButtonMessage2(sender, text){
                 "buttons":[
                     {
                         "type":"postback",
-                        "title":"Load my account",
-                        "payload":"load"
+                        "title":"Account Request",
+                        "payload":"acc"
                     },
                     {
                         "type":"postback",
-                        "title":"check balance",
-                        "payload":"balance"
+                        "title":"Transactions",
+                        "payload":"trans"
                     },
                     {
                         "type":"postback",
-                        "title":"pay merchant",
-                        "payload":"merchant"
+                        "title":"General service",
+                        "payload":"gen"
                     }
 
                 ]
@@ -172,7 +175,42 @@ function quickReply(sender){
     }
   sendRequest(sender, messageData);
 }
+/**
+Account
+*/
+function quickReplyAcc(sender){
+  let messageData={
+      "text": "Select your Phone number",
+      "quick_replies":[
+        {
+        "content_type":"text",
+        "title":"check balance",
+        "payload":"balance",
+        //"image_url":"http://example.com/img/red.png"
+        },
+        {
+        "content_type":"text",
+        "title":"request Ministatement",
+        "payload":"mini",
+        //"image_url":"http://example.com/img/red.png"
+       },
+       {
+       "content_type":"text",
+       "title":"Request full statement",
+       "payload":"statement",
+       //"image_url":"http://example.com/img/red.png"
+     },
+     {
+       "content_type":"text",
+       "title":"Cheque book request",
+       "payload":"book",
+       //"image_url":"http://example.com/img/red.png"
+     }
 
+
+    }
+  sendRequest(sender, messageData);
+}
 
 function sendRequest(sender, messageData) {
     request({
