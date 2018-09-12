@@ -85,7 +85,7 @@ function decideMessage(sender, text1){
      else if(text.includes("acc")){
        quickReplyAcc(sender)
      }
-     else if(text.icludes('balance')){
+     else if(text.includes('balance')){
        sendText(sender, "Thank the request has been received, Youll receive a text message on your registered number with your acc balance.")
        sendButtonMessage2(sender,"Choose the service youll like to use")
      }
