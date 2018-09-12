@@ -78,10 +78,10 @@ function decideMessage(sender, text1){
         //sendGenericMessage(sender)
         sendButtonMessage2(sender,"Choose the service youll like to use")
      }
-     else if(text.includes("load")){
+     /*else if(text.includes("load")){
        //sendText(sender,"You can load your account using Mpesa. Enter your phone number below Or if its a different Number enter on the editor")
        quickReply(sender)
-     }
+     }*/
      else if(text.includes("acc")){
        quickReplyAcc(sender)
      }
