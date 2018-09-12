@@ -85,6 +85,32 @@ function decideMessage(sender, text1){
      else if(text.includes("acc")){
        quickReplyAcc(sender)
      }
+     else if(text.icludes('balance')){
+       sendText(sender, "Thank the request has been received, Youll receive a text message on your registered number with your acc balance.")
+       sendButtonMessage2(sender,"Choose the service youll like to use")
+     }
+     else if(text.includes("mini")){
+       sendText(sender, "Thank the request has been received, Youll receive a text message on your registered number with your Ministatement.")
+       sendButtonMessage2(sender,"Choose the service youll like to use")
+     }
+     else if(text.includes("statement")){
+       sendButtonStatement(sender,"Do you want a")
+     }
+     else if(text.includes("hard")){
+       sendText(sender, "We've received your request visit any NBK branch and pick. Thank you")
+       sendButtonMessage2(sender,"Choose the service youll like to use")
+     }
+     else if(text.includes("soft")){
+       sendText(sender, "You will receive your statement on your email registered to us")
+       sendButtonMessage2(sender,"Choose the service youll like to use")
+     }
+     else if(text.includes("book")){
+       sendButtonCheque(sender,"How many leve")
+     }
+     else if(text.includes("25L")){
+       sendText(sender, "Thank you We've received your request once its ready well inform you . Thank you")
+       sendButtonMessage2(sender,"Choose the service youll like to use")
+     }
      else if(text.includes("254")){
        console.log("I am the number", text);
       let  phoneNumber = text
@@ -129,6 +155,31 @@ function sendButtonMessage(sender, text){
     }
      sendRequest(sender, messageData)
 }
+//the buttin for hard copy and SoftCopy
+function sendButtonStatement(sender, text){
+    let messageData={
+        "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text":text,
+                "buttons":[
+                    {
+                        "type":"postback",
+                        "title":"Hard copy",
+                        "payload":"hard"
+                    },
+                    {
+                        "type":"postback",
+                        "title":"Soft Copy",
+                        "payload":"soft"
+                    }
+                ]
+            }
+        }
+    }
+     sendRequest(sender, messageData)
+}
 // the user second buttons
 function sendButtonMessage2(sender, text){
     let messageData={
@@ -153,6 +204,32 @@ function sendButtonMessage2(sender, text){
                         "title":"General service",
                         "payload":"gen"
                     }
+
+                ]
+            }
+        }
+    }
+     sendRequest(sender, messageData)
+}
+// cheque response
+function sendButttonCheque(sender, text){
+    let messageData={
+        "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text":text,
+                "buttons":[
+                    {
+                        "type":"postback",
+                        "title":"25 leve",
+                        "payload":"25l"
+                    },
+                    {
+                        "type":"postback",
+                        "title":"50 leve",
+                        "payload":"25l"
+                    },
 
                 ]
             }
