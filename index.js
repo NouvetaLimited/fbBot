@@ -212,7 +212,7 @@ function sendButtonMessage2(sender, text){
      sendRequest(sender, messageData)
 }
 // cheque response
-function sendButttonCheque(sender, text){
+function sendButtonCheque(sender, text){
     let messageData={
         "attachment":{
             "type":"template",
