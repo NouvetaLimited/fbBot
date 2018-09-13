@@ -450,11 +450,11 @@ sendQuickTrans(sender){
         "title":"Transfer to annother Account",
         "payload":"fer",
         //"image_url":"http://example.com/img/red.png"
-       },
+       }
         ]
     }
     sendRequest(sender, messageData);
-}
+  }
 
 function sendRequest(sender, messageData) {
     request({
