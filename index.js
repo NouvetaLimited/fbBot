@@ -69,8 +69,8 @@ app.post('/webhook/', function(req, res){
 });
 
 function decideMessage(sender, text1){
-    let text = text1.toLowerCase()
-    //let service = text
+    let text = text1.toLowerCase()    
+    let service = text
      if(text.includes("get started")){
          sendText(sender, "Hi, My name is Kunta. I am National Bank of Kenya's virtual agent. Press the buttons bellow to choose the service you want?")
          sendButtonMessage(sender,"choose one")
@@ -118,11 +118,11 @@ function decideMessage(sender, text1){
      else if(text.includes("depo")){
        console.log("I am the service", text);
        quickReply(sender)
-        service = text
+       let service = text
      }
      else if(text.includes("254")){
        console.log("I am the number", text);
-      phoneNumber = text
+      let  phoneNumber = text
        sendText(sender,"please enter the amount you will wish to deposit")
      }
      else if(service === "depo" && phoneNumber != null){
@@ -140,12 +140,12 @@ function decideMessage(sender, text1){
            }
            else if(text.includes("fer")){
              console.log("im the service",text)
-              service = text
+             let service = text
              sendText(sender,"please enter the acount number you will wish to transfer starting with the Bank example NBK123")
            }
            else if(service === "fer"){
              sendText(sender,"you will recieve an OTP enter the OTP here to confirm the transaction")
-              service = "fer2"
+             let service = "fer2"
            }
            else if(service === "fer2"){
              sendText(sender,"wrong OTP")
@@ -156,7 +156,7 @@ function decideMessage(sender, text1){
             sendButtonGen(sender,"This are general services available")
           }
           else if(text.includes("locate")){
-             service = "loc"
+            let service = "loc"
             quickReplyLoc(sender)
           }
           else if(service === "loc"){
@@ -167,7 +167,7 @@ function decideMessage(sender, text1){
           quickReplyPay(sender)
           }
           else if (text.includes("water")) {
-             service = text
+            let service = text
             sendText(sender,"please enter the amount you will wish to pay")
           }
           else if (service === "water"){
