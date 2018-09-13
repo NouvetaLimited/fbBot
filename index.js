@@ -187,6 +187,9 @@ function decideMessage(sender, text1){
               axios.post(`https://ticketsoko.com/bot/index.php?function=&Pid=${sender}`)
                .then(function (response) {
                  console.log(response);
+                 response.data.forEach((result)=>{
+                   console.log(result.message)
+                 })
                  const service = response.data.message[0]
                })
                .catch(function (error) {
