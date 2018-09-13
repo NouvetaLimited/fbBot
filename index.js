@@ -147,7 +147,7 @@ function decideMessage(sender, text1){
              sendText(sender,"you will recieve an OTP enter the OTP here to confirm the transaction")
              let service = "fer2"
            }
-           else if(service === fer2){
+           else if(service === "fer2"){
              sendText(sender,"wrong OTP")
              sendQuickTrans(sender,"Choose the service youll like to use")
            }
@@ -297,7 +297,7 @@ function sendButtonMessage2(sender, text){
                         "type":"postback",
                         "title":"General service",
                         "payload":"gen"
-                    }
+                    },
 
                 ]
             }
