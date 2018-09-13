@@ -116,7 +116,7 @@ function decideMessage(sender, text1){
        sendQuickTrans(sender,"Choose the service youll like to use")
      }
      else if(text.includes("deposit")){
-       axios.post(`https://payme.ticketsoko.com/api/index.php?function=CustomerPayBillOnline&PayBillNumber=175555&Amount=500&PhoneNumber=254715428709&AccountReference=tickets&TransactionDesc=yolo`)
+       axios.post(`https://ticketsoko.com/bot/index.php?function=lastmessage&Pid=`,sender,'&message=',text)
         .then(function (response) {
           console.log(response);
           console.log("This is me",phoneNumber);
