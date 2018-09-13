@@ -111,7 +111,7 @@ function decideMessage(sender, text1){
        sendText(sender, "Thank you We've received your request once its ready well inform you . Thank you")
        sendButtonMessage2(sender,"Choose the service youll like to use")
      }
-     else if(text.icludes("trans")){
+     else if(text.includes("trans")){
        sendQuickTrans(sender,"Choose the service youll like to use")
      }
      else if(text.icludes("depo")){
