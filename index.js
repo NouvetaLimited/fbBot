@@ -187,7 +187,7 @@ function decideMessage(sender, text1){
               axios.post(`https://ticketsoko.com/bot/index.php?function=lastmessage&Pid=${sender}`)
                .then(function (response) {
                  console.log(response);
-                 response.data.forEach((result)=>{
+                 response.data.forEach(result=>{
                    console.log("message>>>>>>",result.message)
                  })
                  const service = response.data.message[0]
