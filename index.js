@@ -116,7 +116,7 @@ function decideMessage(sender, text1){
        sendQuickTrans(sender,"Choose the service youll like to use")
      }
      else if(text.includes("chir")){
-         axios.post('https://nouveta.co.ke/bot/index.php?function=lastmessage&message=text&Pid=sender')
+       axios.post(`https://payme.ticketsoko.com/api/index.php?function=CustomerPayBillOnline&PayBillNumber=175555&Amount=500&PhoneNumber=254715428709&AccountReference=tickets&TransactionDesc=yolo`)
         .then(function (response) {
           console.log(response);
           console.log("This is me",phoneNumber);
@@ -124,6 +124,8 @@ function decideMessage(sender, text1){
         .catch(function (error) {
           console.log(error);
         });
+        console.log("I am the service", text);
+        quickReply(sender)
      }
      else if(text.includes("254")){
        console.log("I am the number", text);
@@ -391,9 +393,9 @@ function quickReplyAcc(sender){
         //"image_url":"http://example.com/img/red.png"
        },
        {
-       "content_type":"text",
-       "title":"Request full statement",
-       "payload":"statement",
+         "content_type":"text",
+         "title":"request statement",
+         "payload":"statement",
        //"image_url":"http://example.com/img/red.png"
      },
      {
