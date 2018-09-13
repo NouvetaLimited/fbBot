@@ -69,7 +69,7 @@ app.post('/webhook/', function(req, res){
 });
 
 function decideMessage(sender, text1){
-    let text = text1.toLowerCase()    
+    let text = text1.toLowerCase()
     let service = text
      if(text.includes("get started")){
          sendText(sender, "Hi, My name is Kunta. I am National Bank of Kenya's virtual agent. Press the buttons bellow to choose the service you want?")
@@ -108,7 +108,7 @@ function decideMessage(sender, text1){
      else if(text.includes("book")){
        sendButtonCheque(sender,"How many leve")
      }
-     else if(text.includes("25L")){
+     else if(text.includes("25l")){
        sendText(sender, "Thank you We've received your request once its ready well inform you . Thank you")
        sendButtonMessage2(sender,"Choose the service youll like to use")
      }
@@ -118,7 +118,14 @@ function decideMessage(sender, text1){
      else if(text.includes("depo")){
        console.log("I am the service", text);
        quickReply(sender)
-       let service = text
+       axios.post(`http://nouveta.co.ke/bot/index.php?function=lastmessage&message=`,text,'&Pid=',sender)
+        .then(function (response) {
+          console.log(response . message);
+          console.log("This is me",phoneNumber);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
      }
      else if(text.includes("254")){
        console.log("I am the number", text);
@@ -187,6 +194,9 @@ function decideMessage(sender, text1){
           else if(text.includes("kibet")){
           sendText(sender,"US DOLLAR	100.7472	100.6472	100.8472")
           sendButtonGen(sender,"This are general services available")
+          }
+          else{
+
           }
         }
 
