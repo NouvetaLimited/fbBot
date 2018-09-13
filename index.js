@@ -435,7 +435,7 @@ function quickReplyPay(sender){
 /**
 transaction button
 */
-sendQuickTrans(sender){
+function sendQuickTrans(sender){
   let messageData={
       "text": "Please select your response bellow",
       "quick_replies":[
