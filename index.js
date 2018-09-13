@@ -452,7 +452,7 @@ function sendQuickTrans(sender){
       "quick_replies":[
         {
         "content_type":"text",
-        "title":"deposit to your acccount",
+        "title":"deposit",
         "payload":"chir",
         //"image_url":"http://example.com/img/red.png"
         },
