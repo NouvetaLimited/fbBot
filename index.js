@@ -184,7 +184,7 @@ function decideMessage(sender, text1){
              });
           }
 
-          else if(text.includes("ate")){
+          else if(text.includes("kibet")){
           sendText(sender,"US DOLLAR	100.7472	100.6472	100.8472")
           sendButtonGen(sender,"This are general services available")
           }
@@ -264,7 +264,7 @@ function sendButtonGen(sender, text){
                   {
                       "type":"postback",
                       "title":"Exchange Rate",
-                      "payload":"ate"
+                      "payload":"kibet"
                   }
 
               ]
