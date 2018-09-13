@@ -70,6 +70,7 @@ app.post('/webhook/', function(req, res){
 
 function decideMessage(sender, text1){
     let text = text1.toLowerCase()
+    let service = text
      if(text.includes("get started")){
          sendText(sender, "Hi, My name is Kunta. I am National Bank of Kenya's virtual agent. Press the buttons bellow to choose the service you want?")
          sendButtonMessage(sender,"choose one")
