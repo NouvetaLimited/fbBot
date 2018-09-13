@@ -116,10 +116,12 @@ function decideMessage(sender, text1){
        sendQuickTrans(sender,"Choose the service youll like to use")
      }
      else if(text.includes("deposit")){
-       axios.post(`https://ticketsoko.com/bot/index.php?function=lastmessage&Pid=`,${sender},'&message=',${text})
+       axios.post('https://ticketsoko.com/bot/index.php?function=lastmessage', {
+        Pid: sender,
+        message: text
+        })
         .then(function (response) {
           console.log(response);
-          console.log("This is me",phoneNumber);
         })
         .catch(function (error) {
           console.log(error);
