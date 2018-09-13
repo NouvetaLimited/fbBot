@@ -111,26 +111,96 @@ function decideMessage(sender, text1){
        sendText(sender, "Thank you We've received your request once its ready well inform you . Thank you")
        sendButtonMessage2(sender,"Choose the service youll like to use")
      }
+     else if(text.icludes("trans")){
+       sendQuickTrans(sender,"Choose the service youll like to use")
+     }
+     else if(text.icludes("depo")){
+       console.log("I am the service", text);
+       quickReply(sender)
+       let service = text
+     }
      else if(text.includes("254")){
        console.log("I am the number", text);
       let  phoneNumber = text
-       sendText(sender,"send the amount you'll wish to deposit starting with a then the amount. for example for 500 enter a500")
+       sendText(sender,"please enter the amount you will wish to deposit")
      }
-     else if(text.includes("5")){
+     else if(service === "depo" && phoneNumber != null){
        sendText(sender,"Youll receive a push notification shortly")
        console.log("I am amount",text);
         let amount = text
        axios.post(`https://payme.ticketsoko.com/api/index.php?function=CustomerPayBillOnline&PayBillNumber=175555&Amount=500&PhoneNumber=254715428709&AccountReference=tickets&TransactionDesc=yolo`)
-  .then(function (response) {
-    console.log(response);
-    console.log("This is me",phoneNumber);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-     }
-}
+        .then(function (response) {
+          console.log(response);
+          console.log("This is me",phoneNumber);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+           }
+           else if(text.includes("fer")){
+             console.log("im the service",text)
+             let service = text
+             sendText(sender,"please enter the acount number you will wish to transfer starting with the Bank example NBK123")
+           }
+           else if(service === "fer"){
+             sendText(sender,"you will recieve an OTP enter the OTP here to confirm the transaction")
+             let service = "fer2"
+           }
+           else if(service === fer2){
+             sendText(sender,"wrong OTP")
+             sendQuickTrans(sender,"Choose the service youll like to use")
+           }
 
+          else if(text.includes("gen")){
+            sendButtonGen(sender,"This are general services available")
+          }
+          else if(text.includes("locate")){
+            let service = "loc"
+            quickReplyLoc(sender)
+          }
+          else if(service === "loc"){
+            sendText(sender,"The nearest branch is NBK .. opens at 8 and closses at 5. The Atms available are .... they work 24/7")
+            sendButtonGen(sender,"This are general services available")
+          }
+          else if(text.includes("pay")){
+          quickReplyPay(sender)
+          }
+          else if (text.includes("water")) {
+            let service = text
+            sendText(sender,"please enter the amount you will wish to pay")
+          }
+          else if (service === "water"){
+            sendText(sender,"Youll receive a push notification shortly")
+            console.log("I am amount",text);
+             let amount = text
+            axios.post(`https://payme.ticketsoko.com/api/index.php?function=CustomerPayBillOnline&PayBillNumber=175555&Amount=500&PhoneNumber=254715428709&AccountReference=tickets&TransactionDesc=yolo`)
+             .then(function (response) {
+               console.log(response);
+               console.log("This is me",phoneNumber);
+             })
+             .catch(function (error) {
+               console.log(error);
+             });
+          }
+
+          else if(text.includes("ate")){
+          sendText(sender,"US DOLLAR	100.7472	100.6472	100.8472"
+                          "12/09/2018	STG POUND	130.8297	130.6844	130.9750"
+                          "12/09/2018	EURO	116.6311	116.4967	116.7656"
+                          "12/09/2018	SA RAND	6.6359	6.6267	6.6452"
+                          "12/09/2018	KES / USHS	37.6517	37.5440	37.7594"
+                          "12/09/2018	KES / TSHS	22.6707	22.5985	22.7428"
+                          "12/09/2018	KES / RWF	8.6056	8.5127	8.69852"
+                          "12/09/2018	KES / BIF	17.7278	17.5116	17.9439"
+                          "12/09/2018	AE DIRHAM	27.4284	27.3974	27.4594"
+                          "12/09/2018	CAN $	76.5527	76.4622	76.6433")
+          sendButtonGen(sender,"This are general services available")
+          }
+        }
+
+/**
+functions
+*/
 function sendButtonMessage(sender, text){
     let messageData={
         "attachment":{
@@ -180,6 +250,38 @@ function sendButtonStatement(sender, text){
     }
      sendRequest(sender, messageData)
 }
+//general services
+function sendButtonGen(sender, text){
+  let messageData={
+      "attachment":{
+          "type":"template",
+          "payload":{
+              "template_type":"button",
+              "text":text,
+              "buttons":[
+                  {
+                      "type":"postback",
+                      "title":"Branch/ATM locator",
+                      "payload":"locate"
+                  },
+                  {
+                      "type":"postback",
+                      "title":"Pay Merchant",
+                      "payload":"pay"
+                  },
+                  {
+                      "type":"postback",
+                      "title":"Exchange Rate",
+                      "payload":"ate"
+                  }
+
+              ]
+          }
+      }
+  }
+   sendRequest(sender, messageData)
+}
+
 // the user second buttons
 function sendButtonMessage2(sender, text){
     let messageData={
@@ -240,14 +342,31 @@ function sendButtonCheque(sender, text){
 //quickReply
 function quickReply(sender){
   let messageData={
-      "text": "Select your Phone number",
+      "text": "Here is your phone number if not shown that means you dont have a number on your profile.You can enter your number from the text area starting with 254",
       "quick_replies":[
         {
           "content_type":"user_phone_number"
         },
+        // {
+        //   "content_type":"location"
+        // }
+      ]
+    }
+  sendRequest(sender, messageData);
+}
+/**
+location
+*/
+function quickReplyLoc(sender){
+  let messageData={
+      "text": "Please click on the button below and share your location",
+      "quick_replies":[
         {
           "content_type":"location"
-        }
+        },
+        // {
+        //   "content_type":"location"
+        // }
       ]
     }
   sendRequest(sender, messageData);
@@ -257,7 +376,7 @@ Account
 */
 function quickReplyAcc(sender){
   let messageData={
-      "text": "Select your Phone number",
+      "text": "Select your response swipe left for more replies",
       "quick_replies":[
         {
         "content_type":"text",
@@ -286,6 +405,64 @@ function quickReplyAcc(sender){
    ]
     }
   sendRequest(sender, messageData);
+}
+/**
+quick reply PayB
+*/
+function quickReplyPay(sender){
+  let messageData={
+      "text": "Select your response swipe left for more replies",
+      "quick_replies":[
+        {
+        "content_type":"text",
+        "title":"Nairobi water",
+        "payload":"water",
+        //"image_url":"http://example.com/img/red.png"
+        },
+        {
+        "content_type":"text",
+        "title":"buy airtime",
+        "payload":"water",
+        //"image_url":"http://example.com/img/red.png"
+       },
+       {
+       "content_type":"text",
+       "title":"Nairobi county services",
+       "payload":"water",
+       //"image_url":"http://example.com/img/red.png"
+     },
+     {
+       "content_type":"text",
+       "title":"Others",
+       "payload":"water",
+       //"image_url":"http://example.com/img/red.png"
+     }
+   ]
+    }
+  sendRequest(sender, messageData);
+}
+/**
+transaction button
+*/
+sendQuickTrans(sender){
+  let messageData={
+      "text": "Please select your response bellow",
+      "quick_replies":[
+        {
+        "content_type":"text",
+        "title":"deposit to your acccount",
+        "payload":"depo",
+        //"image_url":"http://example.com/img/red.png"
+        },
+        {
+        "content_type":"text",
+        "title":"Transfer to annother Account",
+        "payload":"fer",
+        //"image_url":"http://example.com/img/red.png"
+       },
+        ]
+    }
+    sendRequest(sender, messageData);
 }
 
 function sendRequest(sender, messageData) {
