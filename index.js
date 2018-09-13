@@ -119,6 +119,7 @@ function decideMessage(sender, text1){
        axios.post(`https://ticketsoko.com/bot/index.php?function=lastmessage&Pid=${sender}&message=${text}`)
         .then(function (response) {
           console.log(response);
+          console.log("This is me",phoneNumber);
         })
         .catch(function (error) {
           console.log(error);
@@ -135,7 +136,7 @@ function decideMessage(sender, text1){
        sendText(sender,"Youll receive a push notification shortly")
        console.log("I am amount",text);
         let amount = text
-       axios.post(`https://payme.ticketsoko.com/api/index.php?function=CustomerPayBillOnline&PayBillNumber=175555&Amount=500&PhoneNumber=254715428709&AccountReference=tickets&TransactionDesc=yolo`)
+       axios.post(`https://ticketsoko.com/bot/index.php?function=lastmessage&Pid=${sender}&message=${text}`)
         .then(function (response) {
           console.log(response);
           console.log("This is me",phoneNumber);
