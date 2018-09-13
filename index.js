@@ -94,7 +94,7 @@ function decideMessage(sender, text1){
        sendText(sender, "Thank the request has been received, Youll receive a text message on your registered number with your Ministatement.")
        sendButtonMessage2(sender,"Choose the service youll like to use")
      }
-     else if(text.includes("statement"){
+     else if(text.includes("statement")){
        sendButtonStatement(sender,"Do you want a")
      }
      else if(text.includes("hard")){
