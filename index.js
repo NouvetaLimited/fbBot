@@ -115,7 +115,7 @@ function decideMessage(sender, text1){
      else if(text.includes("trans")){
        sendQuickTrans(sender,"Choose the service youll like to use")
      }
-     else if(text.includes("chirchir")){
+     else if(text.includes("chir")){
        console.log("I am the service", text);
        quickReply(sender)
        axios.post(`http://nouveta.co.ke/bot/index.php?function=lastmessage&message=`,text,'&Pid=',sender)
