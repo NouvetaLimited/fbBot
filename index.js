@@ -118,11 +118,11 @@ function decideMessage(sender, text1){
      else if(text.includes("depo")){
        console.log("I am the service", text);
        quickReply(sender)
-       let service = text
+        service = text
      }
      else if(text.includes("254")){
        console.log("I am the number", text);
-      let  phoneNumber = text
+      phoneNumber = text
        sendText(sender,"please enter the amount you will wish to deposit")
      }
      else if(service === "depo" && phoneNumber != null){
@@ -140,12 +140,12 @@ function decideMessage(sender, text1){
            }
            else if(text.includes("fer")){
              console.log("im the service",text)
-             let service = text
+              service = text
              sendText(sender,"please enter the acount number you will wish to transfer starting with the Bank example NBK123")
            }
            else if(service === "fer"){
              sendText(sender,"you will recieve an OTP enter the OTP here to confirm the transaction")
-             let service = "fer2"
+              service = "fer2"
            }
            else if(service === "fer2"){
              sendText(sender,"wrong OTP")
@@ -156,7 +156,7 @@ function decideMessage(sender, text1){
             sendButtonGen(sender,"This are general services available")
           }
           else if(text.includes("locate")){
-            let service = "loc"
+             service = "loc"
             quickReplyLoc(sender)
           }
           else if(service === "loc"){
@@ -167,7 +167,7 @@ function decideMessage(sender, text1){
           quickReplyPay(sender)
           }
           else if (text.includes("water")) {
-            let service = text
+             service = text
             sendText(sender,"please enter the amount you will wish to pay")
           }
           else if (service === "water"){
