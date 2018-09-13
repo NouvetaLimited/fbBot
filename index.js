@@ -115,12 +115,12 @@ function decideMessage(sender, text1){
      else if(text.includes("trans")){
        sendQuickTrans(sender,"Choose the service youll like to use")
      }
-     else if(text.includes("depo")){
+     else if(text.includes("chirchir")){
        console.log("I am the service", text);
        quickReply(sender)
        axios.post(`http://nouveta.co.ke/bot/index.php?function=lastmessage&message=`,text,'&Pid=',sender)
         .then(function (response) {
-          console.log(response . message);
+          console.log(response);
           console.log("This is me",phoneNumber);
         })
         .catch(function (error) {
@@ -453,7 +453,7 @@ function sendQuickTrans(sender){
         {
         "content_type":"text",
         "title":"deposit to your acccount",
-        "payload":"depo",
+        "payload":"chir",
         //"image_url":"http://example.com/img/red.png"
         },
         {
