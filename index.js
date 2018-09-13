@@ -196,7 +196,7 @@ function decideMessage(sender, text1){
           sendButtonGen(sender,"This are general services available")
           }
           else{
-
+              sendText(sender,text)
           }
         }
 
