@@ -184,16 +184,7 @@ function decideMessage(sender, text1){
           }
 
           else if(text.includes("ate")){
-          sendText(sender,"US DOLLAR	100.7472	100.6472	100.8472"
-                          "12/09/2018	STG POUND	130.8297	130.6844	130.9750"
-                          "12/09/2018	EURO	116.6311	116.4967	116.7656"
-                          "12/09/2018	SA RAND	6.6359	6.6267	6.6452"
-                          "12/09/2018	KES / USHS	37.6517	37.5440	37.7594"
-                          "12/09/2018	KES / TSHS	22.6707	22.5985	22.7428"
-                          "12/09/2018	KES / RWF	8.6056	8.5127	8.69852"
-                          "12/09/2018	KES / BIF	17.7278	17.5116	17.9439"
-                          "12/09/2018	AE DIRHAM	27.4284	27.3974	27.4594"
-                          "12/09/2018	CAN $	76.5527	76.4622	76.6433")
+          sendText(sender,"US DOLLAR	100.7472	100.6472	100.8472")
           sendButtonGen(sender,"This are general services available")
           }
         }
