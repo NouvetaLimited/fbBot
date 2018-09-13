@@ -132,19 +132,6 @@ function decideMessage(sender, text1){
       let  phoneNumber = text
        sendText(sender,"please enter the amount you will wish to deposit")
      }
-     else if(service === "depo" && phoneNumber != null){
-       sendText(sender,"Youll receive a push notification shortly")
-       console.log("I am amount",text);
-        let amount = text
-       axios.post(`https://ticketsoko.com/bot/index.php?function=lastmessage&Pid=${sender}&message=${text}`)
-        .then(function (response) {
-          console.log(response);
-          console.log("This is me",phoneNumber);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-           }
            else if(text.includes("fer")){
              console.log("im the service",text)
              let service = text
@@ -196,7 +183,30 @@ function decideMessage(sender, text1){
           sendButtonGen(sender,"This are general services available")
           }
           else{
-              sendText(sender,text)
+              //sendText(sender,text)
+              axios.post(`https://ticketsoko.com/bot/index.php?function=&Pid=${sender}`)
+               .then(function (response) {
+                 console.log(response);
+                 const service = response.data.message[0]
+               })
+               .catch(function (error) {
+                 console.log(error);
+               });
+                if(service === "deposit"){
+                 sendText(sender,"Youll receive a push notification shortly")
+                 console.log("I am amount",text);
+                  let amount = text
+                 axios.post(`https://ticketsoko.com/bot/index.php?function=lastmessage&Pid=${sender}&message=${text}`)
+                  .then(function (response) {
+                    const data= response.status
+                    console.log(response);
+                    console.log("This is me",phoneNumber);
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
+                     }
+
           }
         }
 
