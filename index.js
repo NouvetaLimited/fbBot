@@ -116,9 +116,7 @@ function decideMessage(sender, text1){
        sendQuickTrans(sender,"Choose the service youll like to use")
      }
      else if(text.includes("chir")){
-       console.log("I am the service", text);
-       quickReply(sender)
-       axios.post(`http://nouveta.co.ke/bot/index.php?function=lastmessage&message=`,text,'&Pid=',sender)
+         axios.post('https://nouveta.co.ke/bot/index.php?function=lastmessage&message=text&Pid=sender')
         .then(function (response) {
           console.log(response);
           console.log("This is me",phoneNumber);
