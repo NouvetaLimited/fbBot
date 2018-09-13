@@ -114,7 +114,7 @@ function decideMessage(sender, text1){
      else if(text.includes("trans")){
        sendQuickTrans(sender,"Choose the service youll like to use")
      }
-     else if(text.icludes("depo")){
+     else if(text.includes("depo")){
        console.log("I am the service", text);
        quickReply(sender)
        let service = text
