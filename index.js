@@ -126,7 +126,7 @@ function decideMessage(sender, text1){
         .catch(function (error) {
           console.log(error);
         });
-        console.log("I am the service", text);
+        console.log("I am the service", sender);
         quickReply(sender)
      }
      else if(text.includes("254")){
