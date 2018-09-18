@@ -35,7 +35,8 @@ res.send ("HI welcome");
  */
 
 //let token = 'EAADUxvcXkUUBAMHJKRihq21puCwj6HO5WaJ1ZAXZAVyMdN5VYZAgjGZAtTQ3BSbcki8InVZBGiPOjrrMvZCucKD3zE6DQVtmzZAafQzcOZCsg6c7xMy9TmYBEiZCt1L40Y52D7dbdB0Hf5kDbZAvdWvZAleiJPI5piyg7kFMAZAkZBj9U2WvkEkTPD1yj';
-let token = 'EAADUxvcXkUUBAHZBee2XG2IYxd35mvojQD26ugoQgM3XEjP0L1SXZC85moBgw8uOmT49ykCZASiKF09B7qKoJZAcXGg5tuEjH3uRAvO2n8A7R1ZCPSiRjynFfeD8XGOHlIZBXiZC5rZAxYCZApkn2HxubcHC1vjXUgvj8K3hFR4EnX5QvjC9Gxm15'
+let token = 'EAADUxvcXkUUBABgmyHgbiwZBcGPykKz0ZB0jurLrV8JkJcNPWJ6ZAGIZCAKNaFR65r34wttH7XC5lNqB8ZCtqZAv3bvQd4rzVmhzVXjaoqgaDHQcGTBOcZAzsVxuFuuwZCmSzQ54XZBPConKIASPnx8lldSyEjfQlB1YSW7JnR8SXYvSPOlw4K6ui'
+
 /**
  * FACEBOOK
  */
@@ -128,6 +129,15 @@ function decideMessage(sender, text1){
         quickReply(sender)
      }
      else if(text.includes("254")){
+       axios.post(`https://ticketsoko.com/bot/index.php?function=lastmessage&Pid=${sender}&message=${text}`)
+        .then(function (response) {
+          const data= response.status
+          console.log(response);
+          console.log("This is me",phoneNumber);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
        console.log("I am the number", text);
       let  phoneNumber = text
        sendText(sender,"please enter the amount you will wish to deposit")
