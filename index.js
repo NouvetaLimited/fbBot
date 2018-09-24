@@ -140,7 +140,7 @@ function decideMessage(sender, text1){
         });
        console.log("I am the number", text);
       let  phoneNumber = text
-       sendText(sender,"please enter the amount you will wish to deposit starting with the word D for example X250 to deposit Ksh250")
+       sendText(sender,"please enter the amount you will wish to deposit starting with the word X for example X250 to deposit Ksh250")
      }
      else if(text.includes("x")){
        axios.get(`http://81ac879b.ngrok.io/api/push/${sender}/amount/${text}`)
@@ -153,7 +153,7 @@ function decideMessage(sender, text1){
         });
        console.log("I am the number", text);
       let  phoneNumber = text
-       sendText(sender,"please enter the amount you will wish to deposit starting with the word D for example D250 to deposit Ksh250")
+       sendText(sender,"Ypu will recieve a push notification shortly")
      }
            else if(text.includes("fer")){
              console.log("im the service",text)
