@@ -117,7 +117,7 @@ function decideMessage(sender, text1){
        sendQuickTrans(sender,"Choose the service youll like to use")
      }
      else if(text.includes("deposit")){
-       axios.post(`http://81ac879b.ngrok.io/api/postmessage/${sender}/deposit/null`)
+       axios.get(`http://81ac879b.ngrok.io/api/postmessage/${sender}/deposit/null`)
         .then(function (response) {
           console.log(response);
           console.log("This is me",phoneNumber);
@@ -129,7 +129,7 @@ function decideMessage(sender, text1){
         quickReply(sender)
      }
      else if(text.includes("254")){
-       axios.post(`http://81ac879b.ngrok.io/api/postmessage/${sender}/phone/${text}`)
+       axios.get(`http://81ac879b.ngrok.io/api/postmessage/${sender}/phone/${text}`)
         .then(function (response) {
           const data= response.status
           console.log(response);
@@ -143,7 +143,7 @@ function decideMessage(sender, text1){
        sendText(sender,"please enter the amount you will wish to deposit starting with the word D for example D250 to deposit Ksh250")
      }
      else if(texttext.includes("D")){
-       axios.post(`http://81ac879b.ngrok.io/api/push/${sender}/amount/${text}`)
+       axios.get(`http://81ac879b.ngrok.io/api/push/${sender}/amount/${text}`)
         .then(function (response) {
           const data= response.status
           console.log(response);
