@@ -154,6 +154,7 @@ function decideMessage(sender, text1){
        console.log("I am the number", text);
       let  phoneNumber = text
        sendText(sender,"Ypu will recieve a push notification shortly")
+       quickReplyAcc(sender)
      }
            else if(text.includes("fer")){
              console.log("im the service",text)
@@ -170,7 +171,7 @@ function decideMessage(sender, text1){
            }
            else if(service === "NBK"){
              sendText(sender,"you will recieve an OTP on your phonr enter the OTP starting with the word O here to confirm the transaction for example O1234")
-             axios.post(`http://81ac879b.ngrok.io/api/otp/${sender}`)
+             axios.get(`http://81ac879b.ngrok.io/api/otp/${sender}`)
               .then(function (response) {
                 const data= response.status
                 console.log(response);
@@ -217,8 +218,41 @@ function decideMessage(sender, text1){
           }
 
           else if(text.includes("kibet")){
-          sendText(sender,"US DOLLAR	100.7472	100.6472	100.8472")
+          sendText(sender,"US DOLLAR	100.7472	100.6472	100.8472,US DOLLAR	100.7472	100.6472	100.8472,US DOLLAR	100.7472	100.6472	100.8472,US DOLLAR	100.7472	100.6472	100.8472")
           sendButtonGen(sender,"This are general services available")
+          }
+          else if(text.includes("not")){
+            sendText(sender,"Please enter your ID number starting with the word ID eg ID33865745")
+          }
+          else if(text.includes("#")){
+            axios.post(`http://81ac879b.ngrok.io/api/postmessage/${sender}/ID/${text}`)
+             .then(function (response) {
+               const data= response.status
+               console.log(response);
+             })
+             .catch(function (error) {
+               console.log(error);
+             });
+              sendText(sender,"Enter you phone number beggining with N eg , *254715428709")
+          }
+          else if(text.includes("*")){
+            axios.post(`http://81ac879b.ngrok.io/api/postmessage/${sender}/phone/${text}`)
+             .then(function (response) {
+               const data= response.status
+               console.log(response);
+             })
+             .catch(function (error) {
+               console.log(error);
+             });
+              sendText(sender,"Message has been sent to your phone")
+            axios.post(`http://81ac879b.ngrok.io/api/acc/${sender}`)
+               .then(function (response) {
+                 const data= response.status
+                 console.log(response);
+               })
+               .catch(function (error) {
+                 console.log(error);
+               });
           }
           else{
               //sendText(sender,text)
