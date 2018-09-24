@@ -133,21 +133,20 @@ function decideMessage(sender, text1){
         .then(function (response) {
           const data= response.status
           console.log(response);
-          console.log("This is me",phoneNumber);
+          console.log("This is me",phoneNumber)
         })
         .catch(function (error) {
           console.log(error);
         });
        console.log("I am the number", text);
       let  phoneNumber = text
-       sendText(sender,"please enter the amount you will wish to deposit starting with the word D for example D250 to deposit Ksh250")
+       sendText(sender,"please enter the amount you will wish to deposit starting with the word D for example X250 to deposit Ksh250")
      }
-     else if(texttext.includes("D")){
+     else if(text.includes("x")){
        axios.get(`http://81ac879b.ngrok.io/api/push/${sender}/amount/${text}`)
         .then(function (response) {
           const data= response.status
           console.log(response);
-          console.log("This is me",phoneNumber);
         })
         .catch(function (error) {
           console.log(error);
