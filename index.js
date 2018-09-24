@@ -73,7 +73,7 @@ function decideMessage(sender, text1){
     let text = text1.toLowerCase()
     let service = text
      if(text.includes("get started")){
-         sendText(sender, "Hi, My name is Kunta. I am National Bank of Kenya's virtual agent. Press the buttons bellow to choose the service you want?")
+         sendText(sender, "Hi, My name is Kunta. I am National Bank of Kenya's assistant. Press the buttons bellow to choose the service you want?")
          sendButtonMessage(sender,"choose one")
 
      }else if(text.includes("exists")){
@@ -107,7 +107,7 @@ function decideMessage(sender, text1){
        sendButtonMessage2(sender,"Choose the service youll like to use")
      }
      else if(text.includes("book")){
-       sendButtonCheque(sender,"How many leve")
+       sendButtonCheque(sender,"How many level")
      }
      else if(text.includes("25l")){
        sendText(sender, "Thank you We've received your request once its ready well inform you . Thank you")
@@ -194,7 +194,7 @@ function decideMessage(sender, text1){
           }
           else{
               //sendText(sender,text)
-              axios.post(`https://ticketsoko.com/bot/index.php?function=lastmessage&Pid=${sender}`)
+              axios.post(`http://81ac879b.ngrok.io/api/pastmessage&Pid=${sender}`)
                .then(function (response) {
                  console.log(response);
                  console.log(response.message)
