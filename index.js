@@ -117,7 +117,7 @@ function decideMessage(sender, text1){
        sendQuickTrans(sender,"Choose the service youll like to use")
      }
      else if(text.includes("deposit")){
-       axios.post(`https://ticketsoko.com/bot/index.php?function=lastmessage&Pid=${sender}&message=${text}`)
+       axios.post(`http://81ac879b.ngrok.io/api/postmessage/${sender}/deposit/null`)
         .then(function (response) {
           console.log(response);
           console.log("This is me",phoneNumber);
@@ -129,7 +129,7 @@ function decideMessage(sender, text1){
         quickReply(sender)
      }
      else if(text.includes("254")){
-       axios.post(`https://ticketsoko.com/bot/index.php?function=lastmessage&Pid=${sender}&message=${text}`)
+       axios.post(`http://81ac879b.ngrok.io/api/postmessage/${sender}/phone/${text}`)
         .then(function (response) {
           const data= response.status
           console.log(response);
@@ -140,18 +140,47 @@ function decideMessage(sender, text1){
         });
        console.log("I am the number", text);
       let  phoneNumber = text
-       sendText(sender,"please enter the amount you will wish to deposit")
+       sendText(sender,"please enter the amount you will wish to deposit starting with the word D for example D250 to deposit Ksh250")
+     }
+     else if(texttext.includes("D")){
+       axios.post(`http://81ac879b.ngrok.io/api/push/${sender}/amount/${text}`)
+        .then(function (response) {
+          const data= response.status
+          console.log(response);
+          console.log("This is me",phoneNumber);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+       console.log("I am the number", text);
+      let  phoneNumber = text
+       sendText(sender,"please enter the amount you will wish to deposit starting with the word D for example D250 to deposit Ksh250")
      }
            else if(text.includes("fer")){
              console.log("im the service",text)
              let service = text
              sendText(sender,"please enter the acount number you will wish to transfer starting with the Bank example NBK123")
+             axios.post(`http://81ac879b.ngrok.io/api/postmessage/${sender}/tranfer/${text}`)
+              .then(function (response) {
+                const data= response.status
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
            }
-           else if(service === "fer"){
-             sendText(sender,"you will recieve an OTP enter the OTP here to confirm the transaction")
-             let service = "fer2"
+           else if(service === "NBK"){
+             sendText(sender,"you will recieve an OTP on your phonr enter the OTP starting with the word O here to confirm the transaction for example O1234")
+             axios.post(`http://81ac879b.ngrok.io/api/otp/${sender}`)
+              .then(function (response) {
+                const data= response.status
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
            }
-           else if(service === "fer2"){
+           else if(service === "O"){
              sendText(sender,"wrong OTP")
              sendQuickTrans(sender,"Choose the service youll like to use")
            }
@@ -194,7 +223,7 @@ function decideMessage(sender, text1){
           }
           else{
               //sendText(sender,text)
-              axios.post(`http://81ac879b.ngrok.io/api/pastmessage&Pid=${sender}`)
+              axios.post(`http://81ac879b.ngrok.io/api/pastmessage/${sender}`)
                .then(function (response) {
                  console.log(response);
                  console.log(response.message)
