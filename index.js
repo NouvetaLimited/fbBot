@@ -373,6 +373,7 @@ function decideMessage(sender, text1){
                  const data= response.status
                  console.log(response);
                  const message = response.data.data
+                 console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',message);
                  if( message === 'registeryes'){
                    sendText(sender,"im here")
                  }
