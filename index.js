@@ -364,29 +364,30 @@ function decideMessage(sender, text1){
                .then(function (response) {
                  const data= response.status
                  console.log(response);
+                 console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',message);
+                 const message = response.data.message
+                 if( message === 'OTPL'){
+                   axios.get(` http://ef36d28f.ngrok.io/api/otp/${sender}/${text}`)
+                    .then(function (response) {
+                      const data= response.status
+                      const lee= response.data.status
+                      console.log(response);
+                      console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',data,lee);
+                      if( lee === '200' ){
+                        sendText(sender,"Account successfully linked")
+                            sendButtonMessage2(sender,"Choose the service youll like to use")
+                      }else {
+                         sendText(sender,"Wrong OTP. Contact our customer care for assistant")
+                      }
+                    })
+                    .catch(function (error) {
+                      console.log(error);
+                    });
+
                })
                .catch(function (error) {
                  console.log(error);
                });
-               const message = response.data.message
-               console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',message);
-               if( message === 'OTPL'){
-                 axios.get(` http://ef36d28f.ngrok.io/api/otp/${sender}/${text}`)
-                  .then(function (response) {
-                    const data= response.status
-                    const lee= response.data.status
-                    console.log(response);
-                    console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',data,lee);
-                    if( lee === '200' ){
-                      sendText(sender,"Account successfully linked")
-                          sendButtonMessage2(sender,"Choose the service youll like to use")
-                    }else {
-                       sendText(sender,"Wrong OTP. Contact our customer care for assistant")
-                    }
-                  })
-                  .catch(function (error) {
-                    console.log(error);
-                  });
                }
                      }
 
