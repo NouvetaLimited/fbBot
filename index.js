@@ -60,7 +60,8 @@ app.post('/webhook/', function(req, res){
             axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
              .then(function (response) {
                const data= response.status
-               console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',response);
+               console.log(response);
+               const name = response.data.first_name
              })
              .catch(function (error) {
                console.log(error);
@@ -83,8 +84,8 @@ function decideMessage(sender, text1){
     let text = text1.toLowerCase()
     let service = text
      if(text.includes("get started")){
-         sendText(sender, "Hi, My name is Kunta. I am National Bank of Kenya's assistant. Press the buttons bellow to choose the service you want?")
-         sendButtonMessage(sender,"choose one")
+         sendText(sender, "Hi"+name+" I am Asunta and will be your agent today, how may I help you?")
+         sendButtonMessage(sender,"Hi"+name+"I am Asunta and will be your agent today, how may I help you?")
 
      }else if(text.includes("exists")){
         //sendGenericMessage(sender)
