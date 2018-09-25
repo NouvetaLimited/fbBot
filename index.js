@@ -197,7 +197,7 @@ function decideMessage(sender, text1){
         console.log("I am the service", sender);
         quickReply(sender)
      }
-     else if(text.includes("254")){
+     else if(text.includes("//")){
        axios.get(`https://d8b21a2b.ngrok.io/api/postmessage/${sender}/phone/${text}`)
         .then(function (response) {
           const data= response.status
@@ -325,7 +325,15 @@ function decideMessage(sender, text1){
              .catch(function (error) {
                console.log(error);
              });
-              sendText(sender,"Enter you phone number beggining with N eg , N0715428709")
+             axios.get(`https://d8b21a2b.ngrok.io/api/postmessage/${sender}/reg2/${text}`)
+              .then(function (response) {
+                const data= response.status
+                console.log(response);
+                sendText(sender,"Enter you phone number beggining with the country code eg 254715428709")
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
           }
           else if(text.includes("n")){
             axios.get(`https://d8b21a2b.ngrok.io/api/register/${sender}/${text}`)
@@ -338,7 +346,8 @@ function decideMessage(sender, text1){
              });
               sendText(sender,"You will receive an OTP on your phone Please enter here to verify your phoneNumber")
           }
-          else if(text.includes("a")){
+          else if(text.includes("//")){
+            //to be deleted on production
             axios.get(`https://d8b21a2b.ngrok.io/api/otp/${sender}/${text}`)
              .then(function (response) {
                const data= response.status
@@ -377,6 +386,59 @@ function decideMessage(sender, text1){
                  if( message === 'registeryes'){
                    sendText(sender,"Good, there are afew items you will require on hand, Your National ID and make sure your MPESA has atleast Kshs 100.00, cofirm when ready.Enter your ID number starting with the word ID eg ID33865745")
                  }
+                 //reg part 2
+                 else if(message === 'reg2'){
+                   axios.get(`https://d8b21a2b.ngrok.io/api/register/${sender}/${text}`)
+                    .then(function (response) {
+                      const data= response.status
+                      console.log(response);
+                    })
+                    .catch(function (error) {
+                      console.log(error);
+                    });
+                    //post the messaging_for OTP
+                     sendText(sender,"You will receive an OTP on your phone Please enter here to verify your phoneNumber")
+
+                     axios.get(`https://d8b21a2b.ngrok.io/api/postmessage/${sender}/otpreg/${text}`)
+                      .then(function (response) {
+                        const data= response.status
+                        console.log(response);
+                        sendText(sender,"Enter you phone number beggining with the country code eg 254715428709")
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
+                   }
+                   //for the otp confirmation
+                   else if(message === 'otpreg'){
+                     axios.get(`https://d8b21a2b.ngrok.io/api/otp/${sender}/${text}`)
+                      .then(function (response) {
+                        const data= response.status
+                        const lee= response.data.status
+                        console.log(response);
+                        console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',data,lee);
+                        if( lee === '200' ){
+                          sendText(sender,"Ok, am sending you a request for a small initail deposit to activate the account")
+                          //sleep(10000);
+                         // sendQuickDep(sender)
+                              axios.get(`https://d8b21a2b.ngrok.io/api/push1/${sender}`)
+                               .then(function (response) {
+                                 const data= response.status
+                                 console.log(response);
+                                 sendQuickDep(sender)
+                               })
+                               .catch(function (error) {
+                                 console.log(error);
+                               });
+                        }else {
+                           sendText(sender,"Wrong OTP. Contact our customer care for assistant")
+                        }
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
+                   }
+
                })
                .catch(function (error) {
                  console.log(error);
