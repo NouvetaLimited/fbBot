@@ -92,7 +92,7 @@ function decideMessage(sender, text1){
      }else if(text.includes("exists")){
         //sendGenericMessage(sender)
         sendText(sender, "Sorry notice this was your first time here. Kindly provide me with your id Number")
-        axios.post(`https://d8b21a2b.ngrok.io/api/postmessage/${sender}/idln/${text}`)
+        axios.get(`https://d8b21a2b.ngrok.io/api/postmessage/${sender}/idln/${text}`)
          .then(function (response) {
            const data= response.status
            console.log(response);
