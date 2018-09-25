@@ -259,8 +259,6 @@ function decideMessage(sender, text1){
               sendText(sender,text)
                      }
 
-          }
-        }
       }
 //
 function sendButtonMessage(sender, text){
