@@ -317,14 +317,6 @@ function decideMessage(sender, text1){
                sendQuickcheq(sender)
           }
           else if(text.includes("id")){
-            axios.get(`https://d8b21a2b.ngrok.io/api/postmessage/${sender}/ID/${text}`)
-             .then(function (response) {
-               const data= response.status
-               console.log(response);
-             })
-             .catch(function (error) {
-               console.log(error);
-             });
              axios.get(`https://d8b21a2b.ngrok.io/api/postmessage/${sender}/reg2/${text}`)
               .then(function (response) {
                 const data= response.status
