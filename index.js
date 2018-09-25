@@ -291,6 +291,13 @@ function decideMessage(sender, text1){
           sendText(sender,"US DOLLAR	100.7472	100.6472	100.8472,US DOLLAR	100.7472	100.6472	100.8472,US DOLLAR	100.7472	100.6472	100.8472,US DOLLAR	100.7472	100.6472	100.8472")
           sendButtonGen(sender,"This are general services available")
           }
+          else if(text.includes("cheque")){
+            sendButtonCheque(sender,"How many level")
+          }
+          else if(text.includes("debit")){
+            sendText(sender,"Request received we will contact you when it is ready")
+            sendButtonMessage2(sender,"Choose the service youll like to use")            
+          }
           else if(text.includes("qali")){
             //sendText(sender,"Please enter your ID number starting with the word ID eg ID33865745")
             //the yes no for account opening
