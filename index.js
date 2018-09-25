@@ -80,9 +80,9 @@ function decideMessage(sender, text1){
 
      }else if(text.includes("exists")){
         //sendGenericMessage(sender)
-        sendText(sender, "Sorry i dont have your data to link to your account. Please provide me with your ID starting with word l eg l345678")
+        sendText(sender, "Sorry i dont have your data to link to your account. Please provide me with your ID starting with word link eg link345678")
      }
-     else if(text.includes("l")){
+     else if(text.includes("link")){
        axios.get(` http://3d13df19.ngrok.io/api/postmessage/${sender}/ID/${text}`)
         .then(function (response) {
           const data= response.status
@@ -129,7 +129,7 @@ function decideMessage(sender, text1){
      else if(text.includes("acc")){
        quickReplyAcc(sender)
      }
-     else if(text.includes('check balance')){
+     else if(text.includes('check')){
        axios.get(`http://3d13df19.ngrok.io/api/balance/${sender}`)
         .then(function (response) {
           console.log(response);
