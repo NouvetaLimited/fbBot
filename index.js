@@ -80,7 +80,7 @@ function decideMessage(sender, text1){
 
      }else if(text.includes("exists")){
         //sendGenericMessage(sender)
-        sendText(sender, "Sorry i dont have your data to link to your account. Please provide me with your ID starting with word link eg l345678")
+        sendText(sender, "Sorry i dont have your data to link to your account. Please provide me with your ID starting with word l eg l345678")
      }
      else if(text.includes("l")){
        axios.get(` http://3d13df19.ngrok.io/api/postmessage/${sender}/ID/${text}`)
@@ -91,9 +91,9 @@ function decideMessage(sender, text1){
         .catch(function (error) {
           console.log(error);
         });
-         sendText(sender,"Enter you phone number beggining with N eg , Z0715428709")
+         sendText(sender,"Enter you phone number beggining with z eg , Z0715428709")
      }
-     else if(text.includes("n")){
+     else if(text.includes("z")){
        axios.get(` http://3d13df19.ngrok.io/api/link/${sender}/${text}`)
         .then(function (response) {
           const data= response.status
