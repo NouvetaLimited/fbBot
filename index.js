@@ -115,7 +115,7 @@ function decideMessage(sender, text1){
         });
          sendText(sender,"Message has been sent to your phone")
      }
-     else if(text.includes("#")){
+     else if(text.includes("ln")){
        axios.get(` http://ef36d28f.ngrok.io/api/otp/${sender}/${text}`)
         .then(function (response) {
           const data= response.status
@@ -301,6 +301,12 @@ function decideMessage(sender, text1){
             //the id Number
              sendText(sender,"Good, there are afew items you will require on hand, Your National ID and make sure your MPESA has atleast Kshs 100.00, cofirm when ready.Enter your ID number starting with the word ID eg ID33865745")
 
+          }
+          else if(text.includes("cheque")){
+              sendQuickcheq(sender)
+          }
+          else if(text.includes("debit")){
+               sendQuickcheq(sender)
           }
           else if(text.includes("id")){
             axios.get(` http://ef36d28f.ngrok.io/api/postmessage/${sender}/ID/${text}`)
@@ -647,6 +653,48 @@ function sendQuickTrans(sender){
       }
       sendRequest(sender, messageData);
     }
+    //Cheque
+    function sendQuickcheq(sender){
+      let messageData={
+          "text": "Your chequebook is now ordered and can be collected at harambee Avenue, is this convinient for you?",
+          "quick_replies":[
+            {
+            "content_type":"text",
+            "title":"Pick there",
+            "payload":"pick",
+            //"image_url":"http://example.com/img/red.png"
+            },
+            {
+            "content_type":"text",
+            "title":"Choose another place",
+            "payload":"choose",
+            //"image_url":"http://example.com/img/red.png"
+           }
+            ]
+        }
+        sendRequest(sender, messageData);
+      }
+      //Debit
+      function sendQuickdebit(sender){
+        let messageData={
+            "text": "Your chequebook is now ordered and can be collected at harambee Avenue, is this convinient for you?",
+            "quick_replies":[
+              {
+              "content_type":"text",
+              "title":"Pick there",
+              "payload":"pick",
+              //"image_url":"http://example.com/img/red.png"
+              },
+              {
+              "content_type":"text",
+              "title":"Choose another place",
+              "payload":"choose",
+              //"image_url":"http://example.com/img/red.png"
+             }
+              ]
+          }
+          sendRequest(sender, messageData);
+        }
   // Yes or no12
   function sendQuickYes(sender){
     let messageData={
