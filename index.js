@@ -62,11 +62,12 @@ app.post('/webhook/', function(req, res){
                const data= response.status
                console.log(response);
                const name = response.data.first_name
-               decideMessage(sender, text ,name)
              })
              .catch(function (error) {
                console.log(error);
              });
+
+             decideMessage(sender, text ,name)
         }
 
         if(event.postback){
@@ -78,11 +79,11 @@ app.post('/webhook/', function(req, res){
                const data= response.status
                console.log(response);
                const name = response.data.first_name
-               decideMessage(sender, text ,name)
              })
              .catch(function (error) {
                console.log(error);
              });
+             decideMessage(sender, text ,name)
         }
     }
     res.sendStatus(200);
@@ -92,7 +93,7 @@ function decideMessage(sender, text1 ,name){
     let text = text1.toLowerCase()
     let service = text
      if(text.includes("get started")){
-         sendText(sender, "Hi"+name+" I am Asunta and will be your agent today, how may I help you?")
+         //sendText(sender, "Hi"+name+" I am Asunta and will be your agent today, how may I help you?"
          sendButtonMessage(sender,"Hi"+name+"I am Asunta and will be your agent today, how may I help you?")
 
      }else if(text.includes("exists")){
