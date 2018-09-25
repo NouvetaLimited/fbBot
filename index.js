@@ -198,6 +198,7 @@ function decideMessage(sender, text1){
             sendButtonGen(sender,"This are general services available")
           }
           else if(text.includes("pay")){
+            console.log(text);
           quickReplyPay(sender)
           }
           else if (text.includes("water")) {
