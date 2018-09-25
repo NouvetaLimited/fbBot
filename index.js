@@ -80,7 +80,7 @@ function decideMessage(sender, text1){
           const data= response.status
           console.log(response);
           const name = response.data.first_name
-          sendButtonMessage(sender,"Hi "+name+",  I am Asunta and will be your agent today, how may I help you")
+          sendButtonMessage(sender,"Hi "+name+",  I am Kunta and will be your agent today, how may I help you")
         })
         .catch(function (error) {
           console.log(error);
@@ -296,7 +296,7 @@ function decideMessage(sender, text1){
             //the yes no for account opening
           sendQuickYes(sender)
           }
-          else if(text.includes("yes12")){
+          else if(text.includes("yes")){
             //sendText(sender,"Please enter your ID number starting with the word ID eg ID33865745")
             //the id Number
              sendText(sender,"Good, there are afew items you will require on hand, Your National ID and make sure your MPESA has atleast Kshs 100.00, cofirm when ready.Enter your ID number starting with the word ID eg ID33865745")
