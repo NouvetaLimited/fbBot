@@ -333,8 +333,8 @@ function decideMessage(sender, text1){
                console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',data,lee);
                if( lee === '200' ){
                  sendText(sender,"Ok, am sending you a request for a small initail deposit to activate the account")
-                 sleep(10000);
-                 sendQuickDep(sender)                 
+                 //sleep(10000);
+                 sendQuickDep(sender)
                      axios.get(` http://ef36d28f.ngrok.io/api/push1/${sender}`)
                       .then(function (response) {
                         const data= response.status
