@@ -112,6 +112,7 @@ function decideMessage(sender, text1){
           console.log(response);
           console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',data,lee);
           if( lee === '200' ){
+            sendText(sender,"Account successfully linked")
                 sendButtonMessage2(sender,"Choose the service youll like to use")
           }else {
              sendText(sender,"Wrong OTP. Contact our customer care for assistant")
@@ -128,11 +129,27 @@ function decideMessage(sender, text1){
      else if(text.includes("acc")){
        quickReplyAcc(sender)
      }
-     else if(text.includes('balance')){
+     else if(text.includes('check balance')){
+       axios.get(`http://3d13df19.ngrok.io/api/balance/${sender}`)
+        .then(function (response) {
+          console.log(response);
+          console.log("This is me",phoneNumber);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
        sendText(sender, "Thank the request has been received, Youll receive a text message on your registered number with your acc balance.")
        sendButtonMessage2(sender,"Choose the service youll like to use")
      }
      else if(text.includes("mini")){
+       axios.get(`http://3d13df19.ngrok.io/api/ministatement/${sender}`)
+        .then(function (response) {
+          console.log(response);
+          console.log("This is me",phoneNumber);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
        sendText(sender, "Thank the request has been received, Youll receive a text message on your registered number with your Ministatement.")
        sendButtonMessage2(sender,"Choose the service youll like to use")
      }
