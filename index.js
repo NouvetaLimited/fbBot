@@ -57,6 +57,14 @@ app.post('/webhook/', function(req, res){
              let text = event.message.text;
             //sendText(sender,"Text echo: " + text.substring(0,100))
             console.log("This is me",text);
+            axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+             .then(function (response) {
+               const data= response.status
+               console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',response);
+             })
+             .catch(function (error) {
+               console.log(error);
+             });
 
             decideMessage(sender, text)
         }
@@ -104,7 +112,7 @@ function decideMessage(sender, text1){
         });
          sendText(sender,"Message has been sent to your phone")
      }
-     else if((text.includes(text.charAt(0))) === 'o'){
+     else if(text.includes("#")){
        axios.get(` http://3d13df19.ngrok.io/api/otp/${sender}/${text}`)
         .then(function (response) {
           const data= response.status
