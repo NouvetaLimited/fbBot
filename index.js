@@ -135,7 +135,6 @@ function decideMessage(sender, text1){
         .then(function (response) {
           const data= response.status
           console.log(response);
-          console.log("This is me",phoneNumber)
         })
         .catch(function (error) {
           console.log(error);
@@ -224,7 +223,7 @@ function decideMessage(sender, text1){
           sendText(sender,"US DOLLAR	100.7472	100.6472	100.8472,US DOLLAR	100.7472	100.6472	100.8472,US DOLLAR	100.7472	100.6472	100.8472,US DOLLAR	100.7472	100.6472	100.8472")
           sendButtonGen(sender,"This are general services available")
           }
-          else if(text.includes("nonexist")){
+          else if(text.includes("qali")){
             sendText(sender,"Please enter your ID number starting with the word ID eg ID33865745")
           }
           else if(text.includes("#")){
@@ -279,7 +278,7 @@ function sendButtonMessage(sender, text){
                     {
                         "type":"postback",
                         "title":"Im not a NBK customer",
-                        "payload":"nonexist"
+                        "payload":"qali"
                     }
                 ]
             }
