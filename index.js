@@ -238,7 +238,7 @@ function decideMessage(sender, text1){
               sendText(sender,"Enter you phone number beggining with N eg , N0715428709")
           }
           else if(text.includes("n")){
-            axios.post(` http://3d13df19.ngrok.io/api/postmessage/${sender}/phone/${text}`)
+            axios.get(` http://3d13df19.ngrok.io/api/register/${sender}/${text}`)
              .then(function (response) {
                const data= response.status
                console.log(response);
@@ -247,14 +247,17 @@ function decideMessage(sender, text1){
                console.log(error);
              });
               sendText(sender,"Message has been sent to your phone")
-            axios.post(` http://3d13df19.ngrok.io/api/acc/${sender}`)
-               .then(function (response) {
-                 const data= response.status
-                 console.log(response);
-               })
-               .catch(function (error) {
-                 console.log(error);
-               });
+          }
+          else if(text.include("a")){
+            axios.get(` http://3d13df19.ngrok.io/api/otp/${sender}/${text}`)
+             .then(function (response) {
+               const data= response.status
+               console.log(response);
+               console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',data);
+             })
+             .catch(function (error) {
+               console.log(error);
+             });
           }
           else{
               sendText(sender,text)
