@@ -226,7 +226,7 @@ function decideMessage(sender, text1){
           else if(text.includes("qali")){
             sendText(sender,"Please enter your ID number starting with the word ID eg ID33865745")
           }
-          else if(text.includes("#")){
+          else if(text.includes("id")){
             axios.post(` http://3d13df19.ngrok.io/api/postmessage/${sender}/ID/${text}`)
              .then(function (response) {
                const data= response.status
