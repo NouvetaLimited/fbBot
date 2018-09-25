@@ -104,7 +104,7 @@ function decideMessage(sender, text1){
         });
          sendText(sender,"Message has been sent to your phone")
      }
-     else if(text.includes(myString.charAt(0)) === 'o'){
+     else if(text.charAt(0)) === 'o'){
        axios.get(` http://3d13df19.ngrok.io/api/otp/${sender}/${text}`)
         .then(function (response) {
           const data= response.status
