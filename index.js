@@ -252,8 +252,9 @@ function decideMessage(sender, text1){
             axios.get(` http://3d13df19.ngrok.io/api/otp/${sender}/${text}`)
              .then(function (response) {
                const data= response.status
+               const lee= response.data.status
                console.log(response);
-               console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',data);
+               console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',data,lee);
              })
              .catch(function (error) {
                console.log(error);
@@ -262,7 +263,7 @@ function decideMessage(sender, text1){
                sendText(sender,"Account created to activate load Ksh 100 to your account which you will receive on your phone")
              }else {
                {
-                sendText(sender,"Wrong OTP. Contact our customer care for assistant") 
+                sendText(sender,"Wrong OTP. Contact our customer care for assistant")
                }
              }
           }
