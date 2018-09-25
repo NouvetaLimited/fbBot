@@ -384,6 +384,15 @@ function decideMessage(sender, text1){
                     .then(function (response) {
                       const data= response.status
                       console.log(response);
+                      axios.get(`https://d8b21a2b.ngrok.io/api/postmessage/${sender}/otpreg/${text}`)
+                       .then(function (response) {
+                         const data= response.status
+                         console.log(response);
+                         sendText(sender,"Enter you phone number beggining with the country code eg 254715428709")
+                       })
+                       .catch(function (error) {
+                         console.log(error);
+                       });
                     })
                     .catch(function (error) {
                       console.log(error);
