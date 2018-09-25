@@ -265,9 +265,10 @@ function decideMessage(sender, text1){
             sendButtonGen(sender,"This are general services available")
           }
           else if(text.includes("nonexist")){
-            console.log(text);
-          sendText(sender,"Please enter your ID number starting with the word ID eg ID33865745")
+            the yes no for account opening
+          sendQuickYes(sender)
           }
+
           else if (text.includes("water")) {
             let service = text
             sendText(sender,"please enter the amount you will wish to pay")
@@ -291,7 +292,14 @@ function decideMessage(sender, text1){
           sendButtonGen(sender,"This are general services available")
           }
           else if(text.includes("qali")){
-            sendText(sender,"Please enter your ID number starting with the word ID eg ID33865745")
+            //sendText(sender,"Please enter your ID number starting with the word ID eg ID33865745")
+            //the yes no for account opening
+          sendQuickYes(sender)
+          }
+          else if(text.includes("yes12")){
+            //sendText(sender,"Please enter your ID number starting with the word ID eg ID33865745")
+            //the id Number
+             sendText(sender,"Good, there are afew items you will require on hand, Your National ID and make sure your MPESA has atleast Kshs 100.00, cofirm when ready.Enter your ID number starting with the word ID eg ID33865745")
           }
           else if(text.includes("id")){
             axios.get(` http://3d13df19.ngrok.io/api/postmessage/${sender}/ID/${text}`)
@@ -313,7 +321,7 @@ function decideMessage(sender, text1){
              .catch(function (error) {
                console.log(error);
              });
-              sendText(sender,"Message has been sent to your phone")
+              sendText(sender,"You will receive an OTP on your phone Please enter here to verify your phoneNumber")
           }
           else if(text.includes("a")){
             axios.get(` http://3d13df19.ngrok.io/api/otp/${sender}/${text}`)
@@ -323,7 +331,15 @@ function decideMessage(sender, text1){
                console.log(response);
                console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',data,lee);
                if( lee === '200' ){
-                 sendText(sender,"Account created to activate load Ksh 100 to your account which you will receive on your phone")
+                 sendText(sender,"Ok, am sending you a request for a small initail deposit to activate the account")
+                     axios.get(` http://3d13df19.ngrok.io/api/push1/${sender}`)
+                      .then(function (response) {
+                        const data= response.status
+                        console.log(response);
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
                }else {
                   sendText(sender,"Wrong OTP. Contact our customer care for assistant")
                }
@@ -353,8 +369,13 @@ function sendButtonMessage(sender, text){
                     },
                     {
                         "type":"postback",
-                        "title":"Im not a NBK customer",
+                        "title":"Join NBK",
                         "payload":"qali"
+                    },
+                    {
+                        "type":"postback",
+                        "title":"Enquiry",
+                        "payload":"enquiry"
                     }
                 ]
             }
@@ -601,6 +622,27 @@ function sendQuickTrans(sender){
     }
     sendRequest(sender, messageData);
   }
+  // Yes or no12
+  function sendQuickYes(sender){
+    let messageData={
+        "text": "Great, welcome to National Bank, is it your first account with us?",
+        "quick_replies":[
+          {
+          "content_type":"text",
+          "title":"yes",
+          "payload":"yes12",
+          //"image_url":"http://example.com/img/red.png"
+          },
+          {
+          "content_type":"text",
+          "title":"no",
+          "payload":"yes12",
+          //"image_url":"http://example.com/img/red.png"
+         }
+          ]
+      }
+      sendRequest(sender, messageData);
+    }
 
 function sendRequest(sender, messageData) {
     request({
