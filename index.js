@@ -199,7 +199,8 @@ function decideMessage(sender, text1){
           }
           else if(text.includes("pay")){
             console.log(text);
-          quickReplyPay(sender)
+        //  quickReplyPay(sender)
+          sendText(sender,"Please enter your ID number starting with the word ID eg ID33865745")
           }
           else if (text.includes("water")) {
             let service = text
