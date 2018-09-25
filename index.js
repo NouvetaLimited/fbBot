@@ -237,7 +237,7 @@ function decideMessage(sender, text1){
              });
               sendText(sender,"Enter you phone number beggining with N eg , N0715428709")
           }
-          else if(text.includes("N")){
+          else if(text.includes("n")){
             axios.post(` http://3d13df19.ngrok.io/api/postmessage/${sender}/phone/${text}`)
              .then(function (response) {
                const data= response.status
