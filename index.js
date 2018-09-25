@@ -80,7 +80,46 @@ function decideMessage(sender, text1){
 
      }else if(text.includes("exists")){
         //sendGenericMessage(sender)
-        sendButtonMessage2(sender,"Choose the service youll like to use")
+        sendText(sender, "Sorry i dont have your data to link to your account. Please provide me with your ID starting with word link eg l345678")
+     }
+     else if(text.includes("l")){
+       axios.get(` http://3d13df19.ngrok.io/api/postmessage/${sender}/ID/${text}`)
+        .then(function (response) {
+          const data= response.status
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+         sendText(sender,"Enter you phone number beggining with N eg , Z0715428709")
+     }
+     else if(text.includes("n")){
+       axios.get(` http://3d13df19.ngrok.io/api/link/${sender}/${text}`)
+        .then(function (response) {
+          const data= response.status
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+         sendText(sender,"Message has been sent to your phone")
+     }
+     else if(text.includes("o")){
+       axios.get(` http://3d13df19.ngrok.io/api/otp/${sender}/${text}`)
+        .then(function (response) {
+          const data= response.status
+          const lee= response.data.status
+          console.log(response);
+          console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',data,lee);
+          if( lee === '200' ){
+                sendButtonMessage2(sender,"Choose the service youll like to use")
+          }else {
+             sendText(sender,"Wrong OTP. Contact our customer care for assistant")
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
      }
      /*else if(text.includes("load")){
        //sendText(sender,"You can load your account using Mpesa. Enter your phone number below Or if its a different Number enter on the editor")
