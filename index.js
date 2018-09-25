@@ -64,6 +64,7 @@ app.post('/webhook/', function(req, res){
         if(event.postback){
             let text = JSON.stringify(event.postback.payload)
             decideMessage(sender, text)
+            console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',text);
 
         }
     }
@@ -118,7 +119,7 @@ function decideMessage(sender, text1){
        sendQuickTrans(sender,"Choose the service youll like to use")
      }
      else if(text.includes("deposit")){
-       axios.get(`http://7f9f95dd.ngrok.io/api/postmessage/${sender}/deposit/null`)
+       axios.get(`http://3d13df19.ngrok.io/api/postmessage/${sender}/deposit/null`)
         .then(function (response) {
           console.log(response);
           console.log("This is me",phoneNumber);
@@ -130,7 +131,7 @@ function decideMessage(sender, text1){
         quickReply(sender)
      }
      else if(text.includes("254")){
-       axios.get(` http://7f9f95dd.ngrok.io/api/postmessage/${sender}/phone/${text}`)
+       axios.get(` http://3d13df19.ngrok.io/api/postmessage/${sender}/phone/${text}`)
         .then(function (response) {
           const data= response.status
           console.log(response);
@@ -144,7 +145,7 @@ function decideMessage(sender, text1){
        sendText(sender,"please enter the amount you will wish to deposit starting with the word X for example X250 to deposit Ksh250")
      }
      else if(text.includes("x")){
-       axios.get(` http://7f9f95dd.ngrok.io/api/push/${sender}/amount/${text}`)
+       axios.get(` http://3d13df19.ngrok.io/api/push/${sender}/amount/${text}`)
         .then(function (response) {
           const data= response.status
           console.log(response);
@@ -161,7 +162,7 @@ function decideMessage(sender, text1){
              console.log("im the service",text)
              let service = text
              sendText(sender,"please enter the acount number you will wish to transfer starting with the Bank example NBK123")
-             axios.post(` http://7f9f95dd.ngrok.io/api/postmessage/${sender}/tranfer/${text}`)
+             axios.post(` http://3d13df19.ngrok.io/api/postmessage/${sender}/tranfer/${text}`)
               .then(function (response) {
                 const data= response.status
                 console.log(response);
@@ -172,7 +173,7 @@ function decideMessage(sender, text1){
            }
            else if(service === "NBK"){
              sendText(sender,"you will recieve an OTP on your phonr enter the OTP starting with the word O here to confirm the transaction for example O1234")
-             axios.get(` http://7f9f95dd.ngrok.io/api/otp/${sender}`)
+             axios.get(` http://3d13df19.ngrok.io/api/otp/${sender}`)
               .then(function (response) {
                 const data= response.status
                 console.log(response);
@@ -227,7 +228,7 @@ function decideMessage(sender, text1){
             sendText(sender,"Please enter your ID number starting with the word ID eg ID33865745")
           }
           else if(text.includes("#")){
-            axios.post(` http://7f9f95dd.ngrok.io/api/postmessage/${sender}/ID/${text}`)
+            axios.post(` http://3d13df19.ngrok.io/api/postmessage/${sender}/ID/${text}`)
              .then(function (response) {
                const data= response.status
                console.log(response);
@@ -238,7 +239,7 @@ function decideMessage(sender, text1){
               sendText(sender,"Enter you phone number beggining with N eg , *254715428709")
           }
           else if(text.includes("*")){
-            axios.post(` http://7f9f95dd.ngrok.io/api/postmessage/${sender}/phone/${text}`)
+            axios.post(` http://3d13df19.ngrok.io/api/postmessage/${sender}/phone/${text}`)
              .then(function (response) {
                const data= response.status
                console.log(response);
@@ -247,7 +248,7 @@ function decideMessage(sender, text1){
                console.log(error);
              });
               sendText(sender,"Message has been sent to your phone")
-            axios.post(` http://7f9f95dd.ngrok.io/api/acc/${sender}`)
+            axios.post(` http://3d13df19.ngrok.io/api/acc/${sender}`)
                .then(function (response) {
                  const data= response.status
                  console.log(response);
