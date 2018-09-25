@@ -94,7 +94,7 @@ function decideMessage(sender, text1){
         sendText(sender, "Sorry i dont have your data to link to your account. Please provide me with your ID starting with word link eg link345678")
      }
      else if(text.includes("link")){
-       axios.get(` http://ef36d28f.ngrok.io/api/postmessage/${sender}/ID/${text}`)
+       axios.get(`https://d8b21a2b.ngrok.io/api/postmessage/${sender}/ID/${text}`)
         .then(function (response) {
           const data= response.status
           console.log(response);
@@ -105,7 +105,7 @@ function decideMessage(sender, text1){
          sendText(sender,"Enter you phone number beggining with z eg , Z0715428709")
      }
      else if(text.includes("z")){
-       axios.get(` http://ef36d28f.ngrok.io/api/link/${sender}/${text}`)
+       axios.get(`https://d8b21a2b.ngrok.io/api/link/${sender}/${text}`)
         .then(function (response) {
           const data= response.status
           console.log(response);
@@ -116,7 +116,7 @@ function decideMessage(sender, text1){
          sendText(sender,"Message has been sent to your phone")
      }
      else if(text.includes("y")){
-       axios.get(` http://ef36d28f.ngrok.io/api/otp/${sender}/${text}`)
+       axios.get(`https://d8b21a2b.ngrok.io/api/otp/${sender}/${text}`)
         .then(function (response) {
           const data= response.status
           const lee= response.data.status
@@ -198,7 +198,7 @@ function decideMessage(sender, text1){
         quickReply(sender)
      }
      else if(text.includes("254")){
-       axios.get(` http://ef36d28f.ngrok.io/api/postmessage/${sender}/phone/${text}`)
+       axios.get(`https://d8b21a2b.ngrok.io/api/postmessage/${sender}/phone/${text}`)
         .then(function (response) {
           const data= response.status
           console.log(response);
@@ -211,7 +211,7 @@ function decideMessage(sender, text1){
        sendText(sender,"please enter the amount you will wish to deposit starting with the word X for example X250 to deposit Ksh250")
      }
      else if(text.includes("x")){
-       axios.get(` http://ef36d28f.ngrok.io/api/push/${sender}/amount/${text}`)
+       axios.get(`https://d8b21a2b.ngrok.io/api/push/${sender}/amount/${text}`)
         .then(function (response) {
           const data= response.status
           console.log(response);
@@ -228,7 +228,7 @@ function decideMessage(sender, text1){
              console.log("im the service",text)
              let service = text
              sendText(sender,"please enter the acount number you will wish to transfer starting with the Bank example NBK123")
-             axios.post(` http://ef36d28f.ngrok.io/api/postmessage/${sender}/tranfer/${text}`)
+             axios.post(`https://d8b21a2b.ngrok.io/api/postmessage/${sender}/tranfer/${text}`)
               .then(function (response) {
                 const data= response.status
                 console.log(response);
@@ -239,7 +239,7 @@ function decideMessage(sender, text1){
            }
            else if(service === "NBK"){
              sendText(sender,"you will recieve an OTP on your phonr enter the OTP starting with the word O here to confirm the transaction for example O1234")
-             axios.get(` http://ef36d28f.ngrok.io/api/otp/${sender}`)
+             axios.get(`https://d8b21a2b.ngrok.io/api/otp/${sender}`)
               .then(function (response) {
                 const data= response.status
                 console.log(response);
@@ -295,8 +295,16 @@ function decideMessage(sender, text1){
             //sendText(sender,"Please enter your ID number starting with the word ID eg ID33865745")
             //the yes no for account opening
           sendQuickYes(sender)
+          axios.get(`https://d8b21a2b.ngrok.io/api/postmessage/${sender}/registeryes/${text}`)
+           .then(function (response) {
+             const data= response.status
+             console.log(response);
+           })
+           .catch(function (error) {
+             console.log(error);
+           });
           }
-          else if(text.includes("yes")){
+          else if(text.includes("///")){
             //sendText(sender,"Please enter your ID number starting with the word ID eg ID33865745")
             //the id Number
              sendText(sender,"Good, there are afew items you will require on hand, Your National ID and make sure your MPESA has atleast Kshs 100.00, cofirm when ready.Enter your ID number starting with the word ID eg ID33865745")
@@ -309,7 +317,7 @@ function decideMessage(sender, text1){
                sendQuickcheq(sender)
           }
           else if(text.includes("id")){
-            axios.get(` http://ef36d28f.ngrok.io/api/postmessage/${sender}/ID/${text}`)
+            axios.get(`https://d8b21a2b.ngrok.io/api/postmessage/${sender}/ID/${text}`)
              .then(function (response) {
                const data= response.status
                console.log(response);
@@ -320,7 +328,7 @@ function decideMessage(sender, text1){
               sendText(sender,"Enter you phone number beggining with N eg , N0715428709")
           }
           else if(text.includes("n")){
-            axios.get(` http://ef36d28f.ngrok.io/api/register/${sender}/${text}`)
+            axios.get(`https://d8b21a2b.ngrok.io/api/register/${sender}/${text}`)
              .then(function (response) {
                const data= response.status
                console.log(response);
@@ -331,7 +339,7 @@ function decideMessage(sender, text1){
               sendText(sender,"You will receive an OTP on your phone Please enter here to verify your phoneNumber")
           }
           else if(text.includes("a")){
-            axios.get(` http://ef36d28f.ngrok.io/api/otp/${sender}/${text}`)
+            axios.get(`https://d8b21a2b.ngrok.io/api/otp/${sender}/${text}`)
              .then(function (response) {
                const data= response.status
                const lee= response.data.status
@@ -341,7 +349,7 @@ function decideMessage(sender, text1){
                  sendText(sender,"Ok, am sending you a request for a small initail deposit to activate the account")
                  //sleep(10000);
                 // sendQuickDep(sender)
-                     axios.get(` http://ef36d28f.ngrok.io/api/push1/${sender}`)
+                     axios.get(`https://d8b21a2b.ngrok.io/api/push1/${sender}`)
                       .then(function (response) {
                         const data= response.status
                         console.log(response);
@@ -360,6 +368,18 @@ function decideMessage(sender, text1){
           }
           else{
               sendText(sender,text)
+              axios.get(`https://d8b21a2b.ngrok.io/api/pastmessage/${sender}`)
+               .then(function (response) {
+                 const data= response.status
+                 console.log(response);
+                 const message = response.data.data
+                 if( message === 'registeryes'){
+                   sendText(sender,"im here")
+                 }
+               })
+               .catch(function (error) {
+                 console.log(error);
+               });
                      }
 
       }
