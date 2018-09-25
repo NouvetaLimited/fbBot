@@ -57,44 +57,26 @@ app.post('/webhook/', function(req, res){
              let text = event.message.text;
             //sendText(sender,"Text echo: " + text.substring(0,100))
             console.log("This is me",text);
-            axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
-             .then(function (response) {
-               const data= response.status
-               console.log(response);
-               const name = response.data.first_name
-             })
-             .catch(function (error) {
-               console.log(error);
-             });
 
-             decideMessage(sender, text ,name)
+            decideMessage(sender, text)
         }
 
         if(event.postback){
             let text = JSON.stringify(event.postback.payload)
             decideMessage(sender, text)
             console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',text);
-            axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
-             .then(function (response) {
-               const data= response.status
-               console.log(response);
-               const name = response.data.first_name
-             })
-             .catch(function (error) {
-               console.log(error);
-             });
-             decideMessage(sender, text ,name)
+
         }
     }
     res.sendStatus(200);
 });
 
-function decideMessage(sender, text1 ,name){
+function decideMessage(sender, text1){
     let text = text1.toLowerCase()
     let service = text
      if(text.includes("get started")){
-         //sendText(sender, "Hi"+name+" I am Asunta and will be your agent today, how may I help you?"
-         sendButtonMessage(sender,"Hi"+name+" I am Asunta and will be your agent today, how may I help you?")
+         sendText(sender, "Hi, My name is Kunta. I am National Bank of Kenya's assistant. Press the buttons bellow to choose the service you want?")
+         sendButtonMessage(sender,"choose one")
 
      }else if(text.includes("exists")){
         //sendGenericMessage(sender)
