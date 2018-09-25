@@ -261,10 +261,7 @@ function decideMessage(sender, text1){
 
           }
         }
-
-/**
-functions
-*/
+//
 function sendButtonMessage(sender, text){
     let messageData={
         "attachment":{
