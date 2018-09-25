@@ -367,7 +367,7 @@ function decideMessage(sender, text1){
              });
           }
           else{
-              sendText(sender,text)
+              //sendText(sender,text)
               axios.get(`https://d8b21a2b.ngrok.io/api/pastmessage/${sender}`)
                .then(function (response) {
                  const data= response.status
@@ -375,7 +375,7 @@ function decideMessage(sender, text1){
                  const message = response.data.data
                  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',message);
                  if( message === 'registeryes'){
-                   sendText(sender,"im here")
+                   sendText(sender,"Good, there are afew items you will require on hand, Your National ID and make sure your MPESA has atleast Kshs 100.00, cofirm when ready.Enter your ID number starting with the word ID eg ID33865745")
                  }
                })
                .catch(function (error) {
