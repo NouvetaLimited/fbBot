@@ -265,7 +265,7 @@ function decideMessage(sender, text1){
             sendButtonGen(sender,"This are general services available")
           }
           else if(text.includes("nonexist")){
-            the yes no for account opening
+        //    the yes no for account opening
           sendQuickYes(sender)
           }
 
