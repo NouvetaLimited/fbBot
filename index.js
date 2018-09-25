@@ -398,16 +398,6 @@ function decideMessage(sender, text1){
                     });
                     //post the messaging_for OTP
                      sendText(sender,"You will receive an OTP on your phone Please enter here to verify your phoneNumber")
-
-                     axios.get(`https://d8b21a2b.ngrok.io/api/postmessage/${sender}/otpreg/${text}`)
-                      .then(function (response) {
-                        const data= response.status
-                        console.log(response);
-                        sendText(sender,"Enter you phone number beggining with the country code eg 254715428709")
-                      })
-                      .catch(function (error) {
-                        console.log(error);
-                      });
                    }
                    //for the otp confirmation
                    else if(message === 'otpreg'){
