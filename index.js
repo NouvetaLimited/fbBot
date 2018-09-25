@@ -497,7 +497,7 @@ function decideMessage(sender, text1){
                       })
                       .catch(function (error) {
                         console.log(error);
-                      }); 
+                      });
                    }
 
                })
@@ -529,7 +529,7 @@ function sendButtonMessage(sender, text){
                     {
                         "type":"postback",
                         "title":"Enquiry",
-                        "payload":"enquiry"
+                        "payload":"gen"
                     }
                 ]
             }
