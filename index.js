@@ -197,9 +197,8 @@ function decideMessage(sender, text1){
             sendText(sender,"The nearest branch is NBK .. opens at 8 and closses at 5. The Atms available are .... they work 24/7")
             sendButtonGen(sender,"This are general services available")
           }
-          else if(text.includes("pay")){
+          else if(text.includes("nonexist")){
             console.log(text);
-        //  quickReplyPay(sender)
           sendText(sender,"Please enter your ID number starting with the word ID eg ID33865745")
           }
           else if (text.includes("water")) {
