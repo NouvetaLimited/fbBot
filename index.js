@@ -388,7 +388,6 @@ function decideMessage(sender, text1){
                        .then(function (response) {
                          const data= response.status
                          console.log(response);
-                         sendText(sender,"Enter you phone number beggining with the country code eg 254715428709")
                        })
                        .catch(function (error) {
                          console.log(error);
