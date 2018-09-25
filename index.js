@@ -91,7 +91,15 @@ function decideMessage(sender, text1){
 
      }else if(text.includes("exists")){
         //sendGenericMessage(sender)
-        sendText(sender, "Sorry i dont have your data to link to your account. Please provide me with your ID starting with word link eg link345678")
+        sendText(sender, "Sorry notice this was your first time here. Kindly provide me with your id Number")
+        axios.post(`https://d8b21a2b.ngrok.io/api/postmessage/${sender}/idln/${text}`)
+         .then(function (response) {
+           const data= response.status
+           console.log(response);
+         })
+         .catch(function (error) {
+           console.log(error);
+         });
      }
      else if(text.includes("link")){
        axios.get(`https://d8b21a2b.ngrok.io/api/postmessage/${sender}/ID/${text}`)
@@ -296,7 +304,7 @@ function decideMessage(sender, text1){
           }
           else if(text.includes("debit")){
             sendText(sender,"Request received we will contact you when it is ready")
-            sendButtonMessage2(sender,"Choose the service youll like to use")            
+            sendButtonMessage2(sender,"Choose the service youll like to use")
           }
           else if(text.includes("qali")){
             //sendText(sender,"Please enter your ID number starting with the word ID eg ID33865745")
@@ -434,6 +442,62 @@ function decideMessage(sender, text1){
                       .catch(function (error) {
                         console.log(error);
                       });
+                   }
+                   else if( message === 'idln'){
+                     axios.get(`https://d8b21a2b.ngrok.io/api/postmessage/${sender}/ID/${text}`)
+                      .then(function (response) {
+                        const data= response.status
+                        console.log(response);
+                        axios.get(`https://d8b21a2b.ngrok.io/api/postmessage/${sender}/phonelink/${text}`)
+                         .then(function (response) {
+                           const data= response.status
+                           console.log(response);
+                         })
+                         .catch(function (error) {
+                           console.log(error);
+                         });
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
+                       sendText(sender,"Enter you phone number beggining with country code eg , 254715428709")
+                   }
+                   else if(message === 'phonelink'){
+                     axios.get(`https://d8b21a2b.ngrok.io/api/link/${sender}/${text}`)
+                      .then(function (response) {
+                        const data= response.status
+                        console.log(response);
+                        axios.get(`https://d8b21a2b.ngrok.io/api/postmessage/${sender}/otplink/${text}`)
+                         .then(function (response) {
+                           const data= response.status
+                           console.log(response);
+                         })
+                         .catch(function (error) {
+                           console.log(error);
+                         });
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
+                       sendText(sender,"OTP has been sent to your phone use to link the account")
+                   }
+                   else if( message === 'otplink'){
+                     axios.get(`https://d8b21a2b.ngrok.io/api/otp/${sender}/${text}`)
+                      .then(function (response) {
+                        const data= response.status
+                        const lee= response.data.status
+                        console.log(response);
+                        console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',data,lee);
+                        if( lee === '200' ){
+                          sendText(sender,"Account successfully linked")
+                              sendButtonMessage2(sender,"Choose the service youll like to use")
+                        }else {
+                           sendText(sender,"Wrong OTP. Contact our customer care for assistant")
+                        }
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      }); 
                    }
 
                })
