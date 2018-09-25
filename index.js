@@ -261,6 +261,7 @@ function decideMessage(sender, text1){
 
           }
         }
+      }
 //
 function sendButtonMessage(sender, text){
     let messageData={
