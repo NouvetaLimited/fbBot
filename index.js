@@ -113,17 +113,9 @@ function decideMessage(sender, text1){
         .catch(function (error) {
           console.log(error);
         });
-        axios.get(` http://ef36d28f.ngrok.io/api/postmessage/${sender}/OTPL/${text}`)
-         .then(function (response) {
-           const data= response.status
-           console.log(response);
-         })
-         .catch(function (error) {
-           console.log(error);
-         });
-         sendText(sender,"Message has been sent to your phone please enter the otp")
+         sendText(sender,"Message has been sent to your phone")
      }
-     else if(text.includes('#')){
+     else if(text.includes("y")){
        axios.get(` http://ef36d28f.ngrok.io/api/otp/${sender}/${text}`)
         .then(function (response) {
           const data= response.status
@@ -328,7 +320,15 @@ function decideMessage(sender, text1){
               sendText(sender,"Enter you phone number beggining with N eg , N0715428709")
           }
           else if(text.includes("n")){
-            sendText(sender,"You will receive an OTP on your phone Please enter here to verify your phoneNumber")
+            axios.get(` http://ef36d28f.ngrok.io/api/register/${sender}/${text}`)
+             .then(function (response) {
+               const data= response.status
+               console.log(response);
+             })
+             .catch(function (error) {
+               console.log(error);
+             });
+              sendText(sender,"You will receive an OTP on your phone Please enter here to verify your phoneNumber")
           }
           else if(text.includes("a")){
             axios.get(` http://ef36d28f.ngrok.io/api/otp/${sender}/${text}`)
@@ -360,17 +360,8 @@ function decideMessage(sender, text1){
           }
           else{
               sendText(sender,text)
-              axios.get(` http://ef36d28f.ngrok.io/api/pastmessage/${sender}`)
-               .then(function (response) {
-                 const data= response.status
-                 console.log(response);
-                 const message = response.data.message
-                 console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',message);
-               })
-               .catch(function (error) {
-                 console.log(error);
-               });
-              }
+                     }
+
       }
 //
 function sendButtonMessage(sender, text){
