@@ -255,7 +255,7 @@ function decideMessage(sender, text1){
                const lee= response.data.status
                console.log(response);
                console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',data,lee);
-               if( lee === 200 ){
+               if( lee === '200' ){
                  sendText(sender,"Account created to activate load Ksh 100 to your account which you will receive on your phone")
                }else {
                   sendText(sender,"Wrong OTP. Contact our customer care for assistant")
