@@ -62,25 +62,33 @@ app.post('/webhook/', function(req, res){
                const data= response.status
                console.log(response);
                const name = response.data.first_name
+               decideMessage(sender, text ,name)
              })
              .catch(function (error) {
                console.log(error);
              });
-
-            decideMessage(sender, text)
         }
 
         if(event.postback){
             let text = JSON.stringify(event.postback.payload)
             decideMessage(sender, text)
             console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',text);
-
+            axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+             .then(function (response) {
+               const data= response.status
+               console.log(response);
+               const name = response.data.first_name
+               decideMessage(sender, text ,name)
+             })
+             .catch(function (error) {
+               console.log(error);
+             });
         }
     }
     res.sendStatus(200);
 });
 
-function decideMessage(sender, text1){
+function decideMessage(sender, text1 ,name){
     let text = text1.toLowerCase()
     let service = text
      if(text.includes("get started")){
