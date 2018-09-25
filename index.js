@@ -300,6 +300,7 @@ function decideMessage(sender, text1){
             //sendText(sender,"Please enter your ID number starting with the word ID eg ID33865745")
             //the id Number
              sendText(sender,"Good, there are afew items you will require on hand, Your National ID and make sure your MPESA has atleast Kshs 100.00, cofirm when ready.Enter your ID number starting with the word ID eg ID33865745")
+
           }
           else if(text.includes("id")){
             axios.get(` http://ef36d28f.ngrok.io/api/postmessage/${sender}/ID/${text}`)
@@ -332,6 +333,8 @@ function decideMessage(sender, text1){
                console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',data,lee);
                if( lee === '200' ){
                  sendText(sender,"Ok, am sending you a request for a small initail deposit to activate the account")
+                 sleep(10000);
+                 sendQuickDep(sender)                 
                      axios.get(` http://ef36d28f.ngrok.io/api/push1/${sender}`)
                       .then(function (response) {
                         const data= response.status
@@ -622,6 +625,27 @@ function sendQuickTrans(sender){
     }
     sendRequest(sender, messageData);
   }
+  //send quick transfer
+  function sendQuickDep(sender){
+    let messageData={
+        "text": "We have Chequebooks and Debit Card for your account which if requested can be picked form a branch of your convinience, would you like to order for any of them",
+        "quick_replies":[
+          {
+          "content_type":"text",
+          "title":"cheque.",
+          "payload":"cheque.",
+          //"image_url":"http://example.com/img/red.png"
+          },
+          {
+          "content_type":"text",
+          "title":"debit card",
+          "payload":"debit card",
+          //"image_url":"http://example.com/img/red.png"
+         }
+          ]
+      }
+      sendRequest(sender, messageData);
+    }
   // Yes or no12
   function sendQuickYes(sender){
     let messageData={
