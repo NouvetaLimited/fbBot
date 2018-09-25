@@ -227,7 +227,7 @@ function decideMessage(sender, text1){
             sendText(sender,"Please enter your ID number starting with the word ID eg ID33865745")
           }
           else if(text.includes("id")){
-            axios.post(` http://3d13df19.ngrok.io/api/postmessage/${sender}/ID/${text}`)
+            axios.get(` http://3d13df19.ngrok.io/api/postmessage/${sender}/ID/${text}`)
              .then(function (response) {
                const data= response.status
                console.log(response);
@@ -235,9 +235,9 @@ function decideMessage(sender, text1){
              .catch(function (error) {
                console.log(error);
              });
-              sendText(sender,"Enter you phone number beggining with N eg , *254715428709")
+              sendText(sender,"Enter you phone number beggining with N eg , N0715428709")
           }
-          else if(text.includes("*")){
+          else if(text.includes("N")){
             axios.post(` http://3d13df19.ngrok.io/api/postmessage/${sender}/phone/${text}`)
              .then(function (response) {
                const data= response.status
