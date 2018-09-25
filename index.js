@@ -94,7 +94,7 @@ function decideMessage(sender, text1 ,name){
     let service = text
      if(text.includes("get started")){
          //sendText(sender, "Hi"+name+" I am Asunta and will be your agent today, how may I help you?"
-         sendButtonMessage(sender,"Hi"+name+"I am Asunta and will be your agent today, how may I help you?")
+         sendButtonMessage(sender,"Hi"+name+" I am Asunta and will be your agent today, how may I help you?")
 
      }else if(text.includes("exists")){
         //sendGenericMessage(sender)
