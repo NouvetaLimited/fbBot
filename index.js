@@ -506,7 +506,7 @@ function decideMessage(sender, text1){
                         console.log(response);
                         console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',data,lee);
                         if( lee === '200' ){
-                          sendText(sender,"Account 121454*******25,35422******,have been linked to this account")
+                          sendText(sender,"Two accounts, 1. 121454*******25, 2. 35422******,have been linked to this account")
                               sendButtonMessage2(sender,"Choose the service youll like to use")
                         }else {
                            sendText(sender,"Wrong OTP. Contact our customer care for assistant")
