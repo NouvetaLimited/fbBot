@@ -187,8 +187,8 @@ function decideMessage(sender, text1){
        sendButtonCheque(sender,"How many level")
      }
      else if(text.includes("25l")){
-       sendText(sender, "Thank you We've received your request once its ready well inform you . Thank you")
-       sendButtonMessage2(sender,"Choose the service youll like to use")
+       sendText(sender, "Thank you We've received your request once its ready we'll inform you . Thank you")
+       sendButtonMessage2(sender,"Choose the service youll like to us to help you")
      }
      else if(text.includes("trans")){
        sendQuickTrans(sender,"Choose the service youll like to use")
@@ -300,7 +300,15 @@ function decideMessage(sender, text1){
           sendButtonGen(sender,"This are general services available")
           }
           else if(text.includes("cheque")){
-            sendButtonCheque(sender,"How many level")
+            sendQuickcheq(sender,"Your chequebook is now ordered and can be collected at harambee Avenue, is this convinient for you?")
+            axios.get(` http://e206f378.ngrok.io/api/postmessage/${sender}/chequestatus/${text}`)
+             .then(function (response) {
+               const data= response.status
+               console.log(response);
+             })
+             .catch(function (error) {
+               console.log(error);
+             });
           }
           else if(text.includes("debit")){
             sendText(sender,"Request received we will contact you when it is ready")
@@ -336,7 +344,7 @@ function decideMessage(sender, text1){
               .then(function (response) {
                 const data= response.status
                 console.log(response);
-                sendText(sender,"Enter you phone number beggining with the country code eg 254715428709")
+                sendText(sender,"Gorrit, Enter you phone number beggining with the country code eg 254715428709")
               })
               .catch(function (error) {
                 console.log(error);
@@ -498,6 +506,24 @@ function decideMessage(sender, text1){
                       .catch(function (error) {
                         console.log(error);
                       });
+                   }
+                   else if(message === 'chequestatus'){
+                     if( text === 'yes'){
+                           sendQuickcheq(sender,"Anything else you would like my assitance on?")
+                     }else {
+                       axios.get(` http://e206f378.ngrok.io/api/postmessage/${sender}/chequeLocation/${text}`)
+                        .then(function (response) {
+                          const data= response.status
+                          console.log(response);
+                        })
+                        .catch(function (error) {
+                          console.log(error);
+                        });
+                        sendText(sender,"Enter the convenient branch you will pick your cheque/debit")
+                     }
+                   }
+                   else if(message === 'chequeLocation'){
+                     sendQuickcheq(sender,"Anything else you would like my assitance on?")
                    }
 
                })
@@ -798,20 +824,20 @@ function sendQuickTrans(sender){
       sendRequest(sender, messageData);
     }
     //Cheque
-    function sendQuickcheq(sender){
+    function sendQuickcheq(sender,text){
       let messageData={
-          "text": "Your chequebook is now ordered and can be collected at harambee Avenue, is this convinient for you?",
+          "text": text,
           "quick_replies":[
             {
             "content_type":"text",
-            "title":"Pick there",
-            "payload":"pick",
+            "title":"yes",
+            "payload":"yes",
             //"image_url":"http://example.com/img/red.png"
             },
             {
             "content_type":"text",
-            "title":"Choose another place",
-            "payload":"choose",
+            "title":"no",
+            "payload":"no",
             //"image_url":"http://example.com/img/red.png"
            }
             ]
