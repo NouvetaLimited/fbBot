@@ -350,7 +350,7 @@ function decideMessage(sender, text1){
                 console.log(error);
               });
           }
-          else if(text.includes("n")){
+          else if(text.includes("///n")){
             axios.get(` http://e206f378.ngrok.io/api/register/${sender}/${text}`)
              .then(function (response) {
                const data= response.status
@@ -509,7 +509,15 @@ function decideMessage(sender, text1){
                    }
                    else if(message === 'chequestatus'){
                      if( text === 'yes'){
-                           sendQuickcheq(sender,"Anything else you would like my assitance on?")
+                       axios.get(` http://e206f378.ngrok.io/api/postmessage/${sender}/final/${text}`)
+                        .then(function (response) {
+                          const data= response.status
+                          console.log(response);
+                        })
+                        .catch(function (error) {
+                          console.log(error);
+                        });
+                        sendQuickcheq(sender,"Anything else you would like my assitance on?")
                      }else {
                        axios.get(` http://e206f378.ngrok.io/api/postmessage/${sender}/chequeLocation/${text}`)
                         .then(function (response) {
