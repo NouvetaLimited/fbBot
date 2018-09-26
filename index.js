@@ -236,7 +236,7 @@ function decideMessage(sender, text1){
      else if(text.includes("trans")){
        sendQuickTrans(sender,"Choose the service youll like to use")
      }
-     else if(text.includes("service")){
+     else if(text.includes("pay")){
        axios.get(`https://3039541c.ngrok.io/api/postmessage/${sender}/deposit/${text}`)
         .then(function (response) {
           console.log(response);
