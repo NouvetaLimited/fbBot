@@ -406,7 +406,7 @@ function decideMessage(sender, text1){
                  const data= response.status
                  console.log(response);
                  const message = response.data.data
-                 console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',message);
+                 console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',message);
                  if( message === 'registeryes'){
                    sendText(sender,"Good, there are afew items you will require on hand, Your National ID and make sure your MPESA has atleast Kshs 100.00, cofirm when ready.Enter your ID number starting with the word ID eg ID33865745")
                  }
