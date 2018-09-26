@@ -279,7 +279,7 @@ function decideMessage(sender, text1){
              console.log("im the service",text)
              let service = text
              sendText(sender,"please enter the acount number you will wish to transfer starting with the Bank example NBK123")
-             axios.post(`  https://3039541c.ngrok.io/api/postmessage/${sender}/tranfer/${text}`)
+             axios.get(`  https://3039541c.ngrok.io/api/postmessage/${sender}/tranfer/${text}`)
               .then(function (response) {
                 const data= response.status
                 console.log(response);
@@ -308,8 +308,17 @@ function decideMessage(sender, text1){
             sendButtonGen(sender,"This are general services available")
           }
           else if(text.includes("locate")){
-            let service = "loc"
-            quickReplyLoc(sender)
+            //let service = "loc"
+            axios.get(`  https://3039541c.ngrok.io/api/postmessage/${sender}/location/${text}`)
+             .then(function (response) {
+               const data= response.status
+               console.log(response);
+               quickReplyLoc(sender)
+             })
+             .catch(function (error) {
+               console.log(error);
+             });
+
           }
           else if(service === "loc"){
             sendText(sender,"The nearest branch is NBK .. opens at 8 and closses at 5. The Atms available are .... they work 24/7")
@@ -670,6 +679,26 @@ function decideMessage(sender, text1){
                     let  phoneNumber = text
                      sendText(sender,"You will recieve a push notification shortly")
                    }
+                   else if(message === 'location'){
+                     axios.get(`  https://3039541c.ngrok.io/api/postmessage/${sender}/amountdepo/${text}`)
+                      .then(function (response) {
+                        const data= response.status
+                        console.log(response);
+                        sendText(sender,"The nearest branch to you is Harambee Avenue and it's operating time is betweem 8:30am and 4:30pm on weekdays and 8:30am to 12:30pm on weekends, but we are closed on Sundays and all national public holidays, Is there any enquiry you wish to make")
+                        sendQuickcheq(sender,"Anything else you would like my assitance on?")
+                        axios.get(`  https://3039541c.ngrok.io/api/postmessage/${sender}/final/${text}`)
+                         .then(function (response) {
+                           const data= response.status
+                           console.log(response);
+                         })
+                         .catch(function (error) {
+                           console.log(error);
+                         });
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
+                   }
                })
                .catch(function (error) {
                  console.log(error);
@@ -841,7 +870,7 @@ location
 */
 function quickReplyLoc(sender){
   let messageData={
-      "text": "Please click on the button below and share your location",
+      "text": "Please click on the button below and share your location or type on the text field",
       "quick_replies":[
         {
           "content_type":"location"
