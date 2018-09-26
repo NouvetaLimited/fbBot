@@ -158,7 +158,16 @@ function decideMessage(sender, text1){
           console.log(error);
         });
        sendText(sender, "Thank the request has been received, Youll receive a text message on your registered number with your acc balance.")
-       sendButtonMessage2(sender,"Choose the service youll like to use")
+       //sendButtonMessage2(sender,"Choose the service youll like to use")
+       sendQuickcheq(sender,"Anything else you would like my assitance on?")
+       axios.get(`  https://3039541c.ngrok.io/api/postmessage/${sender}/final/${text}`)
+        .then(function (response) {
+          const data= response.status
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
      }
      else if(text.includes("mini")){
        axios.get(`https://3039541c.ngrok.io/api/ministatement/${sender}`)
@@ -170,25 +179,60 @@ function decideMessage(sender, text1){
           console.log(error);
         });
        sendText(sender, "Thank the request has been received, Youll receive a text message on your registered number with your Ministatement.")
-       sendButtonMessage2(sender,"Choose the service youll like to use")
+       sendQuickcheq(sender,"Anything else you would like my assitance on?")
+       axios.get(`  https://3039541c.ngrok.io/api/postmessage/${sender}/final/${text}`)
+        .then(function (response) {
+          const data= response.status
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
      }
      else if(text.includes("statement")){
        sendButtonStatement(sender,"Do you want a")
      }
      else if(text.includes("hard")){
-       sendText(sender, "We've received your request visit any NBK branch and pick. Thank you")
-       sendButtonMessage2(sender,"Choose the service youll like to use")
+       sendText(sender, "We've received your request we will contact you once its ready. Thank you")
+       //sendButtonMessage2(sender,"Choose the service youll like to use")
+       sendQuickcheq(sender,"Anything else you would like my assitance on?")
+       axios.get(`  https://3039541c.ngrok.io/api/postmessage/${sender}/final/${text}`)
+        .then(function (response) {
+          const data= response.status
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
      }
      else if(text.includes("soft")){
        sendText(sender, "You will receive your statement on your email registered to us")
-       sendButtonMessage2(sender,"Choose the service youll like to use")
+       //sendButtonMessage2(sender,"Choose the service youll like to use")
+       sendQuickcheq(sender,"Anything else you would like my assitance on?")
+       axios.get(`  https://3039541c.ngrok.io/api/postmessage/${sender}/final/${text}`)
+        .then(function (response) {
+          const data= response.status
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
      }
      else if(text.includes("book")){
        sendButtonCheque(sender,"How many level")
      }
      else if(text.includes("25l")){
        sendText(sender, "Thank you We've received your request once its ready we'll inform you . Thank you")
-       sendButtonMessage2(sender,"Choose the service youll like to us to help you")
+       //sendButtonMessage2(sender,"Choose the service youll like to us to help you")
+       sendQuickcheq(sender,"Anything else you would like my assitance on?")
+       axios.get(`  https://3039541c.ngrok.io/api/postmessage/${sender}/final/${text}`)
+        .then(function (response) {
+          const data= response.status
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
      }
      else if(text.includes("trans")){
        sendQuickTrans(sender,"Choose the service youll like to use")
@@ -506,7 +550,7 @@ function decideMessage(sender, text1){
                         console.log(response);
                         console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',data,lee);
                         if( lee === '200' ){
-                          sendText(sender,"Two accounts, 1. 121454*******25, 2. 35422******,have been linked to this account")
+                          sendText(sender,"Two accounts 1. 121454*******25, 2. 35422******,have been linked to this account")
                               sendButtonMessage2(sender,"Choose the service youll like to use")
                         }else {
                            sendText(sender,"Wrong OTP. Contact our customer care for assistant")
