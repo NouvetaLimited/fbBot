@@ -532,6 +532,17 @@ function decideMessage(sender, text1){
                    }
                    else if(message === 'chequeLocation'){
                      sendQuickcheq(sender,"Anything else you would like my assitance on?")
+                     axios.get(` http://e206f378.ngrok.io/api/postmessage/${sender}/final/${text}`)
+                      .then(function (response) {
+                        const data= response.status
+                        console.log(response);
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
+                   }
+                   else if(message === 'final'){
+                    sendText(sender,"Have a great day and hope to hear from you soon, you can always reachout to me or call us on 0703088000. And im always here 24/7 when you need me just type hi")
                    }
 
                })
