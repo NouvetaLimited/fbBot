@@ -85,8 +85,7 @@ function decideMessage(sender, text1){
         .catch(function (error) {
           console.log(error);
         });
-
-         //sendText(sender, "Hi, My name is Kunta. I am National Bank of Kenya's assistant. Press the buttons bellow to choose the service you want?")
+        //sendText(sender, "Hi, My name is Kunta. I am National Bank of Kenya's assistant. Press the buttons bellow to choose the service you want?")
          //sendButtonMessage(sender,"choose one")
 
      }else if(text.includes("exists")){
@@ -405,6 +404,19 @@ function decideMessage(sender, text1){
              });
               sendText(sender,"You will receive an OTP on your phone Please enter here to verify your phoneNumber")
           }
+          else if(text.includes("hi")){
+            axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+             .then(function (response) {
+               const data= response.status
+               console.log(response);
+               const name = response.data.first_name
+               sendText(sender,"Hi "+name+",  Welcome back.")
+               sendButtonMessage(sender,"This is are ways I can help you")
+             })
+             .catch(function (error) {
+               console.log(error);
+             });
+          }
           else if(text.includes("//")){
             //to be deleted on production
             axios.get(`  https://3039541c.ngrok.io/api/otp/${sender}/${text}`)
@@ -597,8 +609,9 @@ function decideMessage(sender, text1){
                    else if(message === 'final'){
                      if(text === 'yes'){
                        sendButtonMessage2(sender,"Here are services available for you")
+                     }else{
+                       sendText(sender,"Have a great day and hope to hear from you soon, you can always reachout to me or call us on 0703088000. And im always here 24/7 when you need me just type Hi Kunta")
                      }
-                    sendText(sender,"Have a great day and hope to hear from you soon, you can always reachout to me or call us on 0703088000. And im always here 24/7 when you need me just type hi")
                    }
                    else if(message === 'reg3'){
                      if (text === 'yes'){
