@@ -152,7 +152,7 @@ function decideMessage(sender, text1){
        axios.get(`http://ef36d28f.ngrok.io/api/balance/${sender}`)
         .then(function (response) {
           console.log(response);
-          console.log("This is me",phoneNumber);
+          //console.log("This is me",phoneNumber);
         })
         .catch(function (error) {
           console.log(error);
@@ -229,7 +229,7 @@ function decideMessage(sender, text1){
         });
        console.log("I am the number", text);
       let  phoneNumber = text
-       sendText(sender,"Ypu will recieve a push notification shortly")
+       sendText(sender,"You will recieve a push notification shortly")
        quickReplyAcc(sender)
      }
            else if(text.includes("fer")){
@@ -506,7 +506,7 @@ function decideMessage(sender, text1){
                         console.log(response);
                         console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',data,lee);
                         if( lee === '200' ){
-                          sendText(sender,"Account successfully linked")
+                          sendText(sender,"Account 121454*******25,35422******,have been linked to this account")
                               sendButtonMessage2(sender,"Choose the service youll like to use")
                         }else {
                            sendText(sender,"Wrong OTP. Contact our customer care for assistant")
@@ -551,6 +551,9 @@ function decideMessage(sender, text1){
                       });
                    }
                    else if(message === 'final'){
+                     if(text === 'yes'){
+                       sendButtonMessage2(sender,"Here are services available for you")
+                     }
                     sendText(sender,"Have a great day and hope to hear from you soon, you can always reachout to me or call us on 0703088000. And im always here 24/7 when you need me just type hi")
                    }
                    else if(message === 'reg3'){
@@ -567,6 +570,38 @@ function decideMessage(sender, text1){
                           console.log(error);
                         });
                      }
+                   }
+                   else if(message === 'deposit'){
+                     axios.get(` http://e206f378.ngrok.io/api/postmessage/${sender}/phone/${text}`)
+                      .then(function (response) {
+                        const data= response.status
+                        console.log(response);
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
+                      axios.get(` http://e206f378.ngrok.io/api/postmessage/${sender}/amountdepo/${text}`)
+                       .then(function (response) {
+                         const data= response.status
+                         console.log(response);
+                         sendText(sender,"please enter the amount you will wish to deposit example 250 to deposit Ksh250")
+                       })
+                       .catch(function (error) {
+                         console.log(error);
+                       });
+                   }
+                   else if(message === 'amountdepo'){
+                     axios.get(` http://e206f378.ngrok.io/api/push/${sender}/amount/${text}`)
+                      .then(function (response) {
+                        const data= response.status
+                        console.log(response);
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
+                     console.log("I am the number", text);
+                    let  phoneNumber = text
+                     sendText(sender,"You will recieve a push notification shortly")
                    }
                })
                .catch(function (error) {
