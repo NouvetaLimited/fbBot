@@ -576,19 +576,19 @@ function decideMessage(sender, text1){
                       .then(function (response) {
                         const data= response.status
                         console.log(response);
+                        axios.get(`  https://3039541c.ngrok.io/api/postmessage/${sender}/amountdepo/${text}`)
+                         .then(function (response) {
+                           const data= response.status
+                           console.log(response);
+                           sendText(sender,"please enter the amount you will wish to deposit example 250 to deposit Ksh250")
+                         })
+                         .catch(function (error) {
+                           console.log(error);
+                         });
                       })
                       .catch(function (error) {
                         console.log(error);
                       });
-                      axios.get(`  https://3039541c.ngrok.io/api/postmessage/${sender}/amountdepo/${text}`)
-                       .then(function (response) {
-                         const data= response.status
-                         console.log(response);
-                         sendText(sender,"please enter the amount you will wish to deposit example 250 to deposit Ksh250")
-                       })
-                       .catch(function (error) {
-                         console.log(error);
-                       });
                    }
                    else if(message === 'amountdepo'){
                      axios.get(`  https://3039541c.ngrok.io/api/push/${sender}/amount/${text}`)
