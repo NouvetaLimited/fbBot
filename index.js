@@ -57,7 +57,9 @@ app.post('/webhook/', function(req, res){
         if(event.message && event.message.text || event.message.mid){
              let text = event.message.text;
              let mid =event.message.mid
-             console.log('......................................................................................................................................',mid);
+             if(mid === null){
+               console.log('......................................................................................................................................',mid);
+             }
             //sendText(sender,"Text echo: " + text.substring(0,100))
             console.log("This is me",text);
 
