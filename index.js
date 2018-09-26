@@ -465,7 +465,7 @@ function decideMessage(sender, text1){
              });
           }
           else{
-              sendText(sender,text)
+              //sendText(sender,text)
               axios.get(`  https://3039541c.ngrok.io/api/pastmessage/${sender}`)
                .then(function (response) {
                  const data= response.status
