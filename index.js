@@ -377,7 +377,16 @@ function decideMessage(sender, text1){
                       .then(function (response) {
                         const data= response.status
                         console.log(response);
-                        sendQuickDep(sender)
+                        //sendQuickDep(sender)
+                        sendQuickcheq(sender,"I have confirmed your details,And your account number has been sent to your phone, do you mind if I took you through some of our products that you may find useful?")
+                        axios.get(` http://e206f378.ngrok.io/api/postmessage/${sender}/reg3/${text}`)
+                         .then(function (response) {
+                           const data= response.status
+                           console.log(response);
+                       })
+                         .catch(function (error) {
+                           console.log(error);
+                         });
                       })
                       .catch(function (error) {
                         console.log(error);
@@ -544,7 +553,21 @@ function decideMessage(sender, text1){
                    else if(message === 'final'){
                     sendText(sender,"Have a great day and hope to hear from you soon, you can always reachout to me or call us on 0703088000. And im always here 24/7 when you need me just type hi")
                    }
-
+                   else if(message === 'reg3'){
+                     if (text === 'yes'){
+                        sendQuickDep(sender)
+                     }else {
+                       sendQuickcheq(sender,"Anything else you would like my assitance on?")
+                       axios.get(` http://e206f378.ngrok.io/api/postmessage/${sender}/final/${text}`)
+                        .then(function (response) {
+                          const data= response.status
+                          console.log(response);
+                        })
+                        .catch(function (error) {
+                          console.log(error);
+                        });
+                     }
+                   }
                })
                .catch(function (error) {
                  console.log(error);
