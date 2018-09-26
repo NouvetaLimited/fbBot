@@ -56,14 +56,12 @@ app.post('/webhook/', function(req, res){
         let sender = event.sender.id;
         if(event.message && event.message.text || event.message.mid){
              let text = event.message.text;
-             let mid =event.message.mid
-             if(mid === null){
-               console.log('......................................................................................................................................',mid);
-             }
             //sendText(sender,"Text echo: " + text.substring(0,100))
             console.log("This is me",text);
-
             decideMessage(sender, text)
+            if(event.message.mid){
+              sendText(sender,"The nearest branch to you is Harambee Avenue and it's operating time is betweem 8:30am and 4:30pm on weekdays and 8:30am to 12:30pm on weekends, but we are closed on Sundays and all national public holidays, Is there any enquiry you wish to make")
+            }
         }
 
         if(event.postback){
@@ -78,6 +76,7 @@ app.post('/webhook/', function(req, res){
     }
     res.sendStatus(200);
 });
+
 function decideMessage(sender, text1){
     let text = text1.toLowerCase()
     let service = text
