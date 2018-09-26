@@ -54,8 +54,10 @@ app.post('/webhook/', function(req, res){
     for (let i = 0; i < messaging_events.length; i++){
          let event = messaging_events[i];
         let sender = event.sender.id;
-        if(event.message && event.message.text){
+        if(event.message && event.message.text || event.message.mid){
              let text = event.message.text;
+             let mid =event.message.mid
+             console.log('......................................................................................................................................',mid);
             //sendText(sender,"Text echo: " + text.substring(0,100))
             console.log("This is me",text);
 
@@ -74,7 +76,6 @@ app.post('/webhook/', function(req, res){
     }
     res.sendStatus(200);
 });
-
 function decideMessage(sender, text1){
     let text = text1.toLowerCase()
     let service = text
