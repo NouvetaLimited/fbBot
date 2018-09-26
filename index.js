@@ -50,14 +50,13 @@ app.get('/webhook/', function (req, res){
 
 app.post('/webhook/', function(req, res){
      let messaging_events =  req.body.entry[0].messaging;
-     console.log('..............................................',messaging_events);
     for (let i = 0; i < messaging_events.length; i++){
          let event = messaging_events[i];
         let sender = event.sender.id;
         if(event.message && event.message.text){
              let text = event.message.text;
             //sendText(sender,"Text echo: " + text.substring(0,100))
-            console.log(".............................................................................................",text);
+            console.log("This is me",text);
 
             decideMessage(sender, text)
         }
@@ -237,6 +236,18 @@ function decideMessage(sender, text1){
      else if(text.includes("trans")){
        sendQuickTrans(sender,"Choose the service youll like to use")
      }
+     else if(text.includes("service")){
+       axios.get(`https://3039541c.ngrok.io/api/postmessage/${sender}/deposit/${text}`)
+        .then(function (response) {
+          console.log(response);
+          console.log("This is me",phoneNumber);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+        console.log("I am the service", sender);
+        quickReply(sender)
+     }
      else if(text.includes("deposit")){
        axios.get(`https://3039541c.ngrok.io/api/postmessage/${sender}/deposit/${text}`)
         .then(function (response) {
@@ -260,7 +271,7 @@ function decideMessage(sender, text1){
         });
        console.log("I am the number", text);
       let  phoneNumber = text
-       sendText(sender,"please enter the amount you will wish to deposit starting with the word X for example X250 to deposit Ksh250")
+       sendText(sender,"please enter the amount you will wish to deposit starting with the word X for example 250 to deposit Ksh250")
      }
      else if(text.includes("x")){
        axios.get(`  https://3039541c.ngrok.io/api/push/${sender}/amount/${text}`)
@@ -682,15 +693,15 @@ function decideMessage(sender, text1){
                    }
                    else if(message === 'location'){
                      sendText(sender,"The nearest branch to you is Harambee Avenue and it's operating time is betweem 8:30am and 4:30pm on weekdays and 8:30am to 12:30pm on weekends, but we are closed on Sundays and all national public holidays, Is there any enquiry you wish to make")
-                     axios.get(`  https://3039541c.ngrok.io/api/postmessage/${sender}/final/${text}`)
+                     axios.get(`https://3039541c.ngrok.io/api/postmessage/${sender}/final/${text}`)
                       .then(function (response) {
                         const data= response.status
                         console.log(response);
+                        sendQuickcheq(sender,"Anything else you would like my assitance on?")
                       })
                       .catch(function (error) {
                         console.log(error);
                       });
-                      sendQuickcheq(sender,"Anything else you would like my assitance on?")
                    }
                })
                .catch(function (error) {
@@ -919,13 +930,13 @@ function quickReplyPay(sender){
       "quick_replies":[
         {
         "content_type":"text",
-        "title":"Nairobi water",
+        "title":"Nairobi water services",
         "payload":"water",
         //"image_url":"http://example.com/img/red.png"
         },
         {
         "content_type":"text",
-        "title":"buy airtime",
+        "title":"buy airtime services",
         "payload":"water",
         //"image_url":"http://example.com/img/red.png"
        },
@@ -937,7 +948,7 @@ function quickReplyPay(sender){
      },
      {
        "content_type":"text",
-       "title":"Others",
+       "title":"Other services",
        "payload":"water",
        //"image_url":"http://example.com/img/red.png"
      }
