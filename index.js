@@ -194,7 +194,7 @@ function decideMessage(sender, text1){
        sendQuickTrans(sender,"Choose the service youll like to use")
      }
      else if(text.includes("deposit")){
-       axios.get(`http://ef36d28f.ngrok.io/api/postmessage/${sender}/deposit/null`)
+       axios.get(`http://ef36d28f.ngrok.io/api/postmessage/${sender}/deposit/${text}`)
         .then(function (response) {
           console.log(response);
           console.log("This is me",phoneNumber);
