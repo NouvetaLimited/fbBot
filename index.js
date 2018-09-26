@@ -69,15 +69,6 @@ app.post('/webhook/', function(req, res){
         }
         if(event.message.mid){
           sendText(sender,"The nearest branch to you is Harambee Avenue and it's operating time is betweem 8:30am and 4:30pm on weekdays and 8:30am to 12:30pm on weekends, but we are closed on Sundays and all national public holidays, Is there any enquiry you wish to make")
-          sendQuickcheq(sender,"Anything else you would like my assitance on?")
-          axios.get(`  https://3039541c.ngrok.io/api/postmessage/${sender}/final/${text}`)
-           .then(function (response) {
-             const data= response.status
-             console.log(response);
-           })
-           .catch(function (error) {
-             console.log(error);
-           });
         }
 
     }
