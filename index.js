@@ -50,13 +50,14 @@ app.get('/webhook/', function (req, res){
 
 app.post('/webhook/', function(req, res){
      let messaging_events =  req.body.entry[0].messaging;
+     console.log('..............................................',messaging_events);
     for (let i = 0; i < messaging_events.length; i++){
          let event = messaging_events[i];
         let sender = event.sender.id;
         if(event.message && event.message.text){
              let text = event.message.text;
             //sendText(sender,"Text echo: " + text.substring(0,100))
-            console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",text);
+            console.log(".............................................................................................",text);
 
             decideMessage(sender, text)
         }
@@ -65,6 +66,7 @@ app.post('/webhook/', function(req, res){
             let text = JSON.stringify(event.postback.payload)
             decideMessage(sender, text)
             console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',text);
+
         }
     }
     res.sendStatus(200);
@@ -260,7 +262,7 @@ function decideMessage(sender, text1){
       let  phoneNumber = text
        sendText(sender,"please enter the amount you will wish to deposit starting with the word X for example X250 to deposit Ksh250")
      }
-     else if(text.includes("//")){
+     else if(text.includes("x")){
        axios.get(`  https://3039541c.ngrok.io/api/push/${sender}/amount/${text}`)
         .then(function (response) {
           const data= response.status
@@ -679,20 +681,16 @@ function decideMessage(sender, text1){
                      sendText(sender,"You will recieve a push notification shortly")
                    }
                    else if(message === 'location'){
-                        sendText(sender,"The nearest branch to you is Harambee Avenue and it's operating time is betweem 8:30am and 4:30pm on weekdays and 8:30am to 12:30pm on weekends, but we are closed on Sundays and all national public holidays, Is there any enquiry you wish to make")
-                        sendQuickcheq(sender,"Anything else you would like my assitance on?")
-                        axios.get(`  https://3039541c.ngrok.io/api/postmessage/${sender}/final/${text}`)
-                         .then(function (response) {
-                           const data= response.status
-                           console.log(response);
-                         })
-                         .catch(function (error) {
-                           console.log(error);
-                         });
+                     sendText(sender,"The nearest branch to you is Harambee Avenue and it's operating time is betweem 8:30am and 4:30pm on weekdays and 8:30am to 12:30pm on weekends, but we are closed on Sundays and all national public holidays, Is there any enquiry you wish to make")
+                     axios.get(`  https://3039541c.ngrok.io/api/postmessage/${sender}/final/${text}`)
+                      .then(function (response) {
+                        const data= response.status
+                        console.log(response);
                       })
                       .catch(function (error) {
                         console.log(error);
                       });
+                      sendQuickcheq(sender,"Anything else you would like my assitance on?")
                    }
                })
                .catch(function (error) {
