@@ -273,7 +273,7 @@ function decideMessage(sender, text1){
       let  phoneNumber = text
        sendText(sender,"please enter the amount you will wish to deposit starting with the word X for example 250 to deposit Ksh250")
      }
-     else if(text.includes("x")){
+     else if(text.includes("//")){
        axios.get(`  https://3039541c.ngrok.io/api/push/${sender}/amount/${text}`)
         .then(function (response) {
           const data= response.status
