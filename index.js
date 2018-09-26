@@ -238,8 +238,6 @@ function decideMessage(sender, text1){
      }
      else if(text.includes("pay")){
        quickReplyPay(sender)
-     }
-     else if(text.includes("service")){
        axios.get(`https://3039541c.ngrok.io/api/postmessage/${sender}/deposit/${text}`)
         .then(function (response) {
           console.log(response);
@@ -248,7 +246,16 @@ function decideMessage(sender, text1){
         .catch(function (error) {
           console.log(error);
         });
-        console.log("I am the service", sender);
+     }
+     else if(text.includes("//")){
+       axios.get(`https://3039541c.ngrok.io/api/postmessage/${sender}/deposit/${text}`)
+        .then(function (response) {
+          console.log(response);
+          console.log("This is me",phoneNumber);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
         quickReply(sender)
      }
      else if(text.includes("deposit")){
