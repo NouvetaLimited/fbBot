@@ -56,7 +56,7 @@ app.post('/webhook/', function(req, res){
         if(event.message && event.message.text){
              let text = event.message.text;
             //sendText(sender,"Text echo: " + text.substring(0,100))
-            console.log("This is me",text);
+            console.log(".......................................................................",text);
 
             decideMessage(sender, text)
         }
@@ -80,7 +80,8 @@ function decideMessage(sender, text1){
           const data= response.status
           console.log(response);
           const name = response.data.first_name
-          sendButtonMessage(sender,"Hi "+name+",  I am Kunta and will be your agent today, how may I help you?")
+          //sendButtonMessage(sender,"Hi "+name+",  I am Kunta and will be your agent today, how may I help you?")
+          quickReplyAcc(sender,"I am Kunta and will be your agent today, how may I help you?")
         })
         .catch(function (error) {
           console.log(error);
@@ -936,6 +937,34 @@ function quickReplyAcc(sender){
      {
        "content_type":"text",
        "title":"Cheque book request",
+       "payload":"book",
+       //"image_url":"http://example.com/img/red.png"
+     }
+   ]
+    }
+  sendRequest(sender, messageData);
+}
+//first encounter
+
+function quickReplyAcc(sender,text){
+  let messageData={
+      "text": text,
+      "quick_replies":[
+        {
+        "content_type":"text",
+        "title":"Account opening(new customer)",
+        "payload":"balance",
+        //"image_url":"http://example.com/img/red.png"
+        },
+        {
+        "content_type":"text",
+        "title":"service request(returning customer)",
+        "payload":"mini",
+        //"image_url":"http://example.com/img/red.png"
+       },
+     {
+       "content_type":"text",
+       "title":"Enquiries",
        "payload":"book",
        //"image_url":"http://example.com/img/red.png"
      }
