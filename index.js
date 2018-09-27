@@ -807,7 +807,7 @@ function sendButtonMessage(sender, text){
                 "buttons":[
                     {
                         "type":"postback",
-                        "title":"Account openning(newCusomer)",
+                        "title":"Account openning(newCustomer)",
                         "payload":"qali"
                     },
                     {
