@@ -465,7 +465,7 @@ function decideMessage(sender, text1){
              });
               sendText(sender,"You will receive an OTP on your phone Please enter here to verify your phoneNumber")
           }
-          else if(text.includes("hi")){
+          else if(text.includes("Hi Kunta")){
             axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
              .then(function (response) {
                const data= response.status
@@ -1185,14 +1185,14 @@ function sendQuickTrans(sender){
             "quick_replies":[
               {
               "content_type":"text",
-              "title":"Pick there",
-              "payload":"pick",
+              "title":"yes",
+              "payload":"yes",
               //"image_url":"http://example.com/img/red.png"
               },
               {
               "content_type":"text",
-              "title":"Choose another place",
-              "payload":"choose",
+              "title":"no",
+              "payload":"no",
               //"image_url":"http://example.com/img/red.png"
              }
               ]
