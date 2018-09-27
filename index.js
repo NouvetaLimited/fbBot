@@ -992,7 +992,7 @@ function sendQuickTrans(sender){
   //send quick transfer
   function sendQuickDep(sender){
     let messageData={
-        "text": "We have Chequebooks and Debit Card for your account which if requested can be picked form a branch of your convinience, would you like to order for any of them",
+        "text": "We also have Chequebooks and Debit Card for your account which if requested can be picked form a branch of your convinience, would you like to order for any of them",
         "quick_replies":[
           {
           "content_type":"text",
