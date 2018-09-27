@@ -80,7 +80,7 @@ function decideMessage(sender, text1){
           const data= response.status
           console.log(response);
           const name = response.data.first_name
-          sendButtonMessage(sender,"Hi "+name+",  I am Kunta and will be your agent today, how may I help you")
+          sendButtonMessage(sender,"Hi "+name+",  I am Kunta and will be your agent today, how may I help you?")
         })
         .catch(function (error) {
           console.log(error);
@@ -391,8 +391,9 @@ function decideMessage(sender, text1){
           else if(text.includes("qali")){
             //sendText(sender,"Please enter your ID number starting with the word ID eg ID33865745")
             //the yes no for account opening
-          sendQuickYes(sender)
-          axios.get(`  http://1bd24cb4.ngrok.io/api/postmessage/${sender}/registeryes/${text}`)
+          //sendQuickYes(sender)
+          sendText(sender,"Good, there are afew items you will require on hand, Your National ID and make sure your MPESA has atleast Kshs 100.00, cofirm when ready, enter your ID number for example 33865745")
+          axios.get(`  http://1bd24cb4.ngrok.io/api/postmessage/${sender}/idreg/${text}`)
            .then(function (response) {
              const data= response.status
              console.log(response);
@@ -413,7 +414,7 @@ function decideMessage(sender, text1){
           else if(text.includes("debit")){
                sendQuickcheq(sender)
           }
-          else if(text.includes("id")){
+          else if(text.includes("//")){
              axios.get(`  http://1bd24cb4.ngrok.io/api/postmessage/${sender}/reg2/${text}`)
               .then(function (response) {
                 const data= response.status
@@ -713,6 +714,17 @@ function decideMessage(sender, text1){
                         console.log(error);
                       });
                    }
+                   else if(message === 'idreg'){
+                     axios.get(`  http://1bd24cb4.ngrok.io/api/postmessage/${sender}/reg2/${text}`)
+                      .then(function (response) {
+                        const data= response.status
+                        console.log(response);
+                        sendText(sender,"Gorrit, Enter you phone number beggining with the country code eg 254715428709")
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
+                   }
                })
                .catch(function (error) {
                  console.log(error);
@@ -731,13 +743,13 @@ function sendButtonMessage(sender, text){
                 "buttons":[
                     {
                         "type":"postback",
-                        "title":"I have an account",
-                        "payload":"exists"
+                        "title":"Account openning(newCusomer)",
+                        "payload":"qali"
                     },
                     {
                         "type":"postback",
-                        "title":"Join NBK",
-                        "payload":"qali"
+                        "title":"service Request (returning customer)",
+                        "payload":"exists"
                     },
                     {
                         "type":"postback",
