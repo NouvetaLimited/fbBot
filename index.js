@@ -660,7 +660,7 @@ function decideMessage(sender, text1){
                           console.log(response);
                           const name = response.data.first_name
                           //sendButtonMessage(sender,"Hi "+name+",  I am Kunta and will be your agent today, how may I help you")
-                          sendText(sender,"Have a great day "+name+" and hope to hear from you soon, you can always reachout to me or call us on 0703088000. And im always here 24/7 when you need me just type Hi Kunta")
+                          sendText(sender,"Have a great day "+name+" and hope to hear from you soon, you can always reachout to me or call us on 0703088000. And im always here 24/7 to assist you")
                         })
                         .catch(function (error) {
                           console.log(error);
