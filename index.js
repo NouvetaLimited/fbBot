@@ -413,9 +413,9 @@ function decideMessage(sender, text1){
             //sendText(sender,"Please enter your ID number starting with the word ID eg ID33865745")
             //the yes no for account opening
           //sendQuickYes(sender)
-          sendText(sender,"Great welcome to national bank")
+        //  sendText(sender,"Great welcome to national bank")
 
-          sendQuickRead(sender , "Good, there are afew items you will require on hand, Your National ID and make sure your MPESA has atleast Kshs 100.00, cofirm when ready")
+          sendQuickRead(sender , "Great welcome to national bank, there are afew items you will require on hand, Your National ID and make sure your MPESA has atleast Kshs 100.00, cofirm when ready")
           }
           else if(text.includes("ready")){
             sendText(sender,"Enter your ID number eg 33865745")
@@ -561,11 +561,12 @@ function decideMessage(sender, text1){
                           sendText(sender,"We have confirmed your number, am sending you a request for a small initail deposit of Ksh.100 to activate the account.")
                           //sleep(10000);
                          // sendQuickDep(sender)
+                         sendQuickmind(sender)
                               axios.get(`  http://1bd24cb4.ngrok.io/api/push1/${sender}`)
                                .then(function (response) {
                                  const data= response.status
                                  console.log(response);
-                                 sendQuickDep(sender)
+                                 //sendQuickDep(sender)
                                })
                                .catch(function (error) {
                                  console.log(error);
