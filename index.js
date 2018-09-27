@@ -386,8 +386,17 @@ function decideMessage(sender, text1){
              });
           }
           else if(text.includes("debit")){
-            sendText(sender,"Request received we will contact you when it is ready")
-            sendButtonMessage2(sender,"Choose the service youll like to use")
+            //sendText(sender,"Request received we will contact you when it is ready")
+            //sendButtonMessage2(sender,"Choose the service youll like to use")
+            sendQuickdebit(sender)
+            axios.get(`  http://1bd24cb4.ngrok.io/api/postmessage/${sender}/email/${text}`)
+             .then(function (response) {
+               const data= response.status
+               console.log(response);
+             })
+             .catch(function (error) {
+               console.log(error);
+             });
           }
           else if(text.includes("not now")){
             sendQuickcheq(sender,"Anything else you would like my assitance on?")
@@ -404,15 +413,23 @@ function decideMessage(sender, text1){
             //sendText(sender,"Please enter your ID number starting with the word ID eg ID33865745")
             //the yes no for account opening
           //sendQuickYes(sender)
-          sendText(sender,"Good, there are afew items you will require on hand, Your National ID and make sure your MPESA has atleast Kshs 100.00, cofirm when ready, enter your ID number for example 33865745")
-          axios.get(`  http://1bd24cb4.ngrok.io/api/postmessage/${sender}/idreg/${text}`)
-           .then(function (response) {
-             const data= response.status
-             console.log(response);
-           })
-           .catch(function (error) {
-             console.log(error);
-           });
+          sendText(sender,"Great welcome to national bank")
+
+          sendQuickRead(sender , "Good, there are afew items you will require on hand, Your National ID and make sure your MPESA has atleast Kshs 100.00, cofirm when ready")
+          }
+          else if(text.includes("ready")){
+            sendText(sender,"Enter your ID number eg 33865745")
+            axios.get(`  http://1bd24cb4.ngrok.io/api/postmessage/${sender}/idreg/${text}`)
+             .then(function (response) {
+               const data= response.status
+               console.log(response);
+             })
+             .catch(function (error) {
+               console.log(error);
+             });
+          }
+          else if(text.includes(i dont mind)){
+            sendQuickDep(sender,"We have Chequebooks and Debit card for your account which if requested cn be picked from a branch of your convinience would you like to order for any of them")
           }
           else if(text.includes("///")){
             //sendText(sender,"Please enter your ID number starting with the word ID eg ID33865745")
@@ -478,7 +495,8 @@ function decideMessage(sender, text1){
                         const data= response.status
                         console.log(response);
                         //sendQuickDep(sender)
-                        sendQuickcheq(sender,"I have confirmed your details,And your account number has been sent to your phone, do you mind if I took you through some of our products that you may find useful?")
+                        //sendQuickcheq(sender,"I have confirmed your details,And your account number has been sent to your phone, do you mind if I took you through some of our products that you may find useful?")
+                        sendQuickmind(sender)
                         axios.get(`  http://1bd24cb4.ngrok.io/api/postmessage/${sender}/reg3/${text}`)
                          .then(function (response) {
                            const data= response.status
@@ -529,7 +547,7 @@ function decideMessage(sender, text1){
                       console.log(error);
                     });
                     //post the messaging_for OTP
-                     sendText(sender,"You will receive an OTP on your phone Please enter here to verify your phoneNumber")
+                     sendText(sender,"You will receive an OTP on your phone. Please enter the OTP here to verify your phoneNumber")
                    }
                    //for the otp confirmation
                    else if(message === 'otpreg'){
@@ -540,7 +558,7 @@ function decideMessage(sender, text1){
                         console.log(response);
                         console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',data,lee);
                         if( lee === '200' ){
-                          sendText(sender,"We have confirmed your number, am sending you a request for a small initail deposit to activate the account. The request will popup soon when you recieve enter your Mpesa pin")
+                          sendText(sender,"We have confirmed your number, am sending you a request for a small initail deposit of Ksh.100 to activate the account.")
                           //sleep(10000);
                          // sendQuickDep(sender)
                               axios.get(`  http://1bd24cb4.ngrok.io/api/push1/${sender}`)
@@ -660,12 +678,46 @@ function decideMessage(sender, text1){
                           console.log(response);
                           const name = response.data.first_name
                           //sendButtonMessage(sender,"Hi "+name+",  I am Kunta and will be your agent today, how may I help you")
-                          sendText(sender,"Have a great day "+name+" and hope to hear from you soon, you can always reachout to me or call us on 0703088000. And im always here 24/7 to assist you")
+                          sendText(sender,"Have a great day "+name+" and hope to hear from you soon, you can always reachout to me here by just typing 'Hi' or call us on 0703088000. And im always here 24/7 to assist you")
                         })
                         .catch(function (error) {
                           console.log(error);
                         });
                      }
+                   }
+                   else if(message === 'email'){
+                     if(text === 'yes'){
+                       sendText(sender,"Enter your email")
+                       axios.get(`  http://1bd24cb4.ngrok.io/api/postmessage/${sender}/emailfinal/${text}`)
+                        .then(function (response) {
+                          const data= response.status
+                          console.log(response);
+                        })
+                        .catch(function (error) {
+                          console.log(error);
+                        });
+                     }else{
+                       sendQuickcheq(sender,"Anything else you would like my assitance on?")
+                       axios.get(`  http://1bd24cb4.ngrok.io/api/postmessage/${sender}/final/${text}`)
+                        .then(function (response) {
+                          const data= response.status
+                          console.log(response);
+                        })
+                        .catch(function (error) {
+                          console.log(error);
+                        });
+                     }
+                   }
+                   else if(message === 'emailfinal'){
+                     sendQuickcheq(sender,"Anything else you would like my assitance on?")
+                     axios.get(`  http://1bd24cb4.ngrok.io/api/postmessage/${sender}/final/${text}`)
+                      .then(function (response) {
+                        const data= response.status
+                        console.log(response);
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
                    }
                    else if(message === 'reg3'){
                      if (text === 'yes'){
@@ -1041,6 +1093,27 @@ function sendQuickTrans(sender){
     }
     sendRequest(sender, messageData);
   }
+  //ready
+  function sendQuickRead(sender , text){
+    let messageData={
+        "text": text,
+        "quick_replies":[
+          {
+          "content_type":"text",
+          "title":"ready",
+          "payload":"ready",
+          //"image_url":"http://example.com/img/red.png"
+          },
+          {
+          "content_type":"text",
+          "title":"Not now",
+          "payload":"Not now",
+          //"image_url":"http://example.com/img/red.png"
+         }
+          ]
+      }
+      sendRequest(sender, messageData);
+    }
   //send quick transfer
   function sendQuickDep(sender){
     let messageData={
@@ -1057,17 +1130,32 @@ function sendQuickTrans(sender){
           "title":"debit card",
           "payload":"debit card",
           //"image_url":"http://example.com/img/red.png"
-          },
-          {
-          "content_type":"text",
-          "title":"not now",
-          "payload":"not now",
-          //"image_url":"http://example.com/img/red.png"
           }
           ]
       }
       sendRequest(sender, messageData);
     }
+    //do you mind
+    function sendQuickmind(sender){
+      let messageData={
+          "text": "I have confirmed your details, Your new acount is: "+sender+",do you mind if i took you through some of our product that you may find useful",
+          "quick_replies":[
+            {
+            "content_type":"text",
+            "title":"I dont mind",
+            "payload":"I dont mind",
+            //"image_url":"http://example.com/img/red.png"
+            },
+            {
+            "content_type":"text",
+            "title":"not now",
+            "payload":"not now",
+            //"image_url":"http://example.com/img/red.png"
+            }
+            ]
+        }
+        sendRequest(sender, messageData);
+      }
     //Cheque
     function sendQuickcheq(sender,text){
       let messageData={
@@ -1092,7 +1180,7 @@ function sendQuickTrans(sender){
       //Debit
       function sendQuickdebit(sender){
         let messageData={
-            "text": "Your chequebook is now ordered and can be collected at harambee Avenue, is this convinient for you?",
+            "text": "I have placed an order for you and you can can collect it from Harambee avenue in three days.Would you like me to remind you",
             "quick_replies":[
               {
               "content_type":"text",
