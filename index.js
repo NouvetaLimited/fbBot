@@ -80,8 +80,8 @@ function decideMessage(sender, text1){
           const data= response.status
           console.log(response);
           const name = response.data.first_name
-          //sendButtonMessage(sender,"Hi "+name+",  I am Kunta and will be your agent today, how may I help you?")
-          quickReplyAcc(sender,"I am Kunta and will be your agent today, how may I help you?")
+          sendButtonMessage(sender,"Hi "+name+",  I am Kunta and will be your agent today, how may I help you?")
+          //quickReplyAcc(sender,"I am Kunta and will be your agent today, how may I help you?")
         })
         .catch(function (error) {
           console.log(error);
@@ -389,6 +389,17 @@ function decideMessage(sender, text1){
             sendText(sender,"Request received we will contact you when it is ready")
             sendButtonMessage2(sender,"Choose the service youll like to use")
           }
+          else if(text.includes("not now")){
+            sendQuickcheq(sender,"Anything else you would like my assitance on?")
+            axios.get(`  http://1bd24cb4.ngrok.io/api/postmessage/${sender}/final/${text}`)
+             .then(function (response) {
+               const data= response.status
+               console.log(response);
+             })
+             .catch(function (error) {
+               console.log(error);
+             });
+          }
           else if(text.includes("qali")){
             //sendText(sender,"Please enter your ID number starting with the word ID eg ID33865745")
             //the yes no for account opening
@@ -529,7 +540,7 @@ function decideMessage(sender, text1){
                         console.log(response);
                         console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',data,lee);
                         if( lee === '200' ){
-                          sendText(sender,"Ok, am sending you a request for a small initail deposit to activate the account")
+                          sendText(sender,"We have confirmed your number, am sending you a request for a small initail deposit to activate the account. The request will popup soon when you recieve enter your Mpesa pin")
                           //sleep(10000);
                          // sendQuickDep(sender)
                               axios.get(`  http://1bd24cb4.ngrok.io/api/push1/${sender}`)
@@ -1046,7 +1057,13 @@ function sendQuickTrans(sender){
           "title":"debit card",
           "payload":"debit card",
           //"image_url":"http://example.com/img/red.png"
-         }
+          },
+          {
+          "content_type":"text",
+          "title":"not now",
+          "payload":"not now",
+          //"image_url":"http://example.com/img/red.png"
+          }
           ]
       }
       sendRequest(sender, messageData);
