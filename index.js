@@ -428,7 +428,7 @@ function decideMessage(sender, text1){
                console.log(error);
              });
           }
-          else if(text.includes(i dont mind)){
+          else if(text.includes('i dont mind')){
             sendQuickDep(sender,"We have Chequebooks and Debit card for your account which if requested cn be picked from a branch of your convinience would you like to order for any of them")
           }
           else if(text.includes("///")){
