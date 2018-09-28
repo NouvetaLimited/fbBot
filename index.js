@@ -1214,13 +1214,13 @@ function sendQuickTrans(sender){
               "title":"Load more than Ksh.100",
               "payload":"Load more than Ksh.100",
               //"image_url":"http://example.com/img/red.png"
-              }.
+              },
               {
               "content_type":"text",
               "title":"load later",
               "payload":"load later",
               //"image_url":"http://example.com/img/red.png"
-              }.
+              }
               ]
           }
           sendRequest(sender, messageData);
