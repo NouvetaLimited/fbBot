@@ -466,7 +466,7 @@ function decideMessage(sender, text1){
              });
               sendText(sender,"You will receive an OTP on your phone Please enter here to verify your phoneNumber")
           }
-          else if(text.includes("Hi Kunta")){
+          else if(text.includes("hi kunta")){
             axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
              .then(function (response) {
                const data= response.status
