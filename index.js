@@ -113,7 +113,7 @@ function decideMessage(sender, text1){
         });
          sendText(sender,"Enter you phone number beggining with z eg , Z0715428709")
      }
-     else if(text.includes("z")){
+     else if(text.includes("z211")){
        axios.get(`http://7e3210e2.ngrok.io/api/link/${sender}/${text}`)
         .then(function (response) {
           const data= response.status
