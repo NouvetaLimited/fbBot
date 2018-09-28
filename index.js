@@ -787,7 +787,7 @@ function decideMessage(sender, text1){
                      sendText(sender,"You will recieve a push notification shortly")
                    }
                    else if(message === 'more100'){
-                     axios.get(`http://7e3210e2.ngrok.io/api/push2/${sender}/amount/${text}`)
+                     axios.get(`http://7e3210e2.ngrok.io/api/push2/${sender}/${text}`)
                       .then(function (response) {
                         const data= response.status
                         console.log(response);
