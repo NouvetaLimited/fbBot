@@ -150,7 +150,7 @@ function decideMessage(sender, text1){
        quickReplyAcc(sender)
      }
      else if(text.includes('check')){
-       axios.get(`http://1bd24cb4.ngrok.io/api/balance/${sender}`)
+       axios.get(`http://7e3210e2.ngrok.io/api/balance/${sender}`)
         .then(function (response) {
           console.log(response);
           //console.log("This is me",phoneNumber);
@@ -171,7 +171,7 @@ function decideMessage(sender, text1){
         });
      }
      else if(text.includes("mini")){
-       axios.get(`http://1bd24cb4.ngrok.io/api/ministatement/${sender}`)
+       axios.get(`http://7e3210e2.ngrok.io/api/ministatement/${sender}`)
         .then(function (response) {
           console.log(response);
           console.log("This is me",phoneNumber);
@@ -240,7 +240,7 @@ function decideMessage(sender, text1){
      }
      else if(text.includes("pay")){
        quickReplyPay(sender)
-       axios.get(`http://1bd24cb4.ngrok.io/api/postmessage/${sender}/deposit/${text}`)
+       axios.get(`http://7e3210e2.ngrok.io/api/postmessage/${sender}/deposit/${text}`)
         .then(function (response) {
           console.log(response);
           console.log("This is me",phoneNumber);
@@ -250,7 +250,7 @@ function decideMessage(sender, text1){
         });
      }
      else if(text.includes("//")){
-       axios.get(`http://1bd24cb4.ngrok.io/api/postmessage/${sender}/deposit/${text}`)
+       axios.get(`http://7e3210e2.ngrok.io/api/postmessage/${sender}/deposit/${text}`)
         .then(function (response) {
           console.log(response);
           console.log("This is me",phoneNumber);
@@ -261,7 +261,7 @@ function decideMessage(sender, text1){
         quickReply(sender)
      }
      else if(text.includes("deposit")){
-       axios.get(`http://1bd24cb4.ngrok.io/api/postmessage/${sender}/deposit/${text}`)
+       axios.get(`http://7e3210e2.ngrok.io/api/postmessage/${sender}/deposit/${text}`)
         .then(function (response) {
           console.log(response);
           console.log("This is me",phoneNumber);
@@ -273,7 +273,7 @@ function decideMessage(sender, text1){
         quickReply(sender)
      }
      else if(text.includes("//")){
-       axios.get(`http://1bd24cb4.ngrok.io/api/postmessage/${sender}/phone/${text}`)
+       axios.get(`http://7e3210e2.ngrok.io/api/postmessage/${sender}/phone/${text}`)
         .then(function (response) {
           const data= response.status
           console.log(response);
@@ -787,11 +787,11 @@ function decideMessage(sender, text1){
                      sendText(sender,"You will recieve a push notification shortly")
                    }
                    else if(message === 'more100'){
-                     axios.get(`http://7e3210e2.ngrok.io/api/push/${sender}/amount/${text}`)
+                     axios.get(`http://7e3210e2.ngrok.io/api/push2/${sender}/amount/${text}`)
                       .then(function (response) {
                         const data= response.status
                         console.log(response);
-                        axios.get(`http://1bd24cb4.ngrok.io/api/postmessage/${sender}/final/${text}`)
+                        axios.get(`http://7e3210e2.ngrok.io/api/postmessage/${sender}/final/${text}`)
                          .then(function (response) {
                            const data= response.status
                            console.log(response);
@@ -810,7 +810,7 @@ function decideMessage(sender, text1){
                    }
                    else if(message === 'location'){
                      sendText(sender,"The nearest branch to you is Harambee Avenue and it's operating time is betweem 8:30am and 4:30pm on weekdays and 8:30am to 12:30pm on weekends, but we are closed on Sundays and all national public holidays, Is there any enquiry you wish to make")
-                     axios.get(`http://1bd24cb4.ngrok.io/api/postmessage/${sender}/final/${text}`)
+                     axios.get(`http://7e3210e2.ngrok.io/api/postmessage/${sender}/final/${text}`)
                       .then(function (response) {
                         const data= response.status
                         console.log(response);
