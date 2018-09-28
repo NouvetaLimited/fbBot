@@ -417,7 +417,7 @@ function decideMessage(sender, text1){
           //sendQuickYes(sender)
         //  sendText(sender,"Great welcome to national bank")
 
-          sendQuickRead(sender , "Great welcome to national bank, there are afew items you will require on hand <br> 1.Your National ID <br> 2. make sure your MPESA has atleast Kshs 100.00, cofirm when ready 👍")
+          sendQuickRead(sender , "😊 Great welcome to national bank, there are afew items you will require on hand" /n "1.Your National ID " /n "2. make sure your MPESA has atleast Kshs 100.00, cofirm when ready 👍")
           }
           else if(text.includes("ready")){
             sendText(sender,"Enter your ID number eg 33865745")
