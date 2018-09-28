@@ -147,7 +147,7 @@ function decideMessage(sender, text1){
        quickReply(sender)
      }*/
      else if(text.includes("acc")){
-       quickReplyAcc(sender)
+       quickReplyAcc1(sender)
      }
      else if(text.includes('check')){
        axios.get(`http://7e3210e2.ngrok.io/api/balance/${sender}`)
@@ -1017,7 +1017,7 @@ function quickReplyLoc(sender){
 /**
 Account
 */
-function quickReplyAcc(sender){
+function quickReplyAcc1(sender){
   let messageData={
       "text": "Select your response swipe left for more replies",
       "quick_replies":[
