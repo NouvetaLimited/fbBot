@@ -778,6 +778,15 @@ function decideMessage(sender, text1){
                       .then(function (response) {
                         const data= response.status
                         console.log(response);
+                        axios.get(`http://7e3210e2.ngrok.io/api/postmessage/${sender}/final/${text}`)
+                         .then(function (response) {
+                           const data= response.status
+                           console.log(response);
+                           sendQuickcheq(sender,"Anything else you would like my assitance on?")
+                         })
+                         .catch(function (error) {
+                           console.log(error);
+                         });
                       })
                       .catch(function (error) {
                         console.log(error);
