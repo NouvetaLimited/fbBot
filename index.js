@@ -479,6 +479,32 @@ function decideMessage(sender, text1){
                console.log(error);
              });
           }
+          else if(text.includes("Load Ksh.100 now")){
+            sendText(sender,"You will receive an STK push enter you mpesa pin and proceed")
+            axios.get(`http://7e3210e2.ngrok.io/api/push1/${sender}`)
+             .then(function (response) {
+               const data= response.status
+               sendQuickDep(sender)
+               console.log(response);
+             })
+             .catch(function (error) {
+               console.log(error);
+             });
+          }
+          else if(text.includes("Load more than Ksh.100")){
+            sendText(sender,"Enter the amount you want to deposit")
+            axios.get(`http://7e3210e2.ngrok.io/api/postmessage/${sender}/more100/${text}`)
+             .then(function (response) {
+               const data= response.status
+               console.log(response);
+           })
+             .catch(function (error) {
+               console.log(error);
+             });
+          }
+          else if(text.includes("load later")){
+
+          }
           else if(text.includes("//")){
             //to be deleted on production
             axios.get(`http://7e3210e2.ngrok.io/api/otp/${sender}/${text}`)
@@ -562,16 +588,8 @@ function decideMessage(sender, text1){
                           sendText(sender,"We have confirmed your number, am sending you a request for a small initail deposit of Ksh.100 to activate the account.")
                           //sleep(10000);
                          // sendQuickDep(sender)
-                         sendQuickmind(sender)
-                              axios.get(`http://7e3210e2.ngrok.io/api/push1/${sender}`)
-                               .then(function (response) {
-                                 const data= response.status
-                                 console.log(response);
-                                 //sendQuickDep(sender)
-                               })
-                               .catch(function (error) {
-                                 console.log(error);
-                               });
+                         //sendQuickmind(sender)
+                         sendQuickPush(sender)
                         }else {
                            sendText(sender,"Wrong OTP. Contact our customer care for assistant")
                         }
@@ -760,6 +778,28 @@ function decideMessage(sender, text1){
                       .then(function (response) {
                         const data= response.status
                         console.log(response);
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
+                     console.log("I am the number", text);
+                    let  phoneNumber = text
+                     sendText(sender,"You will recieve a push notification shortly")
+                   }
+                   else if(messsage === more100){
+                     axios.get(`http://7e3210e2.ngrok.io/api/push/${sender}/amount/${text}`)
+                      .then(function (response) {
+                        const data= response.status
+                        console.log(response);
+                        axios.get(`http://1bd24cb4.ngrok.io/api/postmessage/${sender}/final/${text}`)
+                         .then(function (response) {
+                           const data= response.status
+                           console.log(response);
+                           sendQuickcheq(sender,"Anything else you would like my assitance on?")
+                         })
+                         .catch(function (error) {
+                           console.log(error);
+                         });
                       })
                       .catch(function (error) {
                         console.log(error);
@@ -1140,7 +1180,7 @@ function sendQuickTrans(sender){
     //do you mind
     function sendQuickmind(sender){
       let messageData={
-          "text": "I have confirmed your details, Your new acount is: "+sender+",do you mind if i took you through some of our product that you may find useful",
+          "text": "Do you mind if i took you through some of our product that you may find useful",
           "quick_replies":[
             {
             "content_type":"text",
@@ -1158,6 +1198,33 @@ function sendQuickTrans(sender){
         }
         sendRequest(sender, messageData);
       }
+      //push
+      function sendQuickPush(sender){
+        let messageData={
+            "text": "I have confirmed your details, Your new acount is: "+sender+", to activate your account you are required to make an initial deposit of atlist 100",
+            "quick_replies":[
+              {
+              "content_type":"text",
+              "title":"Load Ksh.100 now",
+              "payload":"load Ksh.100 now",
+              //"image_url":"http://example.com/img/red.png"
+              },
+              {
+              "content_type":"text",
+              "title":"Load more than Ksh.100",
+              "payload":"Load more than Ksh.100",
+              //"image_url":"http://example.com/img/red.png"
+              }.
+              {
+              "content_type":"text",
+              "title":"load later",
+              "payload":"load later",
+              //"image_url":"http://example.com/img/red.png"
+              }.
+              ]
+          }
+          sendRequest(sender, messageData);
+        }
     //Cheque
     function sendQuickcheq(sender,text){
       let messageData={
