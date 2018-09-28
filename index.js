@@ -1172,6 +1172,12 @@ function sendQuickTrans(sender){
           "title":"debit card",
           "payload":"debit card",
           //"image_url":"http://example.com/img/red.png"
+          },
+          {
+          "content_type":"text",
+          "title":"not now",
+          "payload":"not now",
+          //"image_url":"http://example.com/img/red.png"
           }
           ]
       }
