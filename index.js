@@ -82,7 +82,7 @@ function decideMessage(sender, text1){
           const data= response.status
           console.log(response);
           const name = response.data.first_name
-          const happy =(U+1F600)
+          const happy =(U+'1F600')
           sendButtonMessage(sender,"Hi "+name+",  I am Kunta and will be your agent today, how may I help you?"+happy+"")
           //quickReplyAcc(sender,"I am Kunta and will be your agent today, how may I help you?")
         })
