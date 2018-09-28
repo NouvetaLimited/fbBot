@@ -479,7 +479,7 @@ function decideMessage(sender, text1){
                console.log(error);
              });
           }
-          else if(text.includes("load Ksh.100 now")){
+          else if(text.includes("load ksh.100 now")){
             sendText(sender,"You will receive an STK push enter you mpesa pin and proceed")
             axios.get(`http://7e3210e2.ngrok.io/api/push1/${sender}`)
              .then(function (response) {
@@ -491,7 +491,7 @@ function decideMessage(sender, text1){
                console.log(error);
              });
           }
-          else if(text.includes("load more than Ksh.100")){
+          else if(text.includes("load more than ksh.100")){
             sendText(sender,"Enter the amount you want to deposit")
             axios.get(`http://7e3210e2.ngrok.io/api/postmessage/${sender}/more100/${text}`)
              .then(function (response) {
