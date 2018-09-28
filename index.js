@@ -585,7 +585,7 @@ function decideMessage(sender, text1){
                         console.log(response);
                         console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',data,lee);
                         if( lee === '200' ){
-                          sendText(sender,"We have confirmed your number, am sending you a request for a small initail deposit of Ksh.100 to activate the account.")
+                          //sendText(sender,"We have confirmed your number, am sending you a request for a small initail deposit of Ksh.100 to activate the account.")
                           //sleep(10000);
                          // sendQuickDep(sender)
                          //sendQuickmind(sender)
