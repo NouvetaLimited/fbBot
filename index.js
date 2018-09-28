@@ -473,7 +473,7 @@ function decideMessage(sender, text1){
                console.log(response);
                const name = response.data.first_name
                sendText(sender,"Hi "+name+",  Welcome back.")
-               sendButtonMessage(sender,"This is are ways I can help you")
+               sendButtonMessage2(sender,"This is are ways I can help you")
              })
              .catch(function (error) {
                console.log(error);
