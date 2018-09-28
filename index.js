@@ -503,7 +503,7 @@ function decideMessage(sender, text1){
              });
           }
           else if(text.includes("load later")){
-
+             sendQuickDep(sender)
           }
           else if(text.includes("//")){
             //to be deleted on production
