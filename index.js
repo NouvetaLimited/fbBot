@@ -209,12 +209,13 @@ function decideMessage(sender, text1){
      }
      else if(text.includes("hard")){
        sendText(sender, "We've received your request we will contact you once its ready. Thank you")
+
        //sendButtonMessage2(sender,"Choose the service youll like to use")
-       sendQuickcheq(sender,"Anything else you would like my assitance on?")
        axios.get(`http://9e9a48e8.ngrok.io/api/postmessage/${sender}/final/${text}`)
         .then(function (response) {
           const data= response.status
           console.log(response);
+          sendQuickcheq(sender,"Anything else you would like my assitance on?")
         })
         .catch(function (error) {
           console.log(error);
