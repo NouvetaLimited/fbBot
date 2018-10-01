@@ -713,7 +713,8 @@ function decideMessage(sender, text1){
                         const number = response.data.phone
                         let str = number.replace(/\d(?=\d{4})/g, "*");
                         //console.log('............................................................',number);
-                        sendText(sender, "Thank the request has been received, Youll receive a text message on your phone."+str+"")
+                        // sendText(sender, "Thank the request has been received, Youll receive a text message on your phone."+str+"")
+                        sendQuickcheq(sender,"Your balance as been sent to your phone "+str+" .Anything else you would like my assitance on?")
                       })
                       .catch(function (error) {
                         console.log(error);
@@ -723,7 +724,7 @@ function decideMessage(sender, text1){
                       .then(function (response) {
                         const data= response.status
                         console.log(response);
-                        sendQuickcheq(sender,"Anything else you would like my assitance on?")
+
                       })
                       .catch(function (error) {
                         console.log(error);
