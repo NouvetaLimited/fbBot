@@ -205,17 +205,8 @@ function decideMessage(sender, text1){
         sendText(sender,"Kindly provide me with your id number")
      }
      else if(text.includes("mini")){
-       axios.get(`http://14ee9d2d.ngrok.io/api/ministatement/${sender}`)
-        .then(function (response) {
-          console.log(response);
-          console.log("This is me",phoneNumber);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-       sendText(sender, "Thank the request has been received, Youll receive a text message on your registered number with your Ministatement.")
-       sendQuickcheq(sender,"Anything else you would like my assitance on?")
-       axios.get(`http://14ee9d2d.ngrok.io/api/postmessage/${sender}/final/${text}`)
+       sendText(sender,"Please choose the Account you would want to check the balance \n 1 acc 543*******325\n 2 acc 543***********125")
+       axios.get(`http://14ee9d2d.ngrok.io/api/postmessage/${sender}/mini1/${text}`)
         .then(function (response) {
           const data= response.status
           console.log(response);
@@ -657,6 +648,29 @@ function decideMessage(sender, text1){
                       });
                        sendText(sender,"Enter you phone number beggining with country code eg , 254715428709")
                    }
+                   else if(message === 'mini1'){
+                     axios.get(`http://14ee9d2d.ngrok.io/api/ministatement/${sender}`)
+                      .then(function (response) {
+                        console.log(response);
+                        const number = response.data.phone
+                        let str = number.replace(/\d(?=\d{4})/g, "*");
+                        sendQuickcheq(sender,"Your ministatement has been sent to your phone "+str+" .Anything else you would like my assitance on?")
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
+                      //console.log('............................................................',number);
+                      // sendText(sender, "Thank the request has been received, Youll receive a text message on your phone."+str+"")
+
+                     axios.get(`http://14ee9d2d.ngrok.io/api/postmessage/${sender}/final/${text}`)
+                      .then(function (response) {
+                        const data= response.status
+                        console.log(response);
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
+                   }
                    else if(message === 'phonelink'){
                      axios.get(`http://14ee9d2d.ngrok.io/api/link/${sender}/${text}`)
                       .then(function (response) {
@@ -739,7 +753,7 @@ function decideMessage(sender, text1){
                       .catch(function (error) {
                         console.log(error);
                       });
-                      sendText(sender,"Please choose the Account you would want to check the balance \n send 1 for acc 543*******325\n send 2 for acc 543***********125")
+                      sendText(sender,"Please choose the Account you would want to check the balance \n 1 acc 543*******325\n 2 acc 543***********125")
                    }
                    else if(message === 'chequestatus'){
                      if( text === 'yes'){
