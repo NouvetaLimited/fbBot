@@ -91,7 +91,7 @@ function decideMessage(sender, text1){
         //sendText(sender, "Hi, My name is Kunta. I am National Bank of Kenya's assistant. Press the buttons bellow to choose the service you want?")
          //sendButtonMessage(sender,"choose one")
      }
-    else if(text === 'hi'{
+    else if(text === 'hi'){
        axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
         .then(function (response) {
           const data= response.status
