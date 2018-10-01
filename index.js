@@ -711,9 +711,9 @@ function decideMessage(sender, text1){
                         console.log(response);
                         //console.log("This is me",phoneNumber);
                         const number = response.data.phone
-                        let number = number.replace(/\d(?=\d{4})/g, "*");
+                        let str = number.replace(/\d(?=\d{4})/g, "*");
                         console.log('............................................................',number);
-                        sendText(sender, "Thank the request has been received, Youll receive a text message on your phone."+number+"")
+                        sendText(sender, "Thank the request has been received, Youll receive a text message on your phone."+str+"")
                       })
                       .catch(function (error) {
                         console.log(error);
