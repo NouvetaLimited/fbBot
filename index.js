@@ -387,7 +387,7 @@ function decideMessage(sender, text1){
           }
 
           else if(text.includes("kibet")){
-          sendText(sender,"US DOLLAR	100.7472	100.6472	100.8472,US DOLLAR	100.7472	100.6472	100.8472,US DOLLAR	100.7472	100.6472	100.8472,US DOLLAR	100.7472	100.6472	100.8472")
+          sendText(sender,"US DOLLAR	100.7472	100.6472	100.8472\n,US DOLLAR	100.7472	100.6472	100.8472\n,US DOLLAR	100.7472	100.6472	100.8472\n,US DOLLAR	100.7472	100.6472	100.8472")
           sendButtonGen(sender,"This are general services available")
           }
           else if(text.includes("cheque")){
@@ -592,7 +592,8 @@ function decideMessage(sender, text1){
                       console.log(error);
                     });
                     //post the messaging_for OTP
-                     sendText(sender,"You will receive an OTP on your phone. Please enter the OTP here to verify your phoneNumber")
+                    // sendText(sender,"You will receive an OTP on your phone. Please enter the OTP here to verify your phoneNumber")
+                     quickReplyOTP(sender,"You will receive an OTP on your phone. Please enter the OTP here to verify your phoneNumber")
                    }
                    //for the otp confirmation
                    else if(message === 'otpreg'){
@@ -609,7 +610,8 @@ function decideMessage(sender, text1){
                          //sendQuickmind(sender)
                          sendQuickPush(sender)
                         }else {
-                           sendText(sender,"Wrong OTP. Contact our customer care for assistant")
+                          // sendText(sender,"Wrong OTP. Contact our customer care for assistant")quickReplyOTP()
+                          quickReplyOTP(sender,"Wrong OTP. Contact our customer care for assistant")
                         }
                       })
                       .catch(function (error) {
@@ -662,7 +664,7 @@ function decideMessage(sender, text1){
                         console.log(response);
                         console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',data,lee);
                         if( lee === '200' ){
-                          sendText(sender,"Two accounts 1. 121454*******25, 2. 35422******,have been linked to this account")
+                          sendText(sender,"Two accounts \n 1. 121454*******25. \n2. 35422******. \n have been linked to this account")
                               sendButtonMessage2(sender,"Here are services available")
                         }else {
                            sendText(sender,"Wrong OTP. Contact our customer care for assistant")
@@ -1101,6 +1103,21 @@ function quickReplyAcc(sender,text){
        "payload":"book",
        //"image_url":"http://example.com/img/red.png"
      }
+   ]
+    }
+  sendRequest(sender, messageData);
+}
+//OTP not sendText
+function quickReplyOTP(sender,text){
+  let messageData={
+      "text": text,
+      "quick_replies":[
+        {
+        "content_type":"text",
+        "title":"Resend OTP",
+        "payload":"Resend OTP",
+        //"image_url":"http://example.com/img/red.png"
+        }
    ]
     }
   sendRequest(sender, messageData);
