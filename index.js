@@ -91,7 +91,7 @@ function decideMessage(sender, text1){
         //sendText(sender, "Hi, My name is Kunta. I am National Bank of Kenya's assistant. Press the buttons bellow to choose the service you want?")
          //sendButtonMessage(sender,"choose one")
      }
-    /* else if(text === 'hi'{
+    else if(text === 'hi'{
        axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
         .then(function (response) {
           const data= response.status
@@ -103,11 +103,11 @@ function decideMessage(sender, text1){
         .catch(function (error) {
           console.log(error);
         });
-     }*/
+     }
      else if(text.includes("exists")){
         //sendGenericMessage(sender)
         sendText(sender, "😞Sorry notice this was your first time here. Kindly provide me with your id Number")
-        axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/idln/${text}`)
+        axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/idln/${text}`)
          .then(function (response) {
            const data= response.status
            console.log(response);
@@ -117,7 +117,7 @@ function decideMessage(sender, text1){
          });
      }
      else if(text.includes("link")){
-       axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/ID/${text}`)
+       axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/ID/${text}`)
         .then(function (response) {
           const data= response.status
           console.log(response);
@@ -128,7 +128,7 @@ function decideMessage(sender, text1){
          sendText(sender,"Enter you phone number beggining with z eg , Z0715428709")
      }
      else if(text.includes("z211")){
-       axios.get(`http://c6730885.ngrok.io/api/link/${sender}/${text}`)
+       axios.get(`http://9e9a48e8.ngrok.io /api/link/${sender}/${text}`)
         .then(function (response) {
           const data= response.status
           console.log(response);
@@ -139,7 +139,7 @@ function decideMessage(sender, text1){
          sendText(sender,"Message has been sent to your phone")
      }
      else if(text.includes("//")){
-       axios.get(`http://c6730885.ngrok.io/api/otp/${sender}/${text}`)
+       axios.get(`http://9e9a48e8.ngrok.io /api/otp/${sender}/${text}`)
         .then(function (response) {
           const data= response.status
           const lee= response.data.status
@@ -164,7 +164,7 @@ function decideMessage(sender, text1){
        quickReplyAcc1(sender)
      }
      else if(text.includes('check')){
-       axios.get(`http://c6730885.ngrok.io/api/balance/${sender}`)
+       axios.get(`http://9e9a48e8.ngrok.io /api/balance/${sender}`)
         .then(function (response) {
           console.log(response);
           //console.log("This is me",phoneNumber);
@@ -175,7 +175,7 @@ function decideMessage(sender, text1){
        sendText(sender, "Thank the request has been received, Youll receive a text message on your registered number with your acc balance.")
        //sendButtonMessage2(sender,"Choose the service youll like to use")
        sendQuickcheq(sender,"Anything else you would like my assitance on?")
-       axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/final/${text}`)
+       axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/final/${text}`)
         .then(function (response) {
           const data= response.status
           console.log(response);
@@ -185,7 +185,7 @@ function decideMessage(sender, text1){
         });
      }
      else if(text.includes("mini")){
-       axios.get(`http://c6730885.ngrok.io/api/ministatement/${sender}`)
+       axios.get(`http://9e9a48e8.ngrok.io /api/ministatement/${sender}`)
         .then(function (response) {
           console.log(response);
           console.log("This is me",phoneNumber);
@@ -195,7 +195,7 @@ function decideMessage(sender, text1){
         });
        sendText(sender, "Thank the request has been received, Youll receive a text message on your registered number with your Ministatement.")
        sendQuickcheq(sender,"Anything else you would like my assitance on?")
-       axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/final/${text}`)
+       axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/final/${text}`)
         .then(function (response) {
           const data= response.status
           console.log(response);
@@ -211,7 +211,7 @@ function decideMessage(sender, text1){
        sendText(sender, "We've received your request we will contact you once its ready. Thank you")
        //sendButtonMessage2(sender,"Choose the service youll like to use")
        sendQuickcheq(sender,"Anything else you would like my assitance on?")
-       axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/final/${text}`)
+       axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/final/${text}`)
         .then(function (response) {
           const data= response.status
           console.log(response);
@@ -224,7 +224,7 @@ function decideMessage(sender, text1){
        sendText(sender, "You will receive your statement on your email registered to us")
        //sendButtonMessage2(sender,"Choose the service youll like to use")
        sendQuickcheq(sender,"Anything else you would like my assitance on?")
-       axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/final/${text}`)
+       axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/final/${text}`)
         .then(function (response) {
           const data= response.status
           console.log(response);
@@ -240,7 +240,7 @@ function decideMessage(sender, text1){
        sendText(sender, "Thank you We've received your request once its ready we'll inform you . Thank you")
        //sendButtonMessage2(sender,"Choose the service youll like to us to help you")
        sendQuickcheq(sender,"Anything else you would like my assitance on?")
-       axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/final/${text}`)
+       axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/final/${text}`)
         .then(function (response) {
           const data= response.status
           console.log(response);
@@ -254,7 +254,7 @@ function decideMessage(sender, text1){
      }
      else if(text.includes("pay")){
        quickReplyPay(sender)
-       axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/deposit/${text}`)
+       axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/deposit/${text}`)
         .then(function (response) {
           console.log(response);
           console.log("This is me",phoneNumber);
@@ -264,7 +264,7 @@ function decideMessage(sender, text1){
         });
      }
      else if(text.includes("//")){
-       axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/deposit/${text}`)
+       axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/deposit/${text}`)
         .then(function (response) {
           console.log(response);
           console.log("This is me",phoneNumber);
@@ -275,7 +275,7 @@ function decideMessage(sender, text1){
         quickReply(sender)
      }
      else if(text.includes("deposit")){
-       axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/deposit/${text}`)
+       axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/deposit/${text}`)
         .then(function (response) {
           console.log(response);
           console.log("This is me",phoneNumber);
@@ -287,7 +287,7 @@ function decideMessage(sender, text1){
         quickReply(sender)
      }
      else if(text.includes("//")){
-       axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/phone/${text}`)
+       axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/phone/${text}`)
         .then(function (response) {
           const data= response.status
           console.log(response);
@@ -300,7 +300,7 @@ function decideMessage(sender, text1){
        sendText(sender,"please enter the amount you will wish to deposit starting with the word X for example 250 to deposit Ksh250")
      }
      else if(text.includes("//")){
-       axios.get(`http://c6730885.ngrok.io/api/push/${sender}/amount/${text}`)
+       axios.get(`http://9e9a48e8.ngrok.io /api/push/${sender}/amount/${text}`)
         .then(function (response) {
           const data= response.status
           console.log(response);
@@ -317,7 +317,7 @@ function decideMessage(sender, text1){
              console.log("im the service",text)
              let service = text
              sendText(sender,"please enter the acount number you will wish to transfer starting with the Bank example NBK123")
-             axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/tranfer/${text}`)
+             axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/tranfer/${text}`)
               .then(function (response) {
                 const data= response.status
                 console.log(response);
@@ -328,7 +328,7 @@ function decideMessage(sender, text1){
            }
            else if(service === "NBK"){
              sendText(sender,"you will recieve an OTP on your phonr enter the OTP starting with the word O here to confirm the transaction for example O1234")
-             axios.get(`http://c6730885.ngrok.io/api/otp/${sender}`)
+             axios.get(`http://9e9a48e8.ngrok.io /api/otp/${sender}`)
               .then(function (response) {
                 const data= response.status
                 console.log(response);
@@ -347,7 +347,7 @@ function decideMessage(sender, text1){
           }
           else if(text.includes("locate")){
             //let service = "loc"
-            axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/location/${text}`)
+            axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/location/${text}`)
              .then(function (response) {
                const data= response.status
                console.log(response);
@@ -391,7 +391,7 @@ function decideMessage(sender, text1){
           }
           else if(text.includes("cheque")){
             sendQuickcheq(sender,"Your chequebook is now ordered and can be collected at harambee Avenue, is this convinient for you?")
-            axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/chequestatus/${text}`)
+            axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/chequestatus/${text}`)
              .then(function (response) {
                const data= response.status
                console.log(response);
@@ -404,7 +404,7 @@ function decideMessage(sender, text1){
             //sendText(sender,"Request received we will contact you when it is ready")
             //sendButtonMessage2(sender,"Choose the service youll like to use")
             sendQuickdebit(sender)
-            axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/email/${text}`)
+            axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/email/${text}`)
              .then(function (response) {
                const data= response.status
                console.log(response);
@@ -415,7 +415,7 @@ function decideMessage(sender, text1){
           }
           else if(text.includes("not now")){
             sendQuickcheq(sender,"Anything else you would like my assitance on?")
-            axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/final/${text}`)
+            axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/final/${text}`)
              .then(function (response) {
                const data= response.status
                console.log(response);
@@ -434,7 +434,7 @@ function decideMessage(sender, text1){
           }
           else if(text.includes("ready")){
             sendText(sender,"Enter your ID number eg 33865745")
-            axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/idreg/${text}`)
+            axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/idreg/${text}`)
              .then(function (response) {
                const data= response.status
                console.log(response);
@@ -459,7 +459,7 @@ function decideMessage(sender, text1){
                sendQuickcheq(sender)
           }
           else if(text.includes("//")){
-             axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/reg2/${text}`)
+             axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/reg2/${text}`)
               .then(function (response) {
                 const data= response.status
                 console.log(response);
@@ -470,7 +470,7 @@ function decideMessage(sender, text1){
               });
           }
           else if(text.includes("///n")){
-            axios.get(`http://c6730885.ngrok.io/api/register/${sender}/${text}`)
+            axios.get(`http://9e9a48e8.ngrok.io /api/register/${sender}/${text}`)
              .then(function (response) {
                const data= response.status
                console.log(response);
@@ -495,7 +495,7 @@ function decideMessage(sender, text1){
           }
           else if(text.includes("load ksh.100 now")){
             sendText(sender,"You will receive an STK push enter you mpesa pin and proceed")
-            axios.get(`http://c6730885.ngrok.io/api/push1/${sender}`)
+            axios.get(`http://9e9a48e8.ngrok.io /api/push1/${sender}`)
              .then(function (response) {
                const data= response.status
                sendQuickDep(sender)
@@ -507,7 +507,7 @@ function decideMessage(sender, text1){
           }
           else if(text.includes("load more than")){
             sendText(sender,"Enter the amount you want to deposit")
-            axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/more100/${text}`)
+            axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/more100/${text}`)
              .then(function (response) {
                const data= response.status
                console.log(response);
@@ -521,7 +521,7 @@ function decideMessage(sender, text1){
           }
           else if(text.includes("//")){
             //to be deleted on production
-            axios.get(`http://c6730885.ngrok.io/api/otp/${sender}/${text}`)
+            axios.get(`http://9e9a48e8.ngrok.io /api/otp/${sender}/${text}`)
              .then(function (response) {
                const data= response.status
                const lee= response.data.status
@@ -531,14 +531,14 @@ function decideMessage(sender, text1){
                  sendText(sender,"Ok, am sending you a request for a small initail deposit to activate the account")
                  //sleep(10000);
                 // sendQuickDep(sender)
-                     axios.get(`http://c6730885.ngrok.io/api/push1/${sender}`)
+                     axios.get(`http://9e9a48e8.ngrok.io /api/push1/${sender}`)
                       .then(function (response) {
                         const data= response.status
                         console.log(response);
                         //sendQuickDep(sender)
                         //sendQuickcheq(sender,"I have confirmed your details,And your account number has been sent to your phone, do you mind if I took you through some of our products that you may find useful?")
                         sendQuickmind(sender)
-                        axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/reg3/${text}`)
+                        axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/reg3/${text}`)
                          .then(function (response) {
                            const data= response.status
                            console.log(response);
@@ -560,7 +560,7 @@ function decideMessage(sender, text1){
           }
           else{
               //sendText(sender,text)
-              axios.get(`http://c6730885.ngrok.io/api/pastmessage/${sender}`)
+              axios.get(`http://9e9a48e8.ngrok.io /api/pastmessage/${sender}`)
                .then(function (response) {
                  const data= response.status
                  console.log(response);
@@ -571,11 +571,11 @@ function decideMessage(sender, text1){
                  }
                  //reg part 2
                  else if(message === 'reg2'){
-                   axios.get(`http://c6730885.ngrok.io/api/register/${sender}/${text}`)
+                   axios.get(`http://9e9a48e8.ngrok.io /api/register/${sender}/${text}`)
                     .then(function (response) {
                       const data= response.status
                       console.log(response);
-                      axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/otpreg/${text}`)
+                      axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/otpreg/${text}`)
                        .then(function (response) {
                          const data= response.status
                          console.log(response);
@@ -592,7 +592,7 @@ function decideMessage(sender, text1){
                    }
                    //for the otp confirmation
                    else if(message === 'otpreg'){
-                     axios.get(`http://c6730885.ngrok.io/api/otp/${sender}/${text}`)
+                     axios.get(`http://9e9a48e8.ngrok.io /api/otp/${sender}/${text}`)
                       .then(function (response) {
                         const data= response.status
                         const lee= response.data.status
@@ -613,11 +613,11 @@ function decideMessage(sender, text1){
                       });
                    }
                    else if( message === 'idln'){
-                     axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/ID/${text}`)
+                     axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/ID/${text}`)
                       .then(function (response) {
                         const data= response.status
                         console.log(response);
-                        axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/phonelink/${text}`)
+                        axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/phonelink/${text}`)
                          .then(function (response) {
                            const data= response.status
                            console.log(response);
@@ -632,11 +632,11 @@ function decideMessage(sender, text1){
                        sendText(sender,"Enter you phone number beggining with country code eg , 254715428709")
                    }
                    else if(message === 'phonelink'){
-                     axios.get(`http://c6730885.ngrok.io/api/link/${sender}/${text}`)
+                     axios.get(`http://9e9a48e8.ngrok.io /api/link/${sender}/${text}`)
                       .then(function (response) {
                         const data= response.status
                         console.log(response);
-                        axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/otplink/${text}`)
+                        axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/otplink/${text}`)
                          .then(function (response) {
                            const data= response.status
                            console.log(response);
@@ -651,7 +651,7 @@ function decideMessage(sender, text1){
                        sendText(sender,"OTP has been sent to your phone use to link the account")
                    }
                    else if( message === 'otplink'){
-                     axios.get(`http://c6730885.ngrok.io/api/otp/${sender}/${text}`)
+                     axios.get(`http://9e9a48e8.ngrok.io /api/otp/${sender}/${text}`)
                       .then(function (response) {
                         const data= response.status
                         const lee= response.data.status
@@ -670,7 +670,7 @@ function decideMessage(sender, text1){
                    }
                    else if(message === 'chequestatus'){
                      if( text === 'yes'){
-                       axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/final/${text}`)
+                       axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/final/${text}`)
                         .then(function (response) {
                           const data= response.status
                           console.log(response);
@@ -680,7 +680,7 @@ function decideMessage(sender, text1){
                         });
                         sendQuickcheq(sender,"Anything else you would like my assitance on?")
                      }else {
-                       axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/chequeLocation/${text}`)
+                       axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/chequeLocation/${text}`)
                         .then(function (response) {
                           const data= response.status
                           console.log(response);
@@ -693,7 +693,7 @@ function decideMessage(sender, text1){
                    }
                    else if(message === 'chequeLocation'){
                      sendQuickcheq(sender,"Anything else you would like my assitance on?")
-                     axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/final/${text}`)
+                     axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/final/${text}`)
                       .then(function (response) {
                         const data= response.status
                         console.log(response);
@@ -722,7 +722,7 @@ function decideMessage(sender, text1){
                    else if(message === 'email'){
                      if(text === 'yes'){
                        sendText(sender,"Enter your email")
-                       axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/emailfinal/${text}`)
+                       axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/emailfinal/${text}`)
                         .then(function (response) {
                           const data= response.status
                           console.log(response);
@@ -732,7 +732,7 @@ function decideMessage(sender, text1){
                         });
                      }else{
                        sendQuickcheq(sender,"Anything else you would like my assitance on?")
-                       axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/final/${text}`)
+                       axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/final/${text}`)
                         .then(function (response) {
                           const data= response.status
                           console.log(response);
@@ -744,7 +744,7 @@ function decideMessage(sender, text1){
                    }
                    else if(message === 'emailfinal'){
                      sendQuickcheq(sender,"Anything else you would like my assitance on?")
-                     axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/final/${text}`)
+                     axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/final/${text}`)
                       .then(function (response) {
                         const data= response.status
                         console.log(response);
@@ -758,7 +758,7 @@ function decideMessage(sender, text1){
                         sendQuickDep(sender)
                      }else {
                        sendQuickcheq(sender,"Anything else you would like my assitance on?")
-                       axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/final/${text}`)
+                       axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/final/${text}`)
                         .then(function (response) {
                           const data= response.status
                           console.log(response);
@@ -769,11 +769,11 @@ function decideMessage(sender, text1){
                      }
                    }
                    else if(message === 'deposit'){
-                     axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/phone/${text}`)
+                     axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/phone/${text}`)
                       .then(function (response) {
                         const data= response.status
                         console.log(response);
-                        axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/amountdepo/${text}`)
+                        axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/amountdepo/${text}`)
                          .then(function (response) {
                            const data= response.status
                            console.log(response);
@@ -788,11 +788,11 @@ function decideMessage(sender, text1){
                       });
                    }
                    else if(message === 'amountdepo'){
-                     axios.get(`http://c6730885.ngrok.io/api/push/${sender}/amount/${text}`)
+                     axios.get(`http://9e9a48e8.ngrok.io /api/push/${sender}/amount/${text}`)
                       .then(function (response) {
                         const data= response.status
                         console.log(response);
-                        axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/final/${text}`)
+                        axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/final/${text}`)
                          .then(function (response) {
                            const data= response.status
                            console.log(response);
@@ -810,11 +810,11 @@ function decideMessage(sender, text1){
                      sendText(sender,"You will recieve a push notification shortly")
                    }
                    else if(message === 'more100'){
-                     axios.get(`http://c6730885.ngrok.io/api/push2/${sender}/${text}`)
+                     axios.get(`http://9e9a48e8.ngrok.io /api/push2/${sender}/${text}`)
                       .then(function (response) {
                         const data= response.status
                         console.log(response);
-                        axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/final/${text}`)
+                        axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/final/${text}`)
                          .then(function (response) {
                            const data= response.status
                            console.log(response);
@@ -833,7 +833,7 @@ function decideMessage(sender, text1){
                    }
                    else if(message === 'location'){
                      sendText(sender,"The nearest branch to you is Harambee Avenue and it's operating time is betweem 8:30am and 4:30pm on weekdays and 8:30am to 12:30pm on weekends, but we are closed on Sundays and all national public holidays, Is there any enquiry you wish to make")
-                     axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/final/${text}`)
+                     axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/final/${text}`)
                       .then(function (response) {
                         const data= response.status
                         console.log(response);
@@ -844,7 +844,7 @@ function decideMessage(sender, text1){
                       });
                    }
                    else if(message === 'idreg'){
-                     axios.get(`http://c6730885.ngrok.io/api/postmessage/${sender}/reg2/${text}`)
+                     axios.get(`http://9e9a48e8.ngrok.io /api/postmessage/${sender}/reg2/${text}`)
                       .then(function (response) {
                         const data= response.status
                         console.log(response);
