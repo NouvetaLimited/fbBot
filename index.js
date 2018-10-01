@@ -434,7 +434,7 @@ function decideMessage(sender, text1){
           sendQuickRead(sender , "Great welcome to national bank, there are afew items you will require on hand, Your National ID and make sure your MPESA has atleast Kshs 100.00, cofirm when ready ")
           }
           else if(text.includes("cancel")){
-            sendButtonMessage2(sender,"Choose the service youll like to use")
+            sendButtonMessage2(sender,"Process cancelled \n Choose the service youll like to use")
           }
           else if(text.includes("ready")){
             sendText(sender,"Enter your ID number eg 33865745")
