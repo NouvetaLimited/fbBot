@@ -718,8 +718,6 @@ function decideMessage(sender, text1){
                       .catch(function (error) {
                         console.log(error);
                       });
-                     //sendButtonMessage2(sender,"Choose the service youll like to use")
-                     sleep(3000)
                      sendQuickcheq(sender,"Thank the request has been received, Youll receive a text message on your phone."+str+"\nAnything else you would like my assitance on?")
                      axios.get(`http://14ee9d2d.ngrok.io/api/postmessage/${sender}/final/${text}`)
                       .then(function (response) {
