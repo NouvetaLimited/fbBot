@@ -719,12 +719,11 @@ function decideMessage(sender, text1){
                         console.log(error);
                       });
                      //sendButtonMessage2(sender,"Choose the service youll like to use")
-                     sleep(5000)
-                     sendQuickcheq(sender,"Anything else you would like my assitance on?")
                      axios.get(`http://14ee9d2d.ngrok.io/api/postmessage/${sender}/final/${text}`)
                       .then(function (response) {
                         const data= response.status
                         console.log(response);
+                        sendQuickcheq(sender,"Anything else you would like my assitance on?")
                       })
                       .catch(function (error) {
                         console.log(error);
