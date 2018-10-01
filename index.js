@@ -787,7 +787,7 @@ function decideMessage(sender, text1){
                       .then(function (response) {
                         const data= response.status
                         console.log(response);
-                         await sleep(2000);
+                         sleep(2000);
                         axios.get(`http://9e9a48e8.ngrok.io/api/postmessage/${sender}/final/${text}`)
                          .then(function (response) {
                            const data= response.status
