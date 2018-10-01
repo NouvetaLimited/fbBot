@@ -713,14 +713,14 @@ function decideMessage(sender, text1){
                         const number = response.data.phone
                         let str = number.replace(/\d(?=\d{4})/g, "*");
                         //console.log('............................................................',number);
-                        sendText(sender, "Thank the request has been received, Youll receive a text message on your phone."+str+"")
+                        //sendText(sender, "Thank the request has been received, Youll receive a text message on your phone."+str+"")
                       })
                       .catch(function (error) {
                         console.log(error);
-                      }).then () => {
+                      });
                      //sendButtonMessage2(sender,"Choose the service youll like to use")
-                     //sleep(3000)
-                     sendQuickcheq(sender,"Anything else you would like my assitance on?")
+                     sleep(3000)
+                     sendQuickcheq(sender,"Thank the request has been received, Youll receive a text message on your phone."+str+"\nAnything else you would like my assitance on?")
                      axios.get(`http://14ee9d2d.ngrok.io/api/postmessage/${sender}/final/${text}`)
                       .then(function (response) {
                         const data= response.status
@@ -729,7 +729,6 @@ function decideMessage(sender, text1){
                       .catch(function (error) {
                         console.log(error);
                       });
-                      }
                    }
                    else if(message === 'chequestatus'){
                      if( text === 'yes'){
