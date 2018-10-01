@@ -712,13 +712,14 @@ function decideMessage(sender, text1){
                         //console.log("This is me",phoneNumber);
                         const number = response.data.phone
                         let str = number.replace(/\d(?=\d{4})/g, "*");
-                        console.log('............................................................',number);
+                        //console.log('............................................................',number);
                         sendText(sender, "Thank the request has been received, Youll receive a text message on your phone."+str+"")
                       })
                       .catch(function (error) {
                         console.log(error);
                       });
                      //sendButtonMessage2(sender,"Choose the service youll like to use")
+                     sleep(3000)
                      sendQuickcheq(sender,"Anything else you would like my assitance on?")
                      axios.get(`http://9e9a48e8.ngrok.io/api/postmessage/${sender}/final/${text}`)
                       .then(function (response) {
