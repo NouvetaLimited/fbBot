@@ -202,7 +202,7 @@ function decideMessage(sender, text1){
         .catch(function (error) {
           console.log(error);
         });
-        sendText(sender,"Kindly provide me with your id number")
+        sendText(sender,"😞 Kindly provide me with your id number")
      }
      else if(text.includes("mini")){
        axios.get(`http://9e9a48e8.ngrok.io/api/ministatement/${sender}`)
@@ -711,8 +711,9 @@ function decideMessage(sender, text1){
                         console.log(response);
                         //console.log("This is me",phoneNumber);
                         const number = response.data.phone
-                        str = number.replace(/\d(?=\d{4})/g, "*");
-                        sendText(sender, "Thank the request has been received, Youll receive a text message on your phone."+str+"")
+                        let number = number.replace(/\d(?=\d{4})/g, "*");
+                        console.log('............................................................',number);
+                        sendText(sender, "Thank the request has been received, Youll receive a text message on your phone."+number+"")
                       })
                       .catch(function (error) {
                         console.log(error);
