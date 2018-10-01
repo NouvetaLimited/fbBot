@@ -202,7 +202,7 @@ function decideMessage(sender, text1){
         .catch(function (error) {
           console.log(error);
         });
-        sendText(sender,"😞 Kindly provide me with your id number")
+        sendText(sender,"Kindly provide me with your id number")
      }
      else if(text.includes("mini")){
        axios.get(`http://14ee9d2d.ngrok.io/api/ministatement/${sender}`)
@@ -705,7 +705,7 @@ function decideMessage(sender, text1){
                         console.log(error);
                       });
                    }
-                   else if( message === 'balanceco'){
+                   else if( message === 'balanceco1'){
                      axios.get(`http://14ee9d2d.ngrok.io/api/balance/${sender}`)
                       .then(function (response) {
                         console.log(response);
@@ -729,6 +729,17 @@ function decideMessage(sender, text1){
                       .catch(function (error) {
                         console.log(error);
                       });
+                   }
+                   else if(message === 'balanceco'){
+                     axios.get(`http://14ee9d2d.ngrok.io/api/postmessage/${sender}/balanceco1/${text}`)
+                      .then(function (response) {
+                        const data= response.status
+                        console.log(response);
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
+                      sendText(sender,"Please choose the Account you would want to check the balance \n send 1 for acc 543*******325\n send 2 for acc 543***********125")
                    }
                    else if(message === 'chequestatus'){
                      if( text === 'yes'){
