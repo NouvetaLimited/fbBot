@@ -1075,7 +1075,7 @@ function quickReplyAcc1(sender){
        "title":"Cheque book request",
        "payload":"book",
        //"image_url":"http://example.com/img/red.png"
-     }
+     },
      {
        "content_type":"text",
        "title":"cancel",
