@@ -777,15 +777,6 @@ function decideMessage(sender, text1){
                       .then(function (response) {
                         const data= response.status
                         console.log(response);
-                        axios.get(`http://9e9a48e8.ngrok.io/api/postmessage/${sender}/amountdepo/${text}`)
-                         .then(function (response) {
-                           const data= response.status
-                           console.log(response);
-                           sendText(sender,"please enter the amount you will wish to deposit example 250 to deposit Ksh250")
-                         })
-                         .catch(function (error) {
-                           console.log(error);
-                         });
                       })
                       .catch(function (error) {
                         console.log(error);
@@ -796,6 +787,7 @@ function decideMessage(sender, text1){
                       .then(function (response) {
                         const data= response.status
                         console.log(response);
+                         await sleep(2000);
                         axios.get(`http://9e9a48e8.ngrok.io/api/postmessage/${sender}/final/${text}`)
                          .then(function (response) {
                            const data= response.status
@@ -1404,3 +1396,6 @@ function sendGenericMessage(sender){
 app.listen(app.get('port'),function () {
     console.log("running: port");
 });
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
