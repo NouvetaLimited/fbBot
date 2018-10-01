@@ -164,7 +164,16 @@ function decideMessage(sender, text1){
        quickReplyAcc1(sender)
      }
      else if(text.includes('check')){
-       axios.get(`http://9e9a48e8.ngrok.io/api/balance/${sender}`)
+       axios.get(`http://9e9a48e8.ngrok.io/api/postmessage/${sender}/balance/${text}`)
+        .then(function (response) {
+          const data= response.status
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+        sendQuickbal(sender,'No problem, but first i need to confirm your details  kindly provide me with the following \n 1.Your National ID')
+       /*axios.get(`http://9e9a48e8.ngrok.io/api/balance/${sender}`)
         .then(function (response) {
           console.log(response);
           //console.log("This is me",phoneNumber);
@@ -182,7 +191,18 @@ function decideMessage(sender, text1){
         })
         .catch(function (error) {
           console.log(error);
+        });*/
+     }
+     else if(text.includes("okay")){
+       axios.get(`http://9e9a48e8.ngrok.io/api/postmessage/${sender}/balanceco/${text}`)
+        .then(function (response) {
+          const data= response.status
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
         });
+        sendText(sender,"Kindly provide me with your id number")
      }
      else if(text.includes("mini")){
        axios.get(`http://9e9a48e8.ngrok.io/api/ministatement/${sender}`)
@@ -664,11 +684,45 @@ function decideMessage(sender, text1){
                         console.log(response);
                         console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',data,lee);
                         if( lee === '200' ){
-                          sendText(sender,"Two accounts \n 1. 121454*******25. \n2. 35422******. \n have been linked to this account")
-                              sendButtonMessage2(sender,"Here are services available")
+                          sendText(sender,"Two accounts \n 1. 121454*******25. \n2. 35422**************32. \n have been linked to this facebook account")
+                          axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+                           .then(function (response) {
+                             const data= response.status
+                             console.log(response);
+                             const name = response.data.first_name
+                             //sendText(sender,"Hi "+name+",  Welcome back.")
+                             sendButtonMessage2(sender,+name+"This are ways I can help you")
+                           })
+                           .catch(function (error) {
+                             console.log(error);
+                           });
+                              // sendButtonMessage2(sender,"Here are services available")
                         }else {
                            sendText(sender,"Wrong OTP. Contact our customer care for assistant")
                         }
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
+                   }
+                   else if( message === 'balanceco'){
+                     axios.get(`http://9e9a48e8.ngrok.io/api/balance/${sender}`)
+                      .then(function (response) {
+                        console.log(response);
+                        //console.log("This is me",phoneNumber);
+                        const number = response.data.phone
+                        str = number.replace(/\d(?=\d{4})/g, "*");
+                        sendText(sender, "Thank the request has been received, Youll receive a text message on your phone."+str+"")
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
+                     //sendButtonMessage2(sender,"Choose the service youll like to use")
+                     sendQuickcheq(sender,"Anything else you would like my assitance on?")
+                     axios.get(`http://9e9a48e8.ngrok.io/api/postmessage/${sender}/final/${text}`)
+                      .then(function (response) {
+                        const data= response.status
+                        console.log(response);
                       })
                       .catch(function (error) {
                         console.log(error);
@@ -1297,6 +1351,27 @@ function sendQuickTrans(sender){
         }
         sendRequest(sender, messageData);
       }
+      //balance
+      function sendQuickbal(sender,text){
+        let messageData={
+            "text": text,
+            "quick_replies":[
+              {
+              "content_type":"text",
+              "title":"okay",
+              "payload":"okay",
+              //"image_url":"http://example.com/img/red.png"
+              },
+              {
+              "content_type":"text",
+              "title":"not now",
+              "payload":"not now",
+              //"image_url":"http://example.com/img/red.png"
+             }
+              ]
+          }
+          sendRequest(sender, messageData);
+        }
       //Debit
       function sendQuickdebit(sender){
         let messageData={
