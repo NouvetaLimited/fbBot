@@ -652,7 +652,7 @@ function decideMessage(sender, text1){
                      axios.get(`http://14ee9d2d.ngrok.io/api/ministatement/${sender}`)
                       .then(function (response) {
                         console.log(response);
-                        const number = response.data.phone
+                        const number = response.data.data
                         let str = number.replace(/\d(?=\d{4})/g, "*");
                         sendQuickcheq(sender,"Your balance as been sent to your phone "+str+" .Anything else you would like my assitance on?")
                       })
