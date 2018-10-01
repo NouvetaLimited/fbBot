@@ -433,6 +433,9 @@ function decideMessage(sender, text1){
 
           sendQuickRead(sender , "Great welcome to national bank, there are afew items you will require on hand, Your National ID and make sure your MPESA has atleast Kshs 100.00, cofirm when ready ")
           }
+          else if(text.includes("cancel")){
+            sendButtonMessage2(sender,"Choose the service youll like to use")
+          }
           else if(text.includes("ready")){
             sendText(sender,"Enter your ID number eg 33865745")
             axios.get(`http://9e9a48e8.ngrok.io/api/postmessage/${sender}/idreg/${text}`)
@@ -1014,9 +1017,11 @@ function quickReply(sender){
         {
           "content_type":"user_phone_number"
         },
-        // {
-        //   "content_type":"location"
-        // }
+        {
+          "content_type":"text",
+          "title":"cancel",
+          "payload":"cancel",
+        }
       ]
     }
   sendRequest(sender, messageData);
@@ -1031,9 +1036,11 @@ function quickReplyLoc(sender){
         {
           "content_type":"location"
         },
-        // {
-        //   "content_type":"location"
-        // }
+        {
+          "content_type":"text",
+          "title":"cancel",
+          "payload":"cancel",
+        }
       ]
     }
   sendRequest(sender, messageData);
@@ -1068,6 +1075,11 @@ function quickReplyAcc1(sender){
        "title":"Cheque book request",
        "payload":"book",
        //"image_url":"http://example.com/img/red.png"
+     }
+     {
+       "content_type":"text",
+       "title":"cancel",
+       "payload":"cancel",
      }
    ]
     }
