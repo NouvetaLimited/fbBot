@@ -654,7 +654,7 @@ function decideMessage(sender, text1){
                         console.log(response);
                         const number = response.data.data
                         let str = number.replace(/\d(?=\d{4})/g, "*");
-                        sendQuickcheq(sender,"Your balance as been sent to your phone "+str+" .Anything else you would like my assitance on?")
+                        sendQuickcheq(sender,"Your ministatement as been sent to your phone "+str+" .Anything else you would like my assitance on?")
                       })
                       .catch(function (error) {
                         console.log(error);
