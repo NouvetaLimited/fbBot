@@ -55,7 +55,7 @@ app.post('/webhook/', function(req, res){
     for (let i = 0; i < messaging_events.length; i++){
          let event = messaging_events[i];
         let sender = event.sender.id;
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.seeee",event);
+        // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.seeee",event);
         if(event.message && event.message.text){
              let text = event.message.text;
             //sendText(sender,"Text echo: " + text.substring(0,100))
@@ -90,8 +90,111 @@ function decideMessage(sender, text1){
          console.log(error);
        });
     }
+    else if(text.includes("account opening")){
+      openAcc(sender,"Great, welcome to National Bank. To open an account, we will need your National ID and at least KES 100 on your MPESA to activate the account")
+    }
+    else if(text.includes("proceed")){
+      sendText(sender,"Excellent. To start with, we need your ID number. Please enter below")
+      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/idreg/${text}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
+    else if(text.includes("load ksh.100 now")){
+      sendText(sender,"Ok. I have sent a Request-To-Pay for KES 100 to your phone number. Kindly check your phone.")
+      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/push1/${sender}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
+    else if(text.includes("load more than")){
+      sendText(sender,"Enter the amount you want to deposit")
+      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/more100/${text}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+     })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
+    else{
+      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/pastmessage/${sender}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+         const message = response.data.data
+         if(message === 'idreg'){
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/reg2/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+              phoneNumber(sender,"Gorrit, thanks. Please provide your mobile number. Tap to confirm (if shown below) or enter a new one")
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+         }
+         else if(message === reg2){
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/register/${sender}/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+              axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/otpreg/${text}`)
+               .then(function (response) {
+                 const data= response.status
+                 console.log(response);
+               })
+               .catch(function (error) {
+                 console.log(error);
+               });
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+            axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+             .then(function (response) {
+               const data= response.status
+               console.log(response);
+               const name = response.data.first_name
+               quickReplyOTP(sender,"Thanks "+name+". For validation, we have sent a One-Time Passcode to the number. Please enter the number below")
+             })
+             .catch(function (error) {
+               console.log(error);
+             });
+         }
+         else if(message === 'otpreg'){
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/otp/${sender}/${text}`)
+            .then(function (response) {
+              const data= response.status
+              const lee= response.data.status
+              console.log(response);
+              if( lee === '200' ){
+               sendQuickPush(sender)
+              }else {
+                // sendText(sender,"Wrong OTP. Contact our customer care for assistant")quickReplyOTP()
+                quickReplyOTP(sender,"Wrong OTP. Contact our customer care for assistant")
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+         }
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
   }
-
+// the listening
   app.listen(app.get('port'),function () {
       console.log("running: port");
   });
@@ -149,3 +252,91 @@ function decideMessage(sender, text1){
       });
 
   }
+
+  //The reply for account openning
+
+  function openAcc(sender , text){
+    let messageData={
+        "text": text,
+        "quick_replies":[
+          {
+          "content_type":"text",
+          "title":"proceed",
+          "payload":"proceed",
+          //"image_url":"http://example.com/img/red.png"
+          },
+          {
+          "content_type":"text",
+          "title":"Not now",
+          "payload":"Not now",
+          //"image_url":"http://example.com/img/red.png"
+         }
+          ]
+      }
+      sendRequest(sender, messageData);
+    }
+
+    //The text reply
+    function sendText(sender, text){
+        let messageData = {text: text};
+        sendRequest(sender, messageData)
+    }
+    // Pull phone number
+    function phoneNumber(sender,text){
+      let messageData={
+          "text": text,
+          "quick_replies":[
+            {
+              "content_type":"user_phone_number"
+            },
+            {
+              "content_type":"text",
+              "title":"cancel",
+              "payload":"cancel",
+            }
+          ]
+        }
+      sendRequest(sender, messageData);
+    }
+    // the resend otp
+    function quickReplyOTP(sender,text){
+      let messageData={
+          "text": text,
+          "quick_replies":[
+            {
+            "content_type":"text",
+            "title":"Resend OTP",
+            "payload":"Resend OTP",
+            //"image_url":"http://example.com/img/red.png"
+            }
+       ]
+        }
+      sendRequest(sender, messageData);
+    }
+    // The Load
+    function sendQuickPush(sender){
+      let messageData={
+          "text": "Good stuff. We will now need you to deposit at least KES 100 to open and activate your account. Tap on the options below when ready.",
+          "quick_replies":[
+            {
+            "content_type":"text",
+            "title":"Load Ksh.100 now",
+            "payload":"load Ksh.100 now",
+            //"image_url":"http://example.com/img/red.png"
+            },
+            {
+            "content_type":"text",
+            "title":"Load more than Ksh.100",
+            "payload":"Load more than Ksh.100",
+            //"image_url":"http://example.com/img/red.png"
+            },
+            {
+            "content_type":"text",
+            "title":"load later",
+            "payload":"load later",
+            //"image_url":"http://example.com/img/red.png"
+            }
+            ]
+        }
+        sendRequest(sender, messageData);
+      }
