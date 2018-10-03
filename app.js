@@ -110,10 +110,30 @@ function decideMessage(sender, text1){
        .then(function (response) {
          const data= response.status
          console.log(response);
+
        })
        .catch(function (error) {
          console.log(error);
        });
+       //book the message
+       axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paid/${text}`)
+        .then(function (response) {
+          const data= response.status
+          console.log(response);
+          axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+           .then(function (response) {
+             const data= response.status
+             console.log(response);
+             const name = response.data.first_name
+             returnPay(sender,""+name+", your payment has been received. Your new account number is  "+sender+". Can I tell you the services I can help you with?")
+           })
+           .catch(function (error) {
+             console.log(error);
+           });
+      })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
     else if(text.includes("load more than")){
       sendText(sender,"Enter the amount you want to deposit")
@@ -189,23 +209,55 @@ function decideMessage(sender, text1){
             });
          }
          else if(message === more100){
+           sendText(sender,"Ok. I have sent a Request-To-Pay for KES."+text+" to your phone number. Kindly check your phone.")
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/push2/${sender}/${text}`)
             .then(function (response) {
               const data= response.status
               console.log(response);
-              axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/final/${text}`)
-               .then(function (response) {
-                 const data= response.status
-                 console.log(response);
-               })
-               .catch(function (error) {
-                 console.log(error);
-               });
             })
             .catch(function (error) {
               console.log(error);
             });
-           sendText(sender,"Ok. I have sent a Request-To-Pay for KES."+text+" to your phone number. Kindly check your phone.")
+            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paid/${text}`)
+             .then(function (response) {
+               const data= response.status
+               console.log(response);
+               axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+                .then(function (response) {
+                  const data= response.status
+                  console.log(response);
+                  const name = response.data.first_name
+                  returnPay(sender,""+name+", your payment has been received. Your new account number is  "+sender+". Can I tell you the services I can help you with?")
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+           })
+             .catch(function (error) {
+               console.log(error);
+             });
+         }
+         else if(message === "paid"){
+            if(text === yes){
+              axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+               .then(function (response) {
+                 const data= response.status
+                 console.log(response);
+                 const name = response.data.first_name
+                 mainMenu(sender,"Below are the services I can offer you here , "+name"")
+               })
+               .catch(function (error) {
+                 console.log(error);
+               });
+            }else{
+              axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+               .then(function (response) {
+                 const data= response.status
+                 console.log(response);
+                 const name = response.data.first_name
+                 //sendButtonMessage(sender,"Hi "+name+",  I am Kunta and will be your agent today, how may I help you")
+              sendText(sender,"Have a great day "+name+" and hope to hear from you soon, you can always reachout to me here by just typing 'Hi' or call us on 0703088000. And im always here 24/7 to assist you 👋")
+            }
          }
        })
        .catch(function (error) {
@@ -359,3 +411,52 @@ function decideMessage(sender, text1){
         }
         sendRequest(sender, messageData);
       }
+      /* confirm messaging_events*/
+
+      function returnPay(sender,text){
+        let messageData={
+            "text": text,
+            "quick_replies":[
+              {
+              "content_type":"text",
+              "title":"yes",
+              "payload":"yes",
+              //"image_url":"http://example.com/img/red.png"
+              },
+              {
+              "content_type":"text",
+              "title":"no",
+              "payload":"no",
+              //"image_url":"http://example.com/img/red.png"
+              }
+              ]
+          }
+          sendRequest(sender, messageData);
+        }
+        // the main
+        function mainMenu(sender,text){
+          let messageData={
+              "text": text,
+              "quick_replies":[
+                {
+                "content_type":"text",
+                "title":"My account",
+                "payload":"My account",
+                //"image_url":"http://example.com/img/red.png"
+                },
+                {
+                "content_type":"text",
+                "title":"My services",
+                "payload":"My services",
+                //"image_url":"http://example.com/img/red.png"
+               },
+             {
+               "content_type":"text",
+               "title":"Enquiries",
+               "payload":"Enquiries",
+               //"image_url":"http://example.com/img/red.png"
+             }
+           ]
+            }
+          sendRequest(sender, messageData);
+        }
