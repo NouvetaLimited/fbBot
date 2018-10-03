@@ -296,7 +296,10 @@ function decideMessage(sender, text1){
                  console.log(response);
                  const name = response.data.first_name
                  sendText(sender,"Have a great day "+name+" and hope to hear from you soon, you can always reachout to me here by just typing 'Hi' or call us on 0703088000. And im always here 24/7 to assist you 👋")
-            }
+               })
+               .catch(function (error) {
+                 console.log(error);
+               });
          }
        })
        .catch(function (error) {
