@@ -303,7 +303,7 @@ function decideMessage(sender, text1){
              });
          }
          else if(message === "paid"){
-            if(text === yes){
+            if(text === 'yes'){
               axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
                .then(function (response) {
                  const data= response.status
@@ -314,7 +314,7 @@ function decideMessage(sender, text1){
                .catch(function (error) {
                  console.log(error);
                });
-            }else if(text === no){
+            }else if(text === 'no'){
               axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
                .then(function (response) {
                  const data= response.status
