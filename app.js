@@ -34,9 +34,9 @@ res.send ("HI welcome");
 *payments
 */
 app.post('/pay/', function(req, res){
-    let pid=req
-     console.log("............................................................................................",req);
-     res.send(req)
+    let messaging_events =  req.body.entry[0].messaging;
+     console.log("................................................................................................",messaging_events);
+   res.sendStatus(200);
 });
 
 
