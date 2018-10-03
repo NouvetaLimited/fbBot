@@ -33,10 +33,8 @@ res.send ("HI welcome");
 /**
 *payments
 */
-app.post('/pay/', function(req, res){
-    let messaging_events =  req;
-     console.log("................................................................................................",messaging_events);
-   res.sendStatus(200);
+app.get('/pay/:pid-:status', function (req, res) {
+  res.send(req.params)
 });
 
 
