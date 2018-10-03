@@ -146,6 +146,46 @@ function decideMessage(sender, text1){
          console.log(error);
        });
     }
+    else if(text.includes("not now")){
+      axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+         const name = response.data.first_name
+         mainMenu(sender,"Below are the services I can offer you here , "+name"")
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
+    else if(text.includes("cancel")){
+      axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+         const name = response.data.first_name
+         mainMenu(sender,"Below are the services I can offer you here , "+name"")
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
+    else if(text.includes("load later")){
+      axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+         const name = response.data.first_name
+         sendText(sender,"Once ready to deposit just type load now")
+         mainMenu(sender,"Below are the services I can offer you here , "+name"")
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
+    else if(text.includes("load now")){
+      sendQuickPush(sender)
+    }
     else{
       axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/pastmessage/${sender}`)
        .then(function (response) {
@@ -208,7 +248,7 @@ function decideMessage(sender, text1){
               console.log(error);
             });
          }
-         else if(message === more100){
+         else if(message === 'more100'){
            sendText(sender,"Ok. I have sent a Request-To-Pay for KES."+text+" to your phone number. Kindly check your phone.")
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/push2/${sender}/${text}`)
             .then(function (response) {
@@ -255,8 +295,7 @@ function decideMessage(sender, text1){
                  const data= response.status
                  console.log(response);
                  const name = response.data.first_name
-                 //sendButtonMessage(sender,"Hi "+name+",  I am Kunta and will be your agent today, how may I help you")
-              sendText(sender,"Have a great day "+name+" and hope to hear from you soon, you can always reachout to me here by just typing 'Hi' or call us on 0703088000. And im always here 24/7 to assist you 👋")
+                 sendText(sender,"Have a great day "+name+" and hope to hear from you soon, you can always reachout to me here by just typing 'Hi' or call us on 0703088000. And im always here 24/7 to assist you 👋")
             }
          }
        })
@@ -282,13 +321,13 @@ function decideMessage(sender, text1){
         "quick_replies":[
           {
           "content_type":"text",
-          "title":"Account opening(new customer)",
+          "title":"Account opening",
           "payload":"balance",
           //"image_url":"http://example.com/img/red.png"
           },
           {
           "content_type":"text",
-          "title":"service request(returning customer)",
+          "title":"service request",
           "payload":"mini",
           //"image_url":"http://example.com/img/red.png"
          },
