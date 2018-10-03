@@ -34,9 +34,9 @@ res.send ("HI welcome");
 *payments
 */
 app.post('/pay/', function(req, res){
-    let pid=req.query['pid']
-     console.log("............................................................................................",pid);
-     res.send(pid)
+    let pid=req
+     console.log("............................................................................................",req);
+     res.send(req)
 });
 
 
