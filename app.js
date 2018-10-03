@@ -90,7 +90,8 @@ app.get('/pay/:pid-:status-:amount', function (req, res) {
      .catch(function (error) {
        console.log(error);
      });
-  }else if{
+  }
+  else if(status === '0'){
     axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
      .then(function (response) {
        const data= response.status
@@ -158,7 +159,7 @@ function decideMessage(sender, text1){
              const data= response.status
              console.log(response);
              const name = response.data.first_name
-
+            // returnPay(sender,""+name+", your payment has been received. Your new account number is  "+sender+". Can I tell you the services I can help you with?")
            })
            .catch(function (error) {
              console.log(error);
