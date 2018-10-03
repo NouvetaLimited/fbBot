@@ -52,6 +52,7 @@ app.get('/webhook/', function (req, res){
 
 app.post('/webhook/', function(req, res){
      let messaging_events =  req.body.entry[0].messaging;
+     console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.seeee",messaging_events);
     for (let i = 0; i < messaging_events.length; i++){
          let event = messaging_events[i];
         let sender = event.sender.id;
@@ -72,3 +73,54 @@ app.post('/webhook/', function(req, res){
     }
     res.sendStatus(200);
 });
+// the decideMessage function
+function decideMessage(sender, text1){
+    let text = text1.toLowerCase()
+    let service = text
+    if(text.includes("get started")){
+      axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+         const name = response.data.first_name
+         getstarted(sender,"Hi "+name+",☺ I am Kunta and will be your agent today, how may I help you?")
+         //quickReplyAcc(sender,"I am Kunta and will be your agent today, how may I help you?")
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
+  }
+
+
+
+
+
+  // The functions
+
+  function getstarted(sender,text){
+    let messageData={
+        "text": text,
+        "quick_replies":[
+          {
+          "content_type":"text",
+          "title":"Account opening(new customer)",
+          "payload":"balance",
+          //"image_url":"http://example.com/img/red.png"
+          },
+          {
+          "content_type":"text",
+          "title":"service request(returning customer)",
+          "payload":"mini",
+          //"image_url":"http://example.com/img/red.png"
+         },
+       {
+         "content_type":"text",
+         "title":"Enquiries",
+         "payload":"book",
+         //"image_url":"http://example.com/img/red.png"
+       }
+     ]
+      }
+    sendRequest(sender, messageData);
+  }
