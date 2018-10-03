@@ -143,7 +143,7 @@ function decideMessage(sender, text1){
               console.log(error);
             });
          }
-         else if(message === reg2){
+         else if(message === 'reg2'){
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/register/${sender}/${text}`)
             .then(function (response) {
               const data= response.status
@@ -187,6 +187,25 @@ function decideMessage(sender, text1){
             .catch(function (error) {
               console.log(error);
             });
+         }
+         else if(message === more100){
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/push2/${sender}/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+              axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/final/${text}`)
+               .then(function (response) {
+                 const data= response.status
+                 console.log(response);
+               })
+               .catch(function (error) {
+                 console.log(error);
+               });
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+           sendText(sender,"Ok. I have sent a Request-To-Pay for KES."+text+" to your phone number. Kindly check your phone.")
          }
        })
        .catch(function (error) {
