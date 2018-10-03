@@ -38,13 +38,14 @@ app.get('/pay/:pid-:status-:amount', function (req, res) {
   let sender = req.params['pid'];
   let status = req.params['status']
   let amount = req.params['amount']
-  if(status === 1){
+  if(status === '1'){
     axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
      .then(function (response) {
        const data= response.status
        console.log(response);
        const name = response.data.first_name
        returnPay(sender,""+name+", your payment has of Ksh"+amount+" been received. Your new account number is  "+sender+". Can I tell you the services I can help you with?")
+       res.send("hello")
      })
      .catch(function (error) {
        console.log(error);
