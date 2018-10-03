@@ -34,6 +34,11 @@ res.send ("HI welcome");
 *payments
 */
 app.get('/pay/:pid-:status', function (req, res) {
+  let x = req.params
+  let pid = req.params['pid'];
+  let status = req.params['status']
+  console.log("............................................................Im the Pid",pid);
+  console.log("............................................................Im the status",status);
   res.send(req.params)
 });
 
