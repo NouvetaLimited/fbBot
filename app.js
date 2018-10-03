@@ -147,36 +147,60 @@ function decideMessage(sender, text1){
        });
     }
     else if(text.includes("not now")){
-      axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paid/${text}`)
        .then(function (response) {
          const data= response.status
          console.log(response);
-         const name = response.data.first_name
-         menuMain(sender,"Below are the services I can offer you here , "+name+"")
+         axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+          .then(function (response) {
+            const data= response.status
+            console.log(response);
+            const name = response.data.first_name
+            returnPay(sender,""+name+" Can I tell you the services I can help you with?")
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
        })
        .catch(function (error) {
          console.log(error);
        });
     }
     else if(text.includes("cancel")){
-      axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paid/${text}`)
        .then(function (response) {
          const data= response.status
          console.log(response);
-         const name = response.data.first_name
-         menuMain(sender,"Below are the services I can offer you here , "+name+"")
+         axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+          .then(function (response) {
+            const data= response.status
+            console.log(response);
+            const name = response.data.first_name
+            returnPay(sender,""+name" Can I tell you the services I can help you with?")
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
        })
        .catch(function (error) {
          console.log(error);
        });
     }
     else if(text.includes("load later")){
-      axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paid/${text}`)
        .then(function (response) {
          const data= response.status
          console.log(response);
-         const name = response.data.first_name
-         menuMain(sender,"Dont worry when ready type load now.Below are the services I can offer you here , "+name+"")
+         axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+          .then(function (response) {
+            const data= response.status
+            console.log(response);
+            const name = response.data.first_name
+            returnPay(sender,""+name+" When you are ready just type load now. Can I tell you the services I can help you with?")
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
        })
        .catch(function (error) {
          console.log(error);
