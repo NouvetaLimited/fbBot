@@ -152,7 +152,7 @@ function decideMessage(sender, text1){
          const data= response.status
          console.log(response);
          const name = response.data.first_name
-        // mainMenu(sender,"Below are the services I can offer you here , "+name"")
+         //mainMenu(sender,"Below are the services I can offer you here , "+name"")
        })
        .catch(function (error) {
          console.log(error);
@@ -164,7 +164,7 @@ function decideMessage(sender, text1){
          const data= response.status
          console.log(response);
          const name = response.data.first_name
-         mainMenu(sender,"Below are the services I can offer you here , "+name"")
+        // mainMenu(sender,"Below are the services I can offer you here , "+name"")
        })
        .catch(function (error) {
          console.log(error);
@@ -177,7 +177,7 @@ function decideMessage(sender, text1){
          console.log(response);
          const name = response.data.first_name
          sendText(sender,"Once ready to deposit just type load now")
-         mainMenu(sender,"Below are the services I can offer you here , "+name"")
+      //   mainMenu(sender,"Below are the services I can offer you here , "+name"")
        })
        .catch(function (error) {
          console.log(error);
