@@ -211,6 +211,30 @@ function decideMessage(sender, text1){
          console.log(error);
        });
     }
+    else if(text.includes("resend otp")){
+      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/otpreg/${text}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+     .then(function (response) {
+       const data= response.status
+       console.log(response);
+       const name = response.data.first_name
+       quickReplyOTP(sender,"Thanks "+name+".  we have resent a One-Time Passcode to the number. Please enter the number below")
+     })
+     .catch(function (error) {
+       console.log(error);
+     });
+    }
     else{
       axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/pastmessage/${sender}`)
        .then(function (response) {
