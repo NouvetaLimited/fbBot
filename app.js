@@ -273,7 +273,7 @@ function decideMessage(sender, text1){
               console.log(error);
             });
          }
-         else if(message === more100){
+         else if(message === 'more100'){
            sendText(sender,"Ok. I have sent a Request-To-Pay for KES."+text+" to your phone number. Kindly check your phone.")
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/push2/${sender}/${text}`)
             .then(function (response) {
