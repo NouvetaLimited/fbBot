@@ -31,6 +31,15 @@ res.send ("HI welcome");
 });
 
 /**
+*payments
+*/
+app.post('/pay/', function(req, res){
+  pid=req.query['pid']
+     console.log();
+});
+
+
+/**
  * token
  */
 
