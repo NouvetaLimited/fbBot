@@ -29,32 +29,6 @@ app.get('/' , function (req, res){
 
 res.send ("HI welcome");
 });
-
-/**
-*payments
-*/
-app.get('/pay/:pid-:status-:amount', function (req, res) {
-  let x = req.params
-  let sender = req.params['pid'];
-  let status = req.params['status']
-  let amount = req.params['amount']
-  if(status === '1'){
-    axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
-     .then(function (response) {
-       const data= response.status
-       console.log(response);
-       const name = response.data.first_name
-       returnPay(sender,""+name+", your payment has of Ksh"+amount+" been received. Your new account number is  "+sender+". Can I tell you the services I can help you with?")
-       res.send("hello")
-     })
-     .catch(function (error) {
-       console.log(error);
-     });
-  }
-  res.send(req.params)
-});
-
-
 /**
  * token
  */
@@ -98,6 +72,40 @@ app.post('/webhook/', function(req, res){
     }
     res.sendStatus(200);
 });
+// The paymengs
+app.get('/pay/:pid-:status-:amount', function (req, res) {
+  let x = req.params
+  let sender = req.params['pid'];
+  let status = req.params['status']
+  let amount = req.params['amount']
+  if(status === '1'){
+    axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+     .then(function (response) {
+       const data= response.status
+       console.log(response);
+       const name = response.data.first_name
+       returnPay(sender,""+name+", your payment has of Ksh"+amount+" been received. Your new account number is  "+sender+". Can I tell you the services I can help you with?")
+       res.send("hello")
+     })
+     .catch(function (error) {
+       console.log(error);
+     });
+  }else if{
+    axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+     .then(function (response) {
+       const data= response.status
+       console.log(response);
+       const name = response.data.first_name
+       returnPay(sender,""+name+", your payment has of Ksh"+amount+" Was cancelled 😞 If you want to load again type load now. Your new account number is  "+sender+". Can I tell you the services I can help you with?")
+       res.send("hello")
+     })
+     .catch(function (error) {
+       console.log(error);
+     });
+  }
+  res.send(req.params)
+});
+
 // the decideMessage function
 function decideMessage(sender, text1){
     let text = text1.toLowerCase()
@@ -150,7 +158,6 @@ function decideMessage(sender, text1){
              const data= response.status
              console.log(response);
              const name = response.data.first_name
-             returnPay(sender,""+name+", your payment has been received. Your new account number is  "+sender+". Can I tell you the services I can help you with?")
            })
            .catch(function (error) {
              console.log(error);
@@ -161,20 +168,11 @@ function decideMessage(sender, text1){
         });
     }
     else if(text.includes("load more than")){
-      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paid/${text}`)
+      sendText(sender,"Enter the amount you want to deposit")
+      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/more100/${text}`)
        .then(function (response) {
          const data= response.status
          console.log(response);
-         axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
-          .then(function (response) {
-            const data= response.status
-            console.log(response);
-            const name = response.data.first_name
-            returnPay(sender,""+name+", your payment has been received. Your new account number is  "+sender+". Can I tell you the services I can help you with?")
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
      })
        .catch(function (error) {
          console.log(error);
@@ -190,7 +188,7 @@ function decideMessage(sender, text1){
             const data= response.status
             console.log(response);
             const name = response.data.first_name
-            returnPay(sender,""+name+",. Can I tell you the services I can help you with?")
+          returnPay(sender,""+name+",. Can I tell you the services I can help you with?")
           })
           .catch(function (error) {
             console.log(error);
@@ -350,7 +348,6 @@ function decideMessage(sender, text1){
                   const data= response.status
                   console.log(response);
                   const name = response.data.first_name
-                  returnPay(sender,""+name+", your payment has been received. Your new account number is  "+sender+". Can I tell you the services I can help you with?")
                 })
                 .catch(function (error) {
                   console.log(error);
