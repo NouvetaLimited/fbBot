@@ -185,6 +185,32 @@ function decideMessage(sender, text1){
     else if(text.includes("load now")){
       sendQuickPush(sender)
     }
+    else if(text.includes("hi kunta")){
+      axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+         const name = response.data.first_name
+         sendText(sender,"Hi "+name+",  Welcome back.")
+         menuMain(sender,"Below are the services I can offer you here , "+name+"")
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
+    else if(text === 'hi'){
+      axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+         const name = response.data.first_name
+         sendText(sender,"Hi "+name+",  Welcome back.")
+         menuMain(sender,"Below are the services I can offer you here , "+name+"")
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
     else{
       axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/pastmessage/${sender}`)
        .then(function (response) {
