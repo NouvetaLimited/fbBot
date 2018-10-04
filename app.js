@@ -262,7 +262,7 @@ function decideMessage(sender, text1){
          const data= response.status
          console.log(response);
         const phone = response.data.phone
-        let str = number.replace(/\d(?=\d{4})/g, "*");
+        let str = phone.replace(/\d(?=\d{4})/g, "*");
         quickReplyOTP(sender,"The OTP was sent to "+str+".If you have not received please contact our customer care for assistant")
        })
        .catch(function (error) {
