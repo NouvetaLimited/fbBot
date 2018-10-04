@@ -276,7 +276,7 @@ function decideMessage(sender, text1){
 
 
 
-    else if(text.includes("service request"){
+    else if(text.includes("service request")){
       menuMain(sender,"Below are the services I can provide:")
     }
     // The checking in
