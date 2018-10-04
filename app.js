@@ -279,6 +279,9 @@ function decideMessage(sender, text1){
     else if(text.includes("service request")){
       menuMain(sender,"Below are the services I can provide:")
     }
+    else if(text.includes("my account")){
+
+    }
     // The checking in
 
 
@@ -600,6 +603,40 @@ function decideMessage(sender, text1){
                "content_type":"text",
                "title":"Enquiries",
                "payload":"Enquiries",
+               //"image_url":"http://example.com/img/red.png"
+             },
+             {
+               "content_type":"text",
+               "title":"Cancel",
+               "payload":"Cancel",
+               //"image_url":"http://example.com/img/red.png"
+             }
+           ]
+            }
+          sendRequest(sender, messageData);
+        }
+
+        //my account function
+        function myAccount(sender,text){
+          let messageData={
+              "text": text,
+              "quick_replies":[
+                {
+                "content_type":"text",
+                "title":"Deposit to account",
+                "payload":"Deposit to account",
+                //"image_url":"http://example.com/img/red.png"
+                },
+                {
+                "content_type":"text",
+                "title":"check balance",
+                "payload":"check balance",
+                //"image_url":"http://example.com/img/red.png"
+               },
+             {
+               "content_type":"text",
+               "title":"Get statement",
+               "payload":"Get statement",
                //"image_url":"http://example.com/img/red.png"
              },
              {
