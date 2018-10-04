@@ -73,18 +73,19 @@ app.post('/webhook/', function(req, res){
     res.sendStatus(200);
 });
 // The paymengs
-app.get('/pay/:pid-:status-:amount', function (req, res) {
+app.get('/pay/:pid-:status-:amount-:mpesa', function (req, res) {
   let x = req.params
   let sender = req.params['pid'];
   let status = req.params['status']
   let amount = req.params['amount']
+  let mpesa  = req.params['mpesa']
   if(status === '1'){
     axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
      .then(function (response) {
        const data= response.status
        console.log(response);
        const name = response.data.first_name
-       returnPay(sender,""+name+", your payment of Ksh"+amount+" been . Your new account number is  "+sender+". Can I tell you the services I can help you with?")
+       returnPay(sender,""+name+", your payment of Ksh"+amount+" been Mpesa receipt Number :"+mpesa+" . Your new account number is  "+sender+". Can I tell you the services I can help you with?")
        res.send("hello")
      })
      .catch(function (error) {
