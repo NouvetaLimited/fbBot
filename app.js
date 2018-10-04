@@ -270,7 +270,20 @@ function decideMessage(sender, text1){
        });
     }
     //The service requested
-    //else if()
+
+
+
+
+
+
+    else if(text.includes("service request"){
+      menuMain(sender,"Below are the services I can provide:")
+    }
+    // The checking in
+
+
+
+
     else{
       axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/pastmessage/${sender}`)
        .then(function (response) {
@@ -404,6 +417,9 @@ function decideMessage(sender, text1){
 
 
   // The functions
+
+
+
 
   function getstarted(sender,text){
     let messageData={
@@ -563,7 +579,7 @@ function decideMessage(sender, text1){
           sendRequest(sender, messageData);
         }
 
-        //he main
+        //The main Menu
         function menuMain(sender,text){
           let messageData={
               "text": text,
@@ -584,6 +600,12 @@ function decideMessage(sender, text1){
                "content_type":"text",
                "title":"Enquiries",
                "payload":"Enquiries",
+               //"image_url":"http://example.com/img/red.png"
+             },
+             {
+               "content_type":"text",
+               "title":"Cancel",
+               "payload":"Cancel",
                //"image_url":"http://example.com/img/red.png"
              }
            ]
