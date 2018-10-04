@@ -85,7 +85,7 @@ app.get('/pay/:pid-:status-:amount-:mpesa', function (req, res) {
        const data= response.status
        console.log(response);
        const name = response.data.first_name
-       returnPay(sender,""+name+", your payment of Ksh."+amount+" been Mpesa receipt Number :"+mpesa+" . Your new account number is  "+sender+". Can I tell you the services I can help you with?")
+       returnPay(sender,"Thanks "+name+", your payment of Ksh."+amount+" has been deposited Mpesa receipt Number :"+mpesa+" . Your new account number is  "+sender+". Can I tell you the services I can help you with?")
        res.send("hello")
      })
      .catch(function (error) {
@@ -256,6 +256,21 @@ function decideMessage(sender, text1){
          console.log(error);
        });
     }
+    else if(text.includes("resend otp")){
+      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/otpresend/${sender}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+        const phone = response.data.phone
+        let str = number.replace(/\d(?=\d{4})/g, "*");
+        quickReplyOTP(sender,"The OTP was sent to "+str+".If you have not received please contact our customer care for assistant")                  
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
+    //The service requested
+    else if()
     else{
       axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/pastmessage/${sender}`)
        .then(function (response) {
@@ -366,7 +381,7 @@ function decideMessage(sender, text1){
                  console.log(response);
                  const name = response.data.first_name
                  //sendButtonMessage(sender,"Hi "+name+",  I am Kunta and will be your agent today, how may I help you")
-                 sendText(sender,"Have a great day "+name+" and hope to hear from you soon, you can always reachout to me here by just typing 'Hi' or call us on 0703088000. And im always here 24/7 to assist you 👋")
+                 sendText(sender,"Thanks for engaging me "+name+". I am always here for you. Just type “Hi Kunta” or call us on 073012141 and I will return to assist you whichever way I can. Have a fab day! 👋")
                })
                .catch(function (error) {
                  console.log(error);
