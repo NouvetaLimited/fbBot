@@ -263,14 +263,14 @@ function decideMessage(sender, text1){
          console.log(response);
         const phone = response.data.phone
         let str = number.replace(/\d(?=\d{4})/g, "*");
-        quickReplyOTP(sender,"The OTP was sent to "+str+".If you have not received please contact our customer care for assistant")                  
+        quickReplyOTP(sender,"The OTP was sent to "+str+".If you have not received please contact our customer care for assistant")
        })
        .catch(function (error) {
          console.log(error);
        });
     }
     //The service requested
-    else if()
+    //else if()
     else{
       axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/pastmessage/${sender}`)
        .then(function (response) {
