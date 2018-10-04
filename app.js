@@ -699,3 +699,24 @@ function decideMessage(sender, text1){
             }
           sendRequest(sender, messageData);
         }
+        //checkout
+        function sendQuickcheq(sender,text){
+          let messageData={
+              "text": text,
+              "quick_replies":[
+                {
+                "content_type":"text",
+                "title":"yes",
+                "payload":"yes",
+                //"image_url":"http://example.com/img/red.png"
+                },
+                {
+                "content_type":"text",
+                "title":"no",
+                "payload":"no",
+                //"image_url":"http://example.com/img/red.png"
+               }
+                ]
+            }
+            sendRequest(sender, messageData);
+          }
