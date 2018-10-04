@@ -85,7 +85,7 @@ app.get('/pay/:pid-:status-:amount-:mpesa', function (req, res) {
        const data= response.status
        console.log(response);
        const name = response.data.first_name
-       returnPay(sender,""+name+", your payment of Ksh"+amount+" been Mpesa receipt Number :"+mpesa+" . Your new account number is  "+sender+". Can I tell you the services I can help you with?")
+       returnPay(sender,""+name+", your payment of Ksh."+amount+" been Mpesa receipt Number :"+mpesa+" . Your new account number is  "+sender+". Can I tell you the services I can help you with?")
        res.send("hello")
      })
      .catch(function (error) {
