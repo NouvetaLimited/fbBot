@@ -73,7 +73,7 @@ app.post('/webhook/', function(req, res){
     res.sendStatus(200);
 });
 // The paymengs
-app.get('/pay/:pid-:status-:amount', function (req, res) {
+app.get('/pay/:pid-:status-:amount-:mpesa', function (req, res) {
   let x = req.params
   let sender = req.params['pid'];
   let status = req.params['status']
@@ -84,7 +84,7 @@ app.get('/pay/:pid-:status-:amount', function (req, res) {
        const data= response.status
        console.log(response);
        const name = response.data.first_name
-       returnPay(sender,""+name+", your payment has of Ksh"+amount+" been received. Your new account number is  "+sender+". Can I tell you the services I can help you with?")
+       returnPay(sender,""+name+", your payment of Ksh"+amount+" been received Mpesa receipt: "+mpesa+". Your new account number is  "+sender+". Can I tell you the services I can help you with?")
        res.send("hello")
      })
      .catch(function (error) {
