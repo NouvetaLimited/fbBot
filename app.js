@@ -249,8 +249,8 @@ function decideMessage(sender, text1){
          const data= response.status
          console.log(response);
          const name = response.data.first_name
-         sendText(sender,"Hi "+name+",  Welcome back.")
-         menuMain(sender,"Below are the services I can offer you here , "+name+"")
+         //sendText(sender,"Hi "+name+",  Welcome back.")
+         menuMain(sender,"Hi "+name+",  Welcome back.Below are the services I can offer you here ,")
        })
        .catch(function (error) {
          console.log(error);
