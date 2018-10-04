@@ -280,7 +280,7 @@ function decideMessage(sender, text1){
       menuMain(sender,"Below are the services I can provide:")
     }
     else if(text.includes("my account")){
-
+      myAccount(sender,"Select a service below")
     }
     // The checking in
 
