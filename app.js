@@ -507,7 +507,7 @@ function decideMessage(sender, text1){
                .catch(function (error) {
                  console.log(error);
                });
-              sendQuickcheq(sender,"Your balance is "+name+". The balance as also been sent to your phone "+str+" .Anything else you would like my assitance on?")
+              menuMain(sender,"Your balance is "+name+". The balance as also been sent to your phone "+str+" .Anything else you would like my assitance on?")
             })
             .catch(function (error) {
               console.log(error);
