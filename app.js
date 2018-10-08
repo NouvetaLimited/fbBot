@@ -356,7 +356,50 @@ function decideMessage(sender, text1){
          console.log(error);
        });
     }
-    // The checking in
+    else if(text.includes("get statement")){
+      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/confirm/${sender}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+         let status = response.data.status
+         //The person who has an account
+         if(status == '200'){
+           axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+              const name = response.data.first_name
+              sendText(sender,"Thanks "+name+", your details check out. Our records show you have 2 accounts as below:\n 1:010****12000 \n2:10****1320\nPlease advise which one you’d like to check balance. If all, enter ALL in the space provided if the first enter 1. Please note this is a chargeable service")
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/statement/${text}`)
+             .then(function (response) {
+               const data= response.status
+               console.log(response);
+             })
+             .catch(function (error) {
+               console.log(error);
+             });
+         }else{
+           sendText(sender, "😞 Sorry notice this was your first time here. Kindly provide me with your id Number")
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/idst/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+         }
+     })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
+
+    // The checking in database for past message
 
 
 
@@ -550,6 +593,26 @@ function decideMessage(sender, text1){
             });
              sendText(sender,"Please Enter your phone number")
          }
+         //statement
+         else if(message === 'idst'){
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/ID/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+              axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/phonest/${text}`)
+               .then(function (response) {
+                 const data= response.status
+                 console.log(response);
+               })
+               .catch(function (error) {
+                 console.log(error);
+               });
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+             sendText(sender,"Please Enter your phone number")
+         }
          else if( message === 'phonelink'){
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/link/${sender}/${text}`)
             .then(function (response) {
@@ -607,6 +670,35 @@ function decideMessage(sender, text1){
                console.log(error);
              });
          }
+         //statement
+         else if( message === 'phonest'){
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/link/${sender}/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+              axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/otpst/${text}`)
+               .then(function (response) {
+                 const data= response.status
+                 console.log(response);
+               })
+               .catch(function (error) {
+                 console.log(error);
+               });
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+            axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+             .then(function (response) {
+               const data= response.status
+               console.log(response);
+               const name = response.data.first_name
+               quickReplyOTP(sender,"Thanks "+name+". For validation, we have sent a One-Time Passcode to the number. Please enter the number below")
+             })
+             .catch(function (error) {
+               console.log(error);
+             });
+         }
          else if(message === 'otplink'){
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/otp/${sender}/${text}`)
             .then(function (response) {
@@ -640,6 +732,7 @@ function decideMessage(sender, text1){
               console.log(error);
             });
          }
+         // balance
          else if(message === 'otpbl'){
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/otp/${sender}/${text}`)
             .then(function (response) {
@@ -658,6 +751,40 @@ function decideMessage(sender, text1){
                    console.log(error);
                  });
                  axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/balanceaccount/${text}`)
+                  .then(function (response) {
+                    const data= response.status
+                    console.log(response);
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
+              }else {
+                 sendText(sender,"Wrong OTP. Contact our customer care for assistant")
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+         }
+         //statement
+         else if(message === 'otpst'){
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/otp/${sender}/${text}`)
+            .then(function (response) {
+              const data= response.status
+              const lee= response.data.status
+              console.log(response);
+              if( lee === '200' ){
+                axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+                 .then(function (response) {
+                   const data= response.status
+                   console.log(response);
+                   const name = response.data.first_name
+                   sendText(sender,"Thanks "+name+", your details check out. Our records show you have 2 accounts as below:\n 1:010****12000 \n2:10****1320\nPlease advise which one you’d like to check balance. If all, enter ALL in the space provided if the first enter 1. Please note this is a chargeable service")
+                 })
+                 .catch(function (error) {
+                   console.log(error);
+                 });
+                 axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/statement/${text}`)
                   .then(function (response) {
                     const data= response.status
                     console.log(response);
@@ -707,6 +834,39 @@ function decideMessage(sender, text1){
            console.log("I am the number", text);
           let  phoneNumber = text
            sendText(sender,"Ok. I have sent you a Request-To-Pay to your phone to deposit "+text+" to your account. Please enter the MPESA PIN on your phone")
+         }
+         else if(message === "statement"){
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paid/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/balance/${sender}`)
+            .then(function (response) {
+              console.log(response);
+              //console.log("This is me",phoneNumber);
+              const number = response.data.phone
+              //const balance = response.data.balance
+              const str = number.replace(/\d(?=\d{4})/g, "*");
+              //console.log('............................................................',number);
+              // sendText(sender, "Thank the request has been received, Youll receive a text message on your phone."+str+"")
+              axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+               .then(function (response) {
+                 const data= response.status
+                 console.log(response);
+                 const name = response.data.first_name
+                 returnPay(sender,"Here are the last 5 transactions for account 010****1200/nKES 101,203 chq deposit\nKES 300 airtime bought\nKES 10,000 rent paid/nKES 23,000 loan repaid\nKES 32,000 cr card debit\n.Anything else you would like my assitance on")
+               })
+               .catch(function (error) {
+                 console.log(error);
+               });
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
          }
        })
        .catch(function (error) {
