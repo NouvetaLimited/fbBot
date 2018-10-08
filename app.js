@@ -1006,7 +1006,7 @@ function decideMessage(sender, text1){
             });
          }
          else if(message === "sendmoney"){
-           phoneNumber(sender,"Ok, noted. Please enter the MPESA number you’d like to send the funds to. Please note that this is a chargeable service")
+           sendText(sender,"Ok, noted. Please enter the MPESA number you’d like to send the funds to. Please note that this is a chargeable service")
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/sendingMoney/${text}`)
             .then(function (response) {
               const data= response.status
