@@ -533,8 +533,63 @@ function decideMessage(sender, text1){
     else if(text.includes("pay tv")){
       billTV(sender,"Please select service you want to pay for:")
     }
-    else if((text.includes("startimes"))|| (text.includes("gotv")) || (text.includes("dstv")) || (text.includes("zuku")) || (text.includes("utilities")) || (text.includes("schools")){
-      sendText(sender, "😞 Sorry notice this was your first time here. Kindly provide me with your id Number")
+    else if((text.includes("startimes")){
+      sendText(sender, "Please enter your account number below:")
+      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/accountno/${text}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
+    else if(text.includes("gotv")){
+      sendText(sender, "Please enter your account number below:")
+      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/accountno/${text}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
+    else if(text.includes("dstv")){
+      sendText(sender, "Please enter your account number below:")
+      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/accountno/${text}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
+    else if(text.includes("zuku")){
+      sendText(sender, "Please enter your account number below:")
+      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/accountno/${text}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
+    else if(text.includes("utilities")){
+      sendText(sender, "Please enter your account number below:")
+      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/accountno/${text}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
+    else if(text.includes("schools")){
+      sendText(sender, "Please enter your account number below:")
       axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/accountno/${text}`)
        .then(function (response) {
          const data= response.status
