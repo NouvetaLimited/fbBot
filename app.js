@@ -1216,7 +1216,7 @@ function decideMessage(sender, text1){
             });
          }
          else if(message === 'airtime1'){
-           sendText(sender,"please enter the amount you want to send")
+           sendText(sender,"please enter the amount you ")
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/airtime2/${text}`)
             .then(function (response) {
               const data= response.status
