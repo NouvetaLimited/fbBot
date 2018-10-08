@@ -622,7 +622,7 @@ function decideMessage(sender, text1){
             .catch(function (error) {
               console.log(error);
             });
-             sendText(sender,"Please Enter your phone number")
+             phoneNumber(sender,"Gorrit, thanks. Please provide your mobile number. Tap to confirm (if shown below) or enter a new one")
          }
          // balance for the account
          else if(message === 'idbl'){
@@ -642,7 +642,7 @@ function decideMessage(sender, text1){
             .catch(function (error) {
               console.log(error);
             });
-             sendText(sender,"Please Enter your phone number")
+             phoneNumber(sender,"Gorrit, thanks. Please provide your mobile number. Tap to confirm (if shown below) or enter a new one")
          }
          //statement
          else if(message === 'idst'){
@@ -662,7 +662,7 @@ function decideMessage(sender, text1){
             .catch(function (error) {
               console.log(error);
             });
-             sendText(sender,"Please Enter your phone number")
+             phoneNumber(sender,"Gorrit, thanks. Please provide your mobile number. Tap to confirm (if shown below) or enter a new one")
          }
          // send money
          else if(message === 'idsend'){
@@ -682,7 +682,7 @@ function decideMessage(sender, text1){
             .catch(function (error) {
               console.log(error);
             });
-             sendText(sender,"Please Enter your phone number")
+             phoneNumber(sender,"Gorrit, thanks. Please provide your mobile number. Tap to confirm (if shown below) or enter a new one")
          }
          else if( message === 'phonelink'){
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/link/${sender}/${text}`)
@@ -748,6 +748,36 @@ function decideMessage(sender, text1){
               const data= response.status
               console.log(response);
               axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/otpst/${text}`)
+               .then(function (response) {
+                 const data= response.status
+                 console.log(response);
+               })
+               .catch(function (error) {
+                 console.log(error);
+               });
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+            axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+             .then(function (response) {
+               const data= response.status
+               console.log(response);
+               const name = response.data.first_name
+               quickReplyOTP(sender,"Thanks "+name+". For validation, we have sent a One-Time Passcode to the number. Please enter the number below")
+             })
+             .catch(function (error) {
+               console.log(error);
+             });
+         }
+
+         //send money
+         else if( message === 'phonesend'){
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/link/${sender}/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+              axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/otpsend/${text}`)
                .then(function (response) {
                  const data= response.status
                  console.log(response);
