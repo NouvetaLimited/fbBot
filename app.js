@@ -530,6 +530,21 @@ function decideMessage(sender, text1){
        });
     }
 
+    else if(text.includes("pay tv")){
+      billTV(sender,"Please select service you want to pay for:")
+    }
+    else if(text.includes("startimes") or text.includes("gotv") or text.includes("dstv") or text.includes("zuku") or text.includes("utilities") or text.includes("schools")){
+      sendText(sender, "😞 Sorry notice this was your first time here. Kindly provide me with your id Number")
+      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/accountno/${text}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
+
 
     // The checking in database for past message
 
@@ -1744,6 +1759,41 @@ function decideMessage(sender, text1){
                  "content_type":"text",
                  "title":"Schools",
                  "payload":"Schools",
+                 //"image_url":"http://example.com/img/red.png"
+               },
+               {
+                 "content_type":"text",
+                 "title":"Cancel",
+                 "payload":"Cancel",
+                 //"image_url":"http://example.com/img/red.png"
+               }
+             ]
+              }
+            sendRequest(sender, messageData);
+          }
+
+          // tv billpayments
+
+          function billTV(sender,text){
+            let messageData={
+                "text": text,
+                "quick_replies":[
+                  {
+                  "content_type":"text",
+                  "title":"DSTV",
+                  "payload":"DSTV",
+                  //"image_url":"http://example.com/img/red.png"
+                  },
+                  {
+                  "content_type":"text",
+                  "title":"GOTV",
+                  "payload":"GOTV",
+                  //"image_url":"http://example.com/img/red.png"
+                 },
+               {
+                 "content_type":"text",
+                 "title":"Startimes",
+                 "payload":"Startimes",
                  //"image_url":"http://example.com/img/red.png"
                },
                {
