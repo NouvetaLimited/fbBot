@@ -461,6 +461,7 @@ function decideMessage(sender, text1){
          const data= response.status
          console.log(response);
          const message = response.data.data
+         console.log(".....................................................................................................",message);
          if(message === 'idreg'){
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/reg2/${text}`)
             .then(function (response) {
