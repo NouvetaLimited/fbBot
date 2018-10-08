@@ -533,7 +533,7 @@ function decideMessage(sender, text1){
     else if(text.includes("pay tv")){
       billTV(sender,"Please select service you want to pay for:")
     }
-    else if(text.includes("startimes") or text.includes("gotv") or text.includes("dstv") or text.includes("zuku") or text.includes("utilities") or text.includes("schools")){
+    else if((text.includes("startimes"))|| (text.includes("gotv")) || (text.includes("dstv")) || (text.includes("zuku")) || (text.includes("utilities")) || (text.includes("schools")){
       sendText(sender, "😞 Sorry notice this was your first time here. Kindly provide me with your id Number")
       axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/accountno/${text}`)
        .then(function (response) {
