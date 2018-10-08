@@ -916,7 +916,7 @@ function decideMessage(sender, text1){
                    const data= response.status
                    console.log(response);
                    const name = response.data.first_name
-                   sendText(sender,"Thanks "+name+", your details check out. Our records show you have 2 accounts as below:\n 1:010****12000 \n2:10****1320\nPlease advise which one you’d like to check balance. If all, enter ALL in the space provided if the first enter 1. Please note this is a chargeable service")
+                   sendText(sender,"Thanks "+name+", your details check out. Our records show you have 2 accounts as below:\n 1:010****12000 \n2:10****1320\n you’d like to use to send funds. . If all, enter ALL in the space provided if the first enter 1. Please note this is a chargeable service")
                  })
                  .catch(function (error) {
                    console.log(error);
@@ -1006,9 +1006,77 @@ function decideMessage(sender, text1){
             });
          }
          else if(message === "sendmoney"){
-           sendText(sender,"we are good")
+           phoneNumber(sender,"Ok, noted. Please enter the MPESA number you’d like to send the funds to. Please note that this is a chargeable service")
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/sendingMoney/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
          }
-
+         else if(message === "sendingMoney"){
+           sendText(sender,"Please enter the amount you want to send to "+text+"")
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/phonesend/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+         }
+         else if(message === 'phonesend'){
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/sendmoney/${sender}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+              const phone = response.data.phone
+              openAcc(sender , "Ok. Please confirm below: \nSend "+text+" to "+phone+"")
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/moneysent/${text}`)
+             .then(function (response) {
+               const data= response.status
+               console.log(response);
+             })
+             .catch(function (error) {
+               console.log(error);
+             });
+         }
+         else if(message === 'moneysent'){
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paid/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+              axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+               .then(function (response) {
+                 const data= response.status
+                 console.log(response);
+                 const name = response.data.first_name
+                 axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/sendmoneyconfirm/${sender}`)
+                  .then(function (response) {
+                    const data= response.status
+                    const phone = response.data.phone
+                    const amount = response.data.amount                    
+                    console.log(response);
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
+                 returnPay(sender,"Thanks "+name+". We have sent <Amount> to <recipient number> from account 010****1200. Is there anything else I can help you with?")
+               })
+               .catch(function (error) {
+                 console.log(error);
+               });
+          })
+            .catch(function (error) {
+              console.log(error);
+            });
+         }
        })
        .catch(function (error) {
          console.log(error);
