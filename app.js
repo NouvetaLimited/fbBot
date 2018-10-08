@@ -1033,7 +1033,7 @@ function decideMessage(sender, text1){
               const data= response.status
               console.log(response);
               const phone = response.data.phone
-              openAcc(sender , "Ok. Please confirm below: \nSend "+text+" to "+phone+"")
+              sendMoneyquick(sender , "Ok. Please confirm below: \nSend Ksh."+text+" to phonenumber "+phone+"")
             })
             .catch(function (error) {
               console.log(error);
@@ -1167,6 +1167,30 @@ function decideMessage(sender, text1){
       }
       sendRequest(sender, messageData);
     }
+
+    //send money
+    function sendMoneyquick(sender , text){
+      let messageData={
+          "text": text,
+          "quick_replies":[
+            {
+            "content_type":"text",
+            "title":"confirm",
+            "payload":"confirm",
+            //"image_url":"http://example.com/img/red.png"
+            },
+            {
+            "content_type":"text",
+            "title":"Not now",
+            "payload":"Not now",
+            //"image_url":"http://example.com/img/red.png"
+           }
+            ]
+        }
+        sendRequest(sender, messageData);
+      }
+
+
 
     //The text reply
     function sendText(sender, text){
