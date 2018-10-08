@@ -155,16 +155,6 @@ function decideMessage(sender, text1){
         .then(function (response) {
           const data= response.status
           console.log(response);
-          axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
-           .then(function (response) {
-             const data= response.status
-             console.log(response);
-             const name = response.data.first_name
-            // returnPay(sender,""+name+", your payment has been received. Your new account number is  "+sender+". Can I tell you the services I can help you with?")
-           })
-           .catch(function (error) {
-             console.log(error);
-           });
       })
         .catch(function (error) {
           console.log(error);
@@ -489,6 +479,14 @@ function decideMessage(sender, text1){
             }
          }
          else if(message === 'balanceaccount'){
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paid/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/balance/${sender}`)
             .then(function (response) {
               console.log(response);
@@ -503,7 +501,7 @@ function decideMessage(sender, text1){
                  const data= response.status
                  console.log(response);
                  const name = response.data.first_name
-                 menuMain(sender,"Your balance is "+name+". The balance as also been sent to your phone "+str+" .Anything else you would like my assitance on?")
+                 returnPay(sender,"Your balance is "+balance+". The balance as also been sent to your phone "+str+" .Anything else you would like my assitance on?")
                })
                .catch(function (error) {
                  console.log(error);
