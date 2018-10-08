@@ -450,6 +450,50 @@ function decideMessage(sender, text1){
        });
     }
 
+    //airtime
+    else if(text.includes("buy airtime")){
+      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/confirm/${sender}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+         let status = response.data.status
+         //The person who has an account
+         if(status == '200'){
+           axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+              const name = response.data.first_name
+              phoneNumber(sender,"Please enter the number you want to buy airtime for. If you don’t see it, please enter it below")
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/buyairtime/${text}`)
+             .then(function (response) {
+               const data= response.status
+               console.log(response);
+             })
+             .catch(function (error) {
+               console.log(error);
+             });
+         }else{
+           sendText(sender, "😞 Sorry notice this was your first time here. Kindly provide me with your id Number")
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/idair/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+         }
+     })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
+
     // The checking in database for past message
 
 
@@ -685,6 +729,26 @@ function decideMessage(sender, text1){
             });
              phoneNumber(sender,"Gorrit, thanks. Please provide your mobile number. Tap to confirm (if shown below) or enter a new one")
          }
+         //buyairtime
+         else if(message === 'idair'){
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/ID/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+              axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/phoneair/${text}`)
+               .then(function (response) {
+                 const data= response.status
+                 console.log(response);
+               })
+               .catch(function (error) {
+                 console.log(error);
+               });
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+             phoneNumber(sender,"Gorrit, thanks. Please provide your mobile number. Tap to confirm (if shown below) or enter a new one")
+         }
          else if( message === 'phonelink'){
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/link/${sender}/${text}`)
             .then(function (response) {
@@ -779,6 +843,35 @@ function decideMessage(sender, text1){
               const data= response.status
               console.log(response);
               axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/otpsend/${text}`)
+               .then(function (response) {
+                 const data= response.status
+                 console.log(response);
+               })
+               .catch(function (error) {
+                 console.log(error);
+               });
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+            axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+             .then(function (response) {
+               const data= response.status
+               console.log(response);
+               const name = response.data.first_name
+               quickReplyOTP(sender,"Thanks "+name+". For validation, we have sent a One-Time Passcode to the number. Please enter the number below")
+             })
+             .catch(function (error) {
+               console.log(error);
+             });
+         }
+         // send airtime
+         else if( message === 'phoneair'){
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/link/${sender}/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+              axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/otpair/${text}`)
                .then(function (response) {
                  const data= response.status
                  console.log(response);
@@ -937,6 +1030,40 @@ function decideMessage(sender, text1){
               console.log(error);
             });
          }
+         //airtime
+         else if(message === 'otpair'){
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/otp/${sender}/${text}`)
+            .then(function (response) {
+              const data= response.status
+              const lee= response.data.status
+              console.log(response);
+              if( lee === '200' ){
+                axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+                 .then(function (response) {
+                   const data= response.status
+                   console.log(response);
+                   const name = response.data.first_name
+                   sendText(sender,"Please enter the number you want to buy airtime for. If you don’t see it, please enter it below")
+                 })
+                 .catch(function (error) {
+                   console.log(error);
+                 });
+                 axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/buyairtime/${text}`)
+                  .then(function (response) {
+                    const data= response.status
+                    console.log(response);
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
+              }else {
+                 sendText(sender,"Wrong OTP. Contact our customer care for assistant")
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+         }
          else if( message === 'depositaccount'){
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/phonedepo/${text}`)
             .then(function (response) {
@@ -1058,6 +1185,78 @@ function decideMessage(sender, text1){
                  console.log(response);
                  const name = response.data.first_name
                  axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/sendmoneyconfirm/${sender}`)
+                  .then(function (response) {
+                    const data= response.status
+                    const phone = response.data.phone
+                    const amount = response.data.amount
+                    console.log(response);
+                    returnPay(sender,"Thanks "+name+". We have sent Ksh."+amount+" to phone number "+phone+" from account 010****1200. Is there anything else I can help you with?")
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
+               })
+               .catch(function (error) {
+                 console.log(error);
+               });
+          })
+            .catch(function (error) {
+              console.log(error);
+            });
+         }
+         else if(message === 'buyairtime'){
+           sendText(sender,"Please confirm the account from which to buy the airtime\n010****1200\n010****1320\nPlease note  that this is a chargeable service")
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/airtime1/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+         }
+         else if(message === 'airtime1'){
+           sendText(sender,"please enter the amount you want to send")
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/airtime2/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+         }
+         else if (message === 'airtime2'){
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/buyairtime/${sender}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+              const phone = response.data.phone
+              sendMoneyquick(sender , "Ok. Please confirm below: \nbuy airtime Ksh."+text+" to phonenumber "+phone+"")
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/airtimesent/${text}`)
+             .then(function (response) {
+               const data= response.status
+               console.log(response);
+             })
+             .catch(function (error) {
+               console.log(error);
+             });
+         }
+         else if(message === 'airtimesent'){
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paid/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+              axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+               .then(function (response) {
+                 const data= response.status
+                 console.log(response);
+                 const name = response.data.first_name
+                 axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/buyairtimeconfirm/${sender}`)
                   .then(function (response) {
                     const data= response.status
                     const phone = response.data.phone
