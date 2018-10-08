@@ -300,7 +300,7 @@ function decideMessage(sender, text1){
             .catch(function (error) {
               console.log(error);
             });
-            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/balanceaccount/${text}`)
+            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/depositaccount/${text}`)
              .then(function (response) {
                const data= response.status
                console.log(response);
@@ -541,6 +541,41 @@ function decideMessage(sender, text1){
             .catch(function (error) {
               console.log(error);
             });
+         }
+         else if( message === 'depositaccount'){
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/phone/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+            phoneNumber(sender,"Please confirm the MPESA number from which you’d like to deposit to account number 010****1200. If its not provided below, please enter a new one")
+         }
+         else if(message === 'phone'){
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/amountdepo/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+            sendText(sender,"Please enter the amount you want to deposit")
+         }
+         else if(message === "amountdepo"){
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/push/${sender}/amount/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+           console.log("I am the number", text);
+          let  phoneNumber = text
+           sendText(sender,"Ok. I have sent you a Request-To-Pay to your phone to deposit <Amount> to your account. Please enter the MPESA PIN on your phone")
          }
        })
        .catch(function (error) {
