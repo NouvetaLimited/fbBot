@@ -498,6 +498,17 @@ function decideMessage(sender, text1){
               let str = number.replace(/\d(?=\d{4})/g, "*");
               //console.log('............................................................',number);
               // sendText(sender, "Thank the request has been received, Youll receive a text message on your phone."+str+"")
+              axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+               .then(function (response) {
+                 const data= response.status
+                 console.log(response);
+                 const name = response.data.first_name
+                 //sendButtonMessage(sender,"Hi "+name+",  I am Kunta and will be your agent today, how may I help you")
+                 sendText(sender,"Thanks for engaging me "+name+". I am always here for you. Just type “Hi Kunta” or call us on 073012141 and I will return to assist you whichever way I can. Have a fab day! 👋")
+               })
+               .catch(function (error) {
+                 console.log(error);
+               });
               sendQuickcheq(sender,"Your balance is "+name+". The balance as also been sent to your phone "+str+" .Anything else you would like my assitance on?")
             })
             .catch(function (error) {
