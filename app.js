@@ -1145,7 +1145,7 @@ function decideMessage(sender, text1){
           }
 
           // my services functions
-          function myAccount(sender,text){
+          function myServices(sender,text){
             let messageData={
                 "text": text,
                 "quick_replies":[
