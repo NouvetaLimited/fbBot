@@ -269,6 +269,9 @@ function decideMessage(sender, text1){
     else if(text.includes("service request")){
       menuMain(sender,"Below are the services I can provide:")
     }
+    // my account
+
+
     else if(text.includes("my account")){
       myAccount(sender,"Select a service below")
     }
@@ -397,6 +400,12 @@ function decideMessage(sender, text1){
        .catch(function (error) {
          console.log(error);
        });
+    }
+
+    // my services
+
+    else if(text.includes("my services")){
+      myServices(sender,"Select a service below")
     }
 
     // The checking in database for past message
@@ -779,7 +788,7 @@ function decideMessage(sender, text1){
                    const data= response.status
                    console.log(response);
                    const name = response.data.first_name
-                   sendText(sender,"Thanks "+name+", your details check out. Our records show you have 2 accounts as below:\n 1:010****12000 \n2:10****1320\nPlease advise which one you’d like to check balance. If all, enter ALL in the space provided if the first enter 1. Please note this is a chargeable service")
+                   sendText(sender,"Thanks "+name+", your details check out. Our records show you have 2 accounts as below:\n 1:010****12000 \n2:10****1320\nPlease advise which one you’d like to check statement. If all, enter ALL in the space provided if the first enter 1. Please note this is a chargeable service")
                  })
                  .catch(function (error) {
                    console.log(error);
@@ -1132,5 +1141,39 @@ function decideMessage(sender, text1){
                }
                 ]
             }
+            sendRequest(sender, messageData);
+          }
+
+          // my services functions
+          function myAccount(sender,text){
+            let messageData={
+                "text": text,
+                "quick_replies":[
+                  {
+                  "content_type":"text",
+                  "title":"Send money",
+                  "payload":"send money",
+                  //"image_url":"http://example.com/img/red.png"
+                  },
+                  {
+                  "content_type":"text",
+                  "title":"Buy airtime",
+                  "payload":"Buy airtime",
+                  //"image_url":"http://example.com/img/red.png"
+                 },
+               {
+                 "content_type":"text",
+                 "title":"Bill payment",
+                 "payload":"Bill payment",
+                 //"image_url":"http://example.com/img/red.png"
+               },
+               {
+                 "content_type":"text",
+                 "title":"Cancel",
+                 "payload":"Cancel",
+                 //"image_url":"http://example.com/img/red.png"
+               }
+             ]
+              }
             sendRequest(sender, messageData);
           }
