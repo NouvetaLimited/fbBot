@@ -1152,7 +1152,6 @@ function decideMessage(sender, text1){
               console.log(error);
             });
          }
-         otp bill
          else if(message === 'otpbill'){
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/otp/${sender}/${text}`)
             .then(function (response) {
