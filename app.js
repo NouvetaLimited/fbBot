@@ -1009,8 +1009,8 @@ function decideMessage(sender, text1){
               console.log(error);
             });
          }
-         else if(message === 'sendmoney'){
-           sendText(sender,"Please enter the amount you want to send to "+text+"")
+         else if(message === 'phonesend'){
+           phoneNumber(sender,"Ok, noted. Please enter the MPESA number you’d like to send the funds to. Please note that this is a chargeable service")
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/phonesend/${text}`)
             .then(function (response) {
               const data= response.status
@@ -1019,27 +1019,6 @@ function decideMessage(sender, text1){
             .catch(function (error) {
               console.log(error);
             });
-         }
-         else if(message === "phonesend"){
-           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/sendmoney/${sender}`)
-            .then(function (response) {
-              const data= response.status
-              console.log(response);
-              const phone = response.data.phone
-              openAcc(sender ,"Ok. Please confirm below:\nSend "+text+" to "+phone+"")
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-
-            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/sendconfirm/${text}`)
-             .then(function (response) {
-               const data= response.status
-               console.log(response);
-             })
-             .catch(function (error) {
-               console.log(error);
-             });
          }
        })
        .catch(function (error) {
