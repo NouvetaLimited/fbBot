@@ -545,7 +545,7 @@ function decideMessage(sender, text1){
        });
     }
     else if(text.includes("gotv")){
-      sendText(sender, "Please enter your account number below:")
+      sendText(sender, "Please enter your UIC number below:")
       axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/accountno/${text}`)
        .then(function (response) {
          const data= response.status
@@ -556,7 +556,7 @@ function decideMessage(sender, text1){
        });
     }
     else if(text.includes("dstv")){
-      sendText(sender, "Please enter your account number below:")
+      sendText(sender, "Please enter your UIC number below:")
       axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/accountno/${text}`)
        .then(function (response) {
          const data= response.status
@@ -567,7 +567,7 @@ function decideMessage(sender, text1){
        });
     }
     else if(text.includes("zuku")){
-      sendText(sender, "Please enter your account number below:")
+      sendText(sender, "Please enter your UIC number below:")
       axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/accountno/${text}`)
        .then(function (response) {
          const data= response.status
@@ -1466,6 +1466,31 @@ function decideMessage(sender, text1){
             .catch(function (error) {
               console.log(error);
             });
+         }
+         else if(message === 'accountno'){
+           sendText(sender,"Please confirm the account from which to pay your bill\n010****1200\n010****1320\nPlease note that this is a chargeable service")
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/accountnumber/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+         }
+         else if(message === 'accountnumber'){
+           sendMoneyquick(sender ,"Ok. Please confirm below:\nPay bill of <Amount> to <biller> for account number <account number>")
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paymentsmade/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+         }
+         else if(message === 'paymentsmade'){
+           sendText(sender,"push")
          }
        })
        .catch(function (error) {
