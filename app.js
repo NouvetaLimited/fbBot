@@ -543,7 +543,7 @@ function decideMessage(sender, text1){
             });
          }
          else if( message === 'depositaccount'){
-           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/phone/${text}`)
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/phonedepo/${text}`)
             .then(function (response) {
               const data= response.status
               console.log(response);
@@ -553,8 +553,8 @@ function decideMessage(sender, text1){
             });
             phoneNumber(sender,"Please confirm the MPESA number from which you’d like to deposit to account number 010****1200. If its not provided below, please enter a new one")
          }
-         else if(message === 'phone'){
-           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/amountdepo/${text}`)
+         else if(message === 'phonedepo'){
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/phone/${text}`)
             .then(function (response) {
               const data= response.status
               console.log(response);
@@ -564,7 +564,7 @@ function decideMessage(sender, text1){
             });
             sendText(sender,"Please enter the amount you want to deposit")
          }
-         else if(message === "amountdepo"){
+         else if(message === "phone"){
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/push/${sender}/amount/${text}`)
             .then(function (response) {
               const data= response.status
@@ -575,7 +575,7 @@ function decideMessage(sender, text1){
             });
            console.log("I am the number", text);
           let  phoneNumber = text
-           sendText(sender,"Ok. I have sent you a Request-To-Pay to your phone to deposit <Amount> to your account. Please enter the MPESA PIN on your phone")
+           sendText(sender,"Ok. I have sent you a Request-To-Pay to your phone to deposit "+text+" to your account. Please enter the MPESA PIN on your phone")
          }
        })
        .catch(function (error) {
