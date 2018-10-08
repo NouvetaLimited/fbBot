@@ -1063,11 +1063,11 @@ function decideMessage(sender, text1){
                     const phone = response.data.phone
                     const amount = response.data.amount
                     console.log(response);
+                    returnPay(sender,"Thanks "+name+". We have sent Ksh."+amount+" to phone number "+phone+" from account 010****1200. Is there anything else I can help you with?")
                   })
                   .catch(function (error) {
                     console.log(error);
                   });
-                 returnPay(sender,"Thanks "+name+". We have sent Ksh."+amount+" to phone number "+phone+" from account 010****1200. Is there anything else I can help you with?")
                })
                .catch(function (error) {
                  console.log(error);
