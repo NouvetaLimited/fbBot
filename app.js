@@ -425,7 +425,7 @@ function decideMessage(sender, text1){
             .catch(function (error) {
               console.log(error);
             });
-            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/depositaccount/${text}`)
+            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/sendmoney/${text}`)
              .then(function (response) {
                const data= response.status
                console.log(response);
@@ -901,6 +901,41 @@ function decideMessage(sender, text1){
               console.log(error);
             });
          }
+
+         // otpresend
+         else if(message === 'otpsend'){
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/otp/${sender}/${text}`)
+            .then(function (response) {
+              const data= response.status
+              const lee= response.data.status
+              console.log(response);
+              if( lee === '200' ){
+                axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+                 .then(function (response) {
+                   const data= response.status
+                   console.log(response);
+                   const name = response.data.first_name
+                   sendText(sender,"Thanks "+name+", your details check out. Our records show you have 2 accounts as below:\n 1:010****12000 \n2:10****1320\nPlease advise which one you’d like to check balance. If all, enter ALL in the space provided if the first enter 1. Please note this is a chargeable service")
+                 })
+                 .catch(function (error) {
+                   console.log(error);
+                 });
+                 axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/sendmoney/${text}`)
+                  .then(function (response) {
+                    const data= response.status
+                    console.log(response);
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
+              }else {
+                 sendText(sender,"Wrong OTP. Contact our customer care for assistant")
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+         }
          else if( message === 'depositaccount'){
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/phonedepo/${text}`)
             .then(function (response) {
@@ -969,6 +1004,10 @@ function decideMessage(sender, text1){
               console.log(error);
             });
          }
+         else if(message === "sendmoney"){
+           sendText(sender,"we are good")
+         }
+
        })
        .catch(function (error) {
          console.log(error);
