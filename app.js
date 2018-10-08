@@ -909,7 +909,7 @@ function decideMessage(sender, text1){
                    const data= response.status
                    console.log(response);
                    const name = response.data.first_name
-                   sendText(sender,"Thanks "+name+", your details check out. Our records show you have 2 accounts as below:\n010****1200\n010****1320\nPlease advise which account you’d like to use to send funds.")
+                   sendText(sender,"Thanks "+name+", your details check out. Our records show you have 2 accounts as below:\n 1:010****12000 \n2:10****1320\nPlease advise which one you’d like to check balance. If all, enter ALL in the space provided if the first enter 1. Please note this is a chargeable service")
                  })
                  .catch(function (error) {
                    console.log(error);
@@ -993,28 +993,6 @@ function decideMessage(sender, text1){
                .catch(function (error) {
                  console.log(error);
                });
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-         }
-         else if(message === "sendmoney"){
-           phoneNumber(sender,"Ok, noted. Please enter the MPESA number you’d like to send the funds to. Please note that this is a chargeable service")
-           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/sendmoney/${text}`)
-            .then(function (response) {
-              const data= response.status
-              console.log(response);
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-         }
-         else if(message === 'phonesend'){
-           phoneNumber(sender,"Ok, noted. Please enter the MPESA number you’d like to send the funds to. Please note that this is a chargeable service")
-           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/phonesend/${text}`)
-            .then(function (response) {
-              const data= response.status
-              console.log(response);
             })
             .catch(function (error) {
               console.log(error);
