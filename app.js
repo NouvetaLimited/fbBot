@@ -1041,26 +1041,6 @@ function decideMessage(sender, text1){
                console.log(error);
              });
          }
-         else if(message === "sendconfirm"){
-           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paid/${text}`)
-            .then(function (response) {
-              const data= response.status
-              console.log(response);
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-            axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
-             .then(function (response) {
-               const data= response.status
-               console.log(response);
-               const name = response.data.first_name
-               returnPay(sender,"Thanks "+name+". We have sent <Amount> to <recipient number> from account 010****1200. Is there anything else I can help you with?")
-             })
-             .catch(function (error) {
-               console.log(error);
-             });
-         }
        })
        .catch(function (error) {
          console.log(error);
