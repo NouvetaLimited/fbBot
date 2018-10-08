@@ -408,7 +408,46 @@ function decideMessage(sender, text1){
       myServices(sender,"Select a service below")
     }
     else if(text.includes("send money")){
-
+      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/confirm/${sender}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+         let status = response.data.status
+         //The person who has an account
+         if(status == '200'){
+           axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+              const name = response.data.first_name
+              sendText(sender,"Thanks "+name+", your details check out. Our records show you have 2 accounts as below:\n010****1200\n10****1320\nPlease advise which account you’d like to use to send funds.")
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/depositaccount/${text}`)
+             .then(function (response) {
+               const data= response.status
+               console.log(response);
+             })
+             .catch(function (error) {
+               console.log(error);
+             });
+         }else{
+           sendText(sender, "😞 Sorry notice this was your first time here. Kindly provide me with your id Number")
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/idsend/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+         }
+     })
+       .catch(function (error) {
+         console.log(error);
+       });
     }
 
     // The checking in database for past message
