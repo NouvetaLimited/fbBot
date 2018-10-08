@@ -503,8 +503,6 @@ function decideMessage(sender, text1){
                  const data= response.status
                  console.log(response);
                  const name = response.data.first_name
-                 //sendButtonMessage(sender,"Hi "+name+",  I am Kunta and will be your agent today, how may I help you")
-                 sendText(sender,"Thanks for engaging me "+name+". I am always here for you. Just type “Hi Kunta” or call us on 073012141 and I will return to assist you whichever way I can. Have a fab day! 👋")
                })
                .catch(function (error) {
                  console.log(error);
