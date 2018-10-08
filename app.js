@@ -495,7 +495,7 @@ function decideMessage(sender, text1){
               //console.log("This is me",phoneNumber);
               const number = response.data.phone
               const balance = response.data.balance
-              let str = number.replace(/\d(?=\d{4})/g, "*");
+              const str = number.replace(/\d(?=\d{4})/g, "*");
               //console.log('............................................................',number);
               // sendText(sender, "Thank the request has been received, Youll receive a text message on your phone."+str+"")
               axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
@@ -503,11 +503,11 @@ function decideMessage(sender, text1){
                  const data= response.status
                  console.log(response);
                  const name = response.data.first_name
+                 menuMain(sender,"Your balance is "+name+". The balance as also been sent to your phone "+str+" .Anything else you would like my assitance on?")
                })
                .catch(function (error) {
                  console.log(error);
                });
-              menuMain(sender,"Your balance is "+name+". The balance as also been sent to your phone "+str+" .Anything else you would like my assitance on?")
             })
             .catch(function (error) {
               console.log(error);
