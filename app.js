@@ -1490,8 +1490,18 @@ function decideMessage(sender, text1){
             });
          }
          else if(message === 'amountToPay'){
-           sendMoneyquick(sender ,"Ok. Please confirm below:\nPay bill of Ksh."+text+" to <biller> for account number <account number>")
-           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/amountToPay/${text}`)
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/biller/${sender}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+              const biller = response.data.biller
+              const account = response.data.account
+              sendMoneyquick(sender ,"Ok. Please confirm below:\nPay bill of Ksh."+text+" to "+biller+" for account number "+account+"")
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paymentmade/${text}`)
             .then(function (response) {
               const data= response.status
               console.log(response);
@@ -1501,7 +1511,35 @@ function decideMessage(sender, text1){
             });
          }
          else if(message === 'paymentsmade'){
-           sendText(sender,"push")
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/billerconfirm/${sender}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+              const biller = response.data.biller
+              const account = response.data.account
+              const amount =  response.data.amount
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paid/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+              axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+               .then(function (response) {
+                 const data= response.status
+                 console.log(response);
+                 const name = response.data.first_name
+                 returnPay(sender,"Thanks"+name+", We have paid your bill of "+amount+" to "+biller+" for account number "+account+" from account 010****1200. Is there anything else I can help you with?")
+               })
+               .catch(function (error) {
+                 console.log(error);
+               });
+          })
+            .catch(function (error) {
+              console.log(error);
+            });
          }
        })
        .catch(function (error) {
