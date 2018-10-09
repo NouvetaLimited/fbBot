@@ -1478,7 +1478,7 @@ function decideMessage(sender, text1){
               console.log(error);
             });
          }
-         elseif(message === 'accountnumber'){
+         else if(message === 'accountnumber'){
            sendText(sender,"Please Enter the amount you want to pay")
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/amountToPay/${text}`)
             .then(function (response) {
