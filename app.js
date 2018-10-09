@@ -63,6 +63,13 @@ app.post('/webhook/', function(req, res){
 
             decideMessage(sender, text)
         }
+        if(event.message.attachment){
+             let text = event.message.text;
+            //sendText(sender,"Text echo: " + text.substring(0,100))
+            console.log(".......................................................................",text);
+
+            decideMessage(sender, text)
+        }
 
         if(event.postback){
             let text = JSON.stringify(event.postback.payload)
