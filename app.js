@@ -67,11 +67,8 @@ app.post('/webhook/', function(req, res){
             console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',text);
 
         }
-        if(event.message.attachments.payload.coordinates){
-            let text = "gh"
-            decideMessage(sender, text)
-            console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',text);
-
+        if(event.message.attachments.){
+            sendText(sender,"uuwiiiiii")
         }
     }
     res.sendStatus(200);
