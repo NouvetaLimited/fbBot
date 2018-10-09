@@ -69,6 +69,9 @@ app.post('/webhook/', function(req, res){
             console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',text);
 
         }
+        if(event.message.attachments.coordinates){
+          sendText(sender,"uuuwuuuui")
+        }
     }
     res.sendStatus(200);
 });
