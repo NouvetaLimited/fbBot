@@ -600,6 +600,13 @@ function decideMessage(sender, text1){
        });
     }
 
+    //Enquiries
+
+    else if(text.includes("enquiries")){
+      enquiries(sender,"Please tell me how I can help you")
+    }
+    // else if(text.includes(""))
+
 
     // The checking in database for past message
 
@@ -1932,6 +1939,84 @@ function decideMessage(sender, text1){
                  //"image_url":"http://example.com/img/red.png"
                }
              ]
+              }
+            sendRequest(sender, messageData);
+          }
+
+          //Enquiries
+
+          function enquiries(sender,text){
+            let messageData={
+                "text": text,
+                "quick_replies":[
+                  {
+                  "content_type":"text",
+                  "title":"Branch Locator",
+                  "payload":"Branch Locator",
+                  //"image_url":"http://example.com/img/red.png"
+                  },
+                  {
+                  "content_type":"text",
+                  "title":"Forex Rates",
+                  "payload":"Forex Rates",
+                  //"image_url":"http://example.com/img/red.png"
+                 },
+               {
+                 "content_type":"text",
+                 "title":"Cancel",
+                 "payload":"Cancel",
+                 //"image_url":"http://example.com/img/red.png"
+               }
+             ]
+              }
+            sendRequest(sender, messageData);
+          }
+
+          //branch locator
+
+          function branchLocator(sender,text){
+            let messageData={
+                "text": text,
+                "quick_replies":[
+                  {
+                  "content_type":"text",
+                  "title":"Branches",
+                  "payload":"Branches",
+                  //"image_url":"http://example.com/img/red.png"
+                  },
+                  {
+                  "content_type":"text",
+                  "title":"ATMs",
+                  "payload":"ATMs",
+                  //"image_url":"http://example.com/img/red.png"
+                 },
+               {
+                 "content_type":"text",
+                 "title":"Cancel",
+                 "payload":"Cancel",
+                 //"image_url":"http://example.com/img/red.png"
+               }
+             ]
+              }
+            sendRequest(sender, messageData);
+          }
+
+
+          //location
+
+          function location(sender,text){
+            let messageData={
+                "text": text,
+                "quick_replies":[
+                  {
+                    "content_type":"location"
+                  },
+                  {
+                    "content_type":"text",
+                    "title":"cancel",
+                    "payload":"cancel",
+                  }
+                ]
               }
             sendRequest(sender, messageData);
           }
