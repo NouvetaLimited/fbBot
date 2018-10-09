@@ -51,24 +51,21 @@ app.get('/webhook/', function (req, res){
 
 app.post('/webhook/', function(req, res){
      let messaging_events =  req.body.entry[0].messaging;
+     console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>check...........>>>>>>>>>>>>>>>>>>>>>>>>>>>>",messaging_events);
     for (let i = 0; i < messaging_events.length; i++){
          let event = messaging_events[i];
         let sender = event.sender.id;
+        // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.seeee",event);
         if(event.message && event.message.text){
-          if(event.message.attachments.coordinates){
-            let text =event.message.attachments.coordinates.lat
-            sendText(sender,text)
-          }
-          else{
-            let text = event.message.text;
-           //sendText(sender,"Text echo: " + text.substring(0,100))
-           decideMessage(sender, text)
-          }
+             let text = event.message.text;
+            //sendText(sender,"Text echo: " + text.substring(0,100))
+            decideMessage(sender, text)
         }
         if(event.postback){
             let text = JSON.stringify(event.postback.payload)
             decideMessage(sender, text)
             console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',text);
+
         }
     }
     res.sendStatus(200);
