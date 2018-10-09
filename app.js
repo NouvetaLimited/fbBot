@@ -51,6 +51,7 @@ app.get('/webhook/', function (req, res){
 
 app.post('/webhook/', function(req, res){
      let messaging_events =  req.body.entry[0].messaging;
+     console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>check...........>>>>>>>>>>>>>>>>>>>>>>>>>>>>",messaging_events);
     for (let i = 0; i < messaging_events.length; i++){
          let event = messaging_events[i];
         let sender = event.sender.id;
@@ -608,7 +609,9 @@ function decideMessage(sender, text1){
     else if(text.includes("branch locator")){
       branchLocator(sender,"I can help you find any of these")
     }
-
+    else if(text.includes("branches")){
+      location(sender,"To provide you with an accurate location, please allow me to access location, or enter your location below")
+    }
 
     // The checking in database for past message
 
