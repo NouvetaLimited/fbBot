@@ -534,7 +534,7 @@ function decideMessage(sender, text1){
       billTV(sender,"Please select service you want to pay for:")
     }
     else if(text.includes("startimes")){
-      sendText(sender, "Please enter your account number below:")
+      sendText(sender, "Please enter your UIC number below:")
       axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/accountno/${text}`)
        .then(function (response) {
          const data= response.status
@@ -589,7 +589,7 @@ function decideMessage(sender, text1){
        });
     }
     else if(text.includes("schools")){
-      sendText(sender, "Please enter your account number below:")
+      sendText(sender, "Please enter the school account number below:")
       axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/accountno/${text}`)
        .then(function (response) {
          const data= response.status
@@ -1510,7 +1510,7 @@ function decideMessage(sender, text1){
               console.log(error);
             });
          }
-         else if(message === 'paymentsmade'){
+         else if(message === 'paymentmade'){
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/billerconfirm/${sender}`)
             .then(function (response) {
               const data= response.status
