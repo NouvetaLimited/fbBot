@@ -680,8 +680,7 @@ function decideMessage(sender, text1){
       forex(sender,"Would you like to see rates for other currencies? If so, select the currency below")
     }
     else if(text.includes("swiss franc")){
-      sendText(sender,"Forex rates for  Swiss franc  as at 13:38:38 10/03/2018 are as follows:\nBuying  73.7678\nSelling 79.0740")
-      forex(sender,"Would you like to see rates for other currencies? If so, select the currency below")
+      forex(sender,"Forex rates for  Swiss franc  as at 13:38:38 10/03/2018 are as follows:\nBuying  73.7678\nSelling 79.0740\n\nWould you like to see rates for other currencies? If so, select the currency below")
     }
 
     // The checking in database for past message
