@@ -1518,6 +1518,7 @@ function decideMessage(sender, text1){
               const biller = response.data.biller
               const account = response.data.account
               const amount =  response.data.amount
+              console.log("...................................",amount);
             })
             .catch(function (error) {
               console.log(error);
@@ -1531,7 +1532,7 @@ function decideMessage(sender, text1){
                  const data= response.status
                  console.log(response);
                  const name = response.data.first_name
-                 returnPay(sender,"Thanks"+name+", We have paid your bill of "+amount+" to "+biller+" for account number "+account+" from account 010****1200. Is there anything else I can help you with?")
+                 returnPay(sender,"Thanks"+name+", We have paid your bill of "" to "+biller+" for account number "+account+" from account 010****1200. Is there anything else I can help you with?")
                })
                .catch(function (error) {
                  console.log(error);
