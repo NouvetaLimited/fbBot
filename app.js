@@ -82,7 +82,7 @@ app.get('/pay/:pid-:status-:amount-:mpesa-:acc-:balance', function (req, res) {
   let mpesa  = req.params['mpesa']
   let acc    = req.params['acc']
   let balance = req.params['balance']
-  axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paid/${text}`)
+  axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paid/hdfff`)
    .then(function (response) {
      const data= response.status
      console.log(response);
