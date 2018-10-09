@@ -59,7 +59,12 @@ app.post('/webhook/', function(req, res){
         if(event.message && event.message.text){
              let text = event.message.text;
             //sendText(sender,"Text echo: " + text.substring(0,100))
-            decideMessage(sender, text)
+            if (text === undefined || text === null) {
+               sendText(sender,"uuuwiiiii")
+            }
+            else{
+              decideMessage(sender, text)
+            }
         }
         if(event.postback){
             let text = JSON.stringify(event.postback.payload)
