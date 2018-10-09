@@ -667,6 +667,22 @@ function decideMessage(sender, text1){
        });
     }
     //forex
+    else if(text.includes("forex rates")){
+      sendText(sender,"Forex rates as at 13:36:00 10/03/2018 are as follows:USD buy 96.98 sell 103.92\nEuro buy 110.56 sell 123.04\nPound buy 124.4 sell 137.5")
+      forex(sender,"Would you like to see rates for other currencies? If so, select the currency below")
+    }
+    else if(text.includes("canadian dollar")){
+      sendText(sender,"Forex rates for Canadian Dollar as at 13:38:38 10/03/2018 are as follows:\nBuying  73.7678\nSelling 79.0740")
+      forex(sender,"Would you like to see rates for other currencies? If so, select the currency below")
+    }
+    else if(text.includes("australian dollar")){
+      sendText(sender,"Forex rates for Australian Dollar as at 13:38:38 10/03/2018 are as follows:\nBuying  73.7678\nSelling 79.0740")
+      forex(sender,"Would you like to see rates for other currencies? If so, select the currency below")
+    }
+    else if(text.includes("swiss franc")){
+      sendText(sender,"Forex rates for  Swiss franc as at 13:38:38 10/03/2018 are as follows:\nBuying  73.7678\nSelling 79.0740")
+      forex(sender,"Would you like to see rates for other currencies? If so, select the currency below")
+    }
 
     // The checking in database for past message
 
@@ -2099,6 +2115,40 @@ function decideMessage(sender, text1){
                     "payload":"cancel",
                   }
                 ]
+              }
+            sendRequest(sender, messageData);
+          }
+
+          //Forex
+
+          function forex(sender,text){
+            let messageData={
+                "text": text,
+                "quick_replies":[
+                  {
+                  "content_type":"text",
+                  "title":"Canadian Dollar",
+                  "payload":"Canadian DOLLAR",
+                  //"image_url":"http://example.com/img/red.png"
+                  },
+                  {
+                  "content_type":"text",
+                  "title":"Australian Dollar",
+                  "payload":"ATMs",
+                  //"image_url":"http://example.com/img/red.png"
+                 },
+               {
+                 "content_type":"text",
+                 "title":"Swiss franc",
+                 "payload":"Australian Dollar",
+                 //"image_url":"http://example.com/img/red.pn"
+               },
+               {
+                 "content_type":"text",
+                 "title":"cancel",
+                 "payload":"cancel",
+               }
+             ]
               }
             sendRequest(sender, messageData);
           }
