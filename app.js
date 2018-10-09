@@ -74,37 +74,75 @@ app.post('/webhook/', function(req, res){
     res.sendStatus(200);
 });
 // The paymengs
-app.get('/pay/:pid-:status-:amount-:mpesa', function (req, res) {
+app.get('/pay/:pid-:status-:amount-:mpesa-:acc-:balance', function (req, res) {
   let x = req.params
   let sender = req.params['pid'];
   let status = req.params['status']
   let amount = req.params['amount']
   let mpesa  = req.params['mpesa']
+  let acc    = req.params['acc']
+  let balance = req.params['balance']
+  axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paid/${text}`)
+   .then(function (response) {
+     const data= response.status
+     console.log(response);
+ })
+   .catch(function (error) {
+     console.log(error);
+   });
   if(status === '1'){
-    axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
-     .then(function (response) {
-       const data= response.status
-       console.log(response);
-       const name = response.data.first_name
-       returnPay(sender,"Thanks "+name+", your payment of Ksh."+amount+" has been deposited Mpesa receipt Number :"+mpesa+" . Your new account number is  "+sender+". Can I tell you the services I can help you with?")
-       res.send("hello")
-     })
-     .catch(function (error) {
-       console.log(error);
-     });
+    if(acc === "Acc"){
+      axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+         const name = response.data.first_name
+         returnPay(sender,"Thanks "+name+", your payment of Ksh."+amount+" has been deposited Mpesa receipt Number :"+mpesa+" . Your new account number is  "+sender+". Can I tell you the services I can help you with?")
+         res.send("hello")
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }else if(acc === "Deposit"){
+      axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+         const name = response.data.first_name
+         returnPay(sender,"Thanks "+name+", your deposit of "+amount+" has been credited to your account 010****1200 .New balance is "+balance+". Is there anything else I can help you with?")
+         res.send("hello")
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
   }
   else if(status === '0'){
-    axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
-     .then(function (response) {
-       const data= response.status
-       console.log(response);
-       const name = response.data.first_name
-       returnPay(sender,""+name+", your payment has of Ksh"+amount+" Was cancelled 😞 If you want to load again type load now. Your new account number is  "+sender+" the account will be active once you load. Can I tell you the services I can help you with?")
-       res.send("hello")
-     })
-     .catch(function (error) {
-       console.log(error);
-     });
+    if(acc == "Acc"){
+      axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+         const name = response.data.first_name
+         returnPay(sender,""+name+", your payment has of Ksh"+amount+" Was cancelled 😞 If you want to load again type load now. Your new account number is  "+sender+" the account will be active once you load. Can I tell you the services I can help you with?")
+         res.send("hello")
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }else if(acc === "Deposit"){
+      axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+         const name = response.data.first_name
+         returnPay(sender,"Thanks "+name+", your deposit of "+amount+" was cancelled. Is there anything else I can help you with?")
+         res.send("hello")
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
   }
   res.send(req.params)
 });
@@ -303,7 +341,7 @@ function decideMessage(sender, text1){
                console.log(error);
              });
          }else{
-           sendText(sender, "😞 Sorry notice this was your first time here. Kindly provide me with your id Number")
+           sendText(sender, "😞 Ok. Before we can proceed, I need to perform a security check. To do this I will need your id number.Kindly enter below")
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/idln/${text}`)
             .then(function (response) {
               const data= response.status
@@ -345,7 +383,7 @@ function decideMessage(sender, text1){
                console.log(error);
              });
          }else{
-           sendText(sender, "😞 Sorry notice this was your first time here. Kindly provide me with your id Number")
+           sendText(sender, "😞 Ok. Before we can proceed, I need to perform a security check. To do this I will need your id number.Kindly enter below")
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/idbl/${text}`)
             .then(function (response) {
               const data= response.status
@@ -387,7 +425,7 @@ function decideMessage(sender, text1){
                console.log(error);
              });
          }else{
-           sendText(sender, "😞 Sorry notice this was your first time here. Kindly provide me with your id Number")
+           sendText(sender, "😞 Ok. Before we can proceed, I need to perform a security check. To do this I will need your id number.Kindly enter below")
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/idst/${text}`)
             .then(function (response) {
               const data= response.status
@@ -435,7 +473,7 @@ function decideMessage(sender, text1){
                console.log(error);
              });
          }else{
-           sendText(sender, "😞 Sorry notice this was your first time here. Kindly provide me with your id Number")
+           sendText(sender, "😞 Ok. Before we can proceed, I need to perform a security check. To do this I will need your id number.Kindly enter below")
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/idsend/${text}`)
             .then(function (response) {
               const data= response.status
@@ -479,7 +517,7 @@ function decideMessage(sender, text1){
                console.log(error);
              });
          }else{
-           sendText(sender, "😞 Sorry notice this was your first time here. Kindly provide me with your id Number")
+           sendText(sender, "😞 Ok. Before we can proceed, I need to perform a security check. To do this I will need your id number.Kindly enter below")
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/idair/${text}`)
             .then(function (response) {
               const data= response.status
@@ -515,7 +553,7 @@ function decideMessage(sender, text1){
               console.log(error);
             });
          }else{
-           sendText(sender, "😞 Sorry notice this was your first time here. Kindly provide me with your id Number")
+           sendText(sender, "😞 Ok. Before we can proceed, I need to perform a security check. To do this I will need your id number.Kindly enter below")
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/idbill/${text}`)
             .then(function (response) {
               const data= response.status
@@ -611,6 +649,25 @@ function decideMessage(sender, text1){
     }
     else if(text.includes("branches")){
       location(sender,"To provide you with an accurate location, please allow me to access location, or enter your location below")
+      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/locator/${text}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+    }
+    else if(text.includes("atms")){
+      location(sender,"To provide you with an accurate location, please allow me to access location, or enter your location below")
+      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/locator/${text}`)
+       .then(function (response) {
+         const data= response.status
+         console.log(response);
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
     }
 
     // The checking in database for past message
@@ -1552,6 +1609,9 @@ function decideMessage(sender, text1){
             .catch(function (error) {
               console.log(error);
             });
+         }
+         else if(message === 'locator'){
+
          }
        })
        .catch(function (error) {
