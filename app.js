@@ -1611,6 +1611,25 @@ function decideMessage(sender, text1){
             });
          }
          else if(message === 'locator'){
+           sendText(sender,"Hold on! Finding the closest ATM to your location")
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paid/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+              axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+               .then(function (response) {
+                 const data= response.status
+                 console.log(response);
+                 const name = response.data.first_name
+                 returnPay(sender,""+name+",The nearest branch is NBK .. opens at 8 and closses at 5. The Atms available are .... they work 24/7")
+               })
+               .catch(function (error) {
+                 console.log(error);
+               });
+          })
+            .catch(function (error) {
+              console.log(error);
+            });
 
          }
        })
