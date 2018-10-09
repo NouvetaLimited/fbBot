@@ -68,7 +68,7 @@ app.post('/webhook/', function(req, res){
 
         }
         if(event.message.attachments.payload.coordinates){
-            let text = JSON.stringify(event.postback.payload)
+            let text = "gh"
             decideMessage(sender, text)
             console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',text);
 
