@@ -605,7 +605,9 @@ function decideMessage(sender, text1){
     else if(text.includes("enquiries")){
       enquiries(sender,"Please tell me how I can help you")
     }
-    // else if(text.includes(""))
+    else if(text.includes("branch locator")){
+      branchLocator(sender,"I can help you find any of these")
+    }
 
 
     // The checking in database for past message
