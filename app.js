@@ -1478,9 +1478,20 @@ function decideMessage(sender, text1){
               console.log(error);
             });
          }
-         else if(message === 'accountnumber'){
-           sendMoneyquick(sender ,"Ok. Please confirm below:\nPay bill of <Amount> to <biller> for account number <account number>")
-           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paymentsmade/${text}`)
+         elseif(message === 'accountnumber'){
+           sendText(sender,"Please Enter the amount you want to pay")
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/amountToPay/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+         }
+         else if(message === 'amountToPay'){
+           sendMoneyquick(sender ,"Ok. Please confirm below:\nPay bill of Ksh."+text+" to <biller> for account number <account number>")
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/amountToPay/${text}`)
             .then(function (response) {
               const data= response.status
               console.log(response);
