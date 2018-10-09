@@ -67,9 +67,6 @@ app.post('/webhook/', function(req, res){
             console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',text);
 
         }
-        if(event.payload.coordinates){
-          sendText(sender,"uuwi")
-        }
     }
     res.sendStatus(200);
 });
@@ -669,6 +666,7 @@ function decideMessage(sender, text1){
          console.log(error);
        });
     }
+    //forex
 
     // The checking in database for past message
 
