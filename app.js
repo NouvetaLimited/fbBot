@@ -56,10 +56,6 @@ app.post('/webhook/', function(req, res){
          let event = messaging_events[i];
         let sender = event.sender.id;
         // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.seeee",event);
-        if(event.message.attachments){
-            sendText(sender,"uuwiiiiii")
-            return
-        }
         if(event.message && event.message.text){
             let text = event.message.text;
            //sendText(sender,"Text echo: " + text.substring(0,100))
@@ -69,7 +65,6 @@ app.post('/webhook/', function(req, res){
             let text = JSON.stringify(event.postback.payload)
             decideMessage(sender, text)
             console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',text);
-
         }
     }
     res.sendStatus(200);
