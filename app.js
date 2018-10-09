@@ -57,18 +57,19 @@ app.post('/webhook/', function(req, res){
         let sender = event.sender.id;
         // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.seeee",event);
         if(event.message && event.message.text){
-             let text = event.message.text;
-            //sendText(sender,"Text echo: " + text.substring(0,100))
-            decideMessage(sender, text)
+          if(event.message.attachments){
+              sendText(sender,"uuwiiiiii")
+          }else {
+            let text = event.message.text;
+           //sendText(sender,"Text echo: " + text.substring(0,100))
+           decideMessage(sender, text)  
+          }
         }
         if(event.postback){
             let text = JSON.stringify(event.postback.payload)
             decideMessage(sender, text)
             console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',text);
 
-        }
-        if(event.message.attachments){
-            sendText(sender,"uuwiiiiii")
         }
     }
     res.sendStatus(200);
