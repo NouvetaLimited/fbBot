@@ -68,8 +68,26 @@ app.post('/webhook/', function(req, res){
             console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',text);
         }
       else  if(event.message.attachments){
-          locateAttchment(sender)
-          sendText(sender,"uuuuuuuwwii")
+          sendText(sender,"Hold on! Finding the closest ATM to your location")
+           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paid/${text}`)
+            .then(function (response) {
+              const data= response.status
+              console.log(response);
+              locateAttchment(sender)
+              axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+               .then(function (response) {
+                 const data= response.status
+                 console.log(response);
+                 const name = response.data.first_name
+                 returnPay(sender,""+name+",is there anything else I can help you with?")
+               })
+               .catch(function (error) {
+                 console.log(error);
+               });
+          })
+            .catch(function (error) {
+              console.log(error);
+            });
         }
     }
     res.sendStatus(200);
@@ -1691,6 +1709,7 @@ function decideMessage(sender, text1){
      ]
       }
     sendRequest(sender, messageData);
+    typingoff(sender)
   }
 
   // the sending messaging_events
@@ -1703,7 +1722,6 @@ function decideMessage(sender, text1){
           json: {
               recipient: {id: sender},
               message: messageData,
-              sender_action: "typing_off"
           }
       }, function(error, response, body) {
           if (error) {
@@ -1733,11 +1751,10 @@ function decideMessage(sender, text1){
               console.log("response body error")
           }
       });
-      typingoff(sender)
     }
 
   // typing off
-  function typingoff(sender) {
+  function typingoff(sender){
       request({
           url: "https://graph.facebook.com/v2.6/me/messages",
           qs : {access_token : token},
@@ -1777,6 +1794,7 @@ function decideMessage(sender, text1){
           ]
       }
       sendRequest(sender, messageData);
+      typingoff(sender)
     }
 
     //send money
@@ -1799,6 +1817,7 @@ function decideMessage(sender, text1){
             ]
         }
         sendRequest(sender, messageData);
+        typingoff(sender)
       }
 
 
@@ -1824,6 +1843,7 @@ function decideMessage(sender, text1){
           ]
         }
       sendRequest(sender, messageData);
+      typingoff(sender)
     }
     // the resend otp
     function quickReplyOTP(sender,text){
@@ -1839,6 +1859,7 @@ function decideMessage(sender, text1){
        ]
         }
       sendRequest(sender, messageData);
+      typingoff(sender)
     }
     // The Load
     function sendQuickPush(sender){
@@ -1866,6 +1887,7 @@ function decideMessage(sender, text1){
             ]
         }
         sendRequest(sender, messageData);
+        typingoff(sender)
       }
       /* confirm messaging_events*/
 
@@ -1888,6 +1910,7 @@ function decideMessage(sender, text1){
               ]
           }
           sendRequest(sender, messageData);
+          typingoff(sender)
         }
 
         //The main Menu
@@ -1922,6 +1945,7 @@ function decideMessage(sender, text1){
            ]
             }
           sendRequest(sender, messageData);
+          typingoff(sender)
         }
 
         //my account function
@@ -1956,6 +1980,7 @@ function decideMessage(sender, text1){
            ]
             }
           sendRequest(sender, messageData);
+          typingoff(sender)
         }
         //checkout
         function sendQuickcheq(sender,text){
@@ -1977,6 +2002,7 @@ function decideMessage(sender, text1){
                 ]
             }
             sendRequest(sender, messageData);
+            typingoff(sender)
           }
 
           // my services functions
@@ -2011,6 +2037,7 @@ function decideMessage(sender, text1){
              ]
               }
             sendRequest(sender, messageData);
+            typingoff(sender)
           }
 
           // bill payments
@@ -2046,6 +2073,7 @@ function decideMessage(sender, text1){
              ]
               }
             sendRequest(sender, messageData);
+            typingoff(sender)
           }
 
           // tv billpayments
@@ -2081,6 +2109,7 @@ function decideMessage(sender, text1){
              ]
               }
             sendRequest(sender, messageData);
+            typingoff(sender)
           }
 
           //Enquiries
@@ -2110,6 +2139,7 @@ function decideMessage(sender, text1){
              ]
               }
             sendRequest(sender, messageData);
+            typingoff(sender)
           }
 
           //branch locator
@@ -2139,6 +2169,7 @@ function decideMessage(sender, text1){
              ]
               }
             sendRequest(sender, messageData);
+            typingoff(sender)
           }
 
 
@@ -2159,6 +2190,7 @@ function decideMessage(sender, text1){
                 ]
               }
             sendRequest(sender, messageData);
+            typingoff(sender)
           }
 
           //Forex
@@ -2193,6 +2225,7 @@ function decideMessage(sender, text1){
              ]
               }
             sendRequest(sender, messageData);
+            typingoff(sender)
           }
 
 
@@ -2213,4 +2246,5 @@ function decideMessage(sender, text1){
                     }
                   }
             sendRequest(sender, messageData);
+            typingoff(sender)
           }
