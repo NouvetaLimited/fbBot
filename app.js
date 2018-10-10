@@ -73,13 +73,12 @@ app.post('/webhook/', function(req, res){
             .then(function (response) {
               const data= response.status
               console.log(response);
-              locateAttchment(sender)
               axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
                .then(function (response) {
                  const data= response.status
                  console.log(response);
                  const name = response.data.first_name
-                 returnPay(sender,""+name+",is there anything else I can help you with?")
+                 locateAttchment(sender)
                })
                .catch(function (error) {
                  console.log(error);
@@ -88,6 +87,7 @@ app.post('/webhook/', function(req, res){
             .catch(function (error) {
               console.log(error);
             });
+            returnPay(sender,""+name+",is there anything else I can help you with?")
         }
     }
     res.sendStatus(200);
