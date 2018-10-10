@@ -2167,7 +2167,7 @@ function decideMessage(sender, text1){
                           "title": 'Location Shared By Bot',
                           "subtitle": "Location Subtitle",
                           "image_url": "https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyDV5zxg6Oj-mdq_vAM4m9CvcjRMu6e3Q4M"
-                          "&markers=color:red|label:B|" + lat + "," + long + "&size=360x360&zoom=13"
+                          "&markers=color:red|label:B|52,42&size=360x360&zoom=13"
                         }]
                       }
                     }
