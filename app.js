@@ -56,7 +56,6 @@ app.post('/webhook/', function(req, res){
          let event = messaging_events[i];
         let sender = event.sender.id;
         typing(sender)
-
         if(event.message && event.message.text){
             let text = event.message.text;
            //sendText(sender,"Text echo: " + text.substring(0,100))
@@ -1733,7 +1732,26 @@ function decideMessage(sender, text1){
               console.log("response body error")
           }
       });
+      typingoff(sender)
+    }
 
+  // typing off
+  function typingoff(sender) {
+      request({
+          url: "https://graph.facebook.com/v2.6/me/messages",
+          qs : {access_token : token},
+          method: "POST" ,
+          json: {
+              recipient: {id: sender},
+              sender_action: "typing_off"
+          }
+      }, function(error, response, body) {
+          if (error) {
+              console.log("sending error")
+          } else if (response.body.error) {
+              console.log("response body error")
+          }
+      });
   }
 
 
