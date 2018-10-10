@@ -68,6 +68,9 @@ app.post('/webhook/', function(req, res){
             decideMessage(sender, text)
             console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',text);
         }
+        if(event.message && event.message.attachments){
+          locateAttchment(sender)
+        }
     }
     res.sendStatus(200);
 });
