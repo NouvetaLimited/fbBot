@@ -1610,7 +1610,7 @@ function decideMessage(sender, text1){
                     const data= response.status
                     console.log(response);
                     const name = response.data.first_name
-                    returnPay(sender,"Thanks"+name+", We have paid your bill of "+amount+" to "+biller+" for account number "+account+" from account 010****1200. Is there anything else I can help you with?")
+                    billpayments(sender,"Thanks"+name+", We have paid your bill of "+amount+" to "+biller+" for account number "+account+" from account 010****1200. We have the following billers you can pay through this service as shown below:")
                   })
                   .catch(function (error) {
                     console.log(error);
@@ -2061,8 +2061,8 @@ function decideMessage(sender, text1){
                  },
                {
                  "content_type":"text",
-                 "title":"Cancel",
-                 "payload":"Cancel",
+                 "title":"not now",
+                 "payload":"not now",
                  //"image_url":"http://example.com/img/red.png"
                }
              ]
