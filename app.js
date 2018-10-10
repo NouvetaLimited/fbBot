@@ -55,7 +55,7 @@ app.post('/webhook/', function(req, res){
     for (let i = 0; i < messaging_events.length; i++){
          let event = messaging_events[i];
         let sender = event.sender.id;
-        // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.seeee",event);
+        typingOn(sender)
 
         if(event.message && event.message.text){
             let text = event.message.text;
@@ -1739,6 +1739,26 @@ function decideMessage(sender, text1){
       });
 
   }
+  //typing on
+  function typingOn(sender) {
+      request({
+          url: "https://graph.facebook.com/v2.6/me/messages",
+          qs : {access_token : token},
+          method: "POST" ,
+          json: {
+              recipient: {id: sender},
+               "sender_action":"typing_on",
+          }
+      }, function(error, response, body) {
+          if (error) {
+              console.log("sending error")
+          } else if (response.body.error) {
+              console.log("response body error")
+          }
+      });
+
+  }
+
 
   //The reply for account openning
 
