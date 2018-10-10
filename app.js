@@ -2164,8 +2164,8 @@ function decideMessage(sender, text1){
                       "payload": {
                         "template_type": "generic",
                         "elements": [{
-                          "title": 'Location Shared By Bot',
-                          "subtitle": "Location Subtitle",
+                          "title": 'Location Shared By Kunta',
+                          "subtitle": "Nearest nbk bank",
                           "image_url": "https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyDV5zxg6Oj-mdq_vAM4m9CvcjRMu6e3Q4M&markers=color:red|label:B|52,42&size=360x360&zoom=13"
                         }]
                       }
