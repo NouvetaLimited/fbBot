@@ -1737,7 +1737,7 @@ function decideMessage(sender, text1){
               console.log("response body error")
           }
       });
-
+      typingOff(sender)
   }
   //typing on
   function typingOn(sender) {
@@ -1748,6 +1748,44 @@ function decideMessage(sender, text1){
           json: {
               recipient: {id: sender},
                "sender_action":"typing_on",
+          }
+      }, function(error, response, body) {
+          if (error) {
+              console.log("sending error")
+          } else if (response.body.error) {
+              console.log("response body error")
+          }
+      });
+  }
+  // typing on
+  function typingOn(sender) {
+      request({
+          url: "https://graph.facebook.com/v2.6/me/messages",
+          qs : {access_token : token},
+          method: "POST" ,
+          json: {
+              recipient: {id: sender},
+               "sender_action":"typing_on",
+          }
+      }, function(error, response, body) {
+          if (error) {
+              console.log("sending error")
+          } else if (response.body.error) {
+              console.log("response body error")
+          }
+      });
+
+  }
+
+  // typing offer
+  function typingOff(sender) {
+      request({
+          url: "https://graph.facebook.com/v2.6/me/messages",
+          qs : {access_token : token},
+          method: "POST" ,
+          json: {
+              recipient: {id: sender},
+               "sender_action":"typing_off",
           }
       }, function(error, response, body) {
           if (error) {
