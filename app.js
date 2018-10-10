@@ -1646,6 +1646,9 @@ function decideMessage(sender, text1){
             });
 
          }
+         else(
+           menuMain(sender,"Hey. I'm still in alpha mode and I have to learn a lot. But if you like me a bit, please become a fan on Facebook and feel free to share me with friends 😉 Thanks a lot! 🤖. please to assist me use the command button")
+         )
        })
        .catch(function (error) {
          console.log(error);
@@ -2061,8 +2064,8 @@ function decideMessage(sender, text1){
                  },
                {
                  "content_type":"text",
-                 "title":"not now",
-                 "payload":"not now",
+                 "title":"Cancel",
+                 "payload":"Cancel",
                  //"image_url":"http://example.com/img/red.png"
                }
              ]
@@ -2145,8 +2148,8 @@ function decideMessage(sender, text1){
                },
                {
                  "content_type":"text",
-                 "title":"cancel",
-                 "payload":"cancel",
+                 "title":"not now",
+                 "payload":"not now",
                }
              ]
               }
