@@ -213,27 +213,41 @@ function decideMessage(sender, text1){
        });
     }
     else if(text.includes("not now")){
-      axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paid/${text}`)
        .then(function (response) {
          const data= response.status
          console.log(response);
-         const name = response.data.first_name
-         //sendButtonMessage(sender,"Hi "+name+",  I am Kunta and will be your agent today, how may I help you")
-         sendText(sender,"Have a great day "+name+" and hope to hear from you soon, you can always reachout to me here by just typing 'Hi' or call us on 0703088000. And im always here 24/7 to assist you 👋")
-       })
+         axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+          .then(function (response) {
+            const data= response.status
+            console.log(response);
+            const name = response.data.first_name
+            returnPay(sender,""+name+",When you are ready just type load now. Can I tell you the services I can help you with?")
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+     })
        .catch(function (error) {
          console.log(error);
        });
     }
     else if(text.includes("cancel")){
-      axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paid/${text}`)
        .then(function (response) {
          const data= response.status
          console.log(response);
-         const name = response.data.first_name
-         //sendButtonMessage(sender,"Hi "+name+",  I am Kunta and will be your agent today, how may I help you")
-         sendText(sender,"Have a great day "+name+" and hope to hear from you soon, you can always reachout to me here by just typing 'Hi' or call us on 0703088000. And im always here 24/7 to assist you 👋")
-       })
+         axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+          .then(function (response) {
+            const data= response.status
+            console.log(response);
+            const name = response.data.first_name
+            returnPay(sender,""+name+",When you are ready just type load now. Can I tell you the services I can help you with?")
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+     })
        .catch(function (error) {
          console.log(error);
        });
@@ -801,6 +815,15 @@ function decideMessage(sender, text1){
                  const name = response.data.first_name
                  //sendButtonMessage(sender,"Hi "+name+",  I am Kunta and will be your agent today, how may I help you")
                  sendText(sender,"Thanks for engaging me "+name+". I am always here for you. Just type “Hi Kunta” or call us on 073012141 and I will return to assist you whichever way I can. Have a fab day! 👋")
+                 axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/byebye/${text}`)
+                  .then(function (response) {
+                    const data= response.status
+                    console.log(response);
+                })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
+
                })
                .catch(function (error) {
                  console.log(error);
@@ -1160,7 +1183,7 @@ function decideMessage(sender, text1){
                   .catch(function (error) {
                     console.log(error);
                   });
-              }else {
+              }else if(message === 'byebye') {
                  sendText(sender,"Wrong OTP. Contact our customer care for assistant")
               }
             })
