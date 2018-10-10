@@ -70,9 +70,7 @@ app.post('/webhook/', function(req, res){
         }
       else  if(event.message.attachments){
           locateAttchment(sender)
-          .then(){
-          menuMain(sender,"here are more options")  
-          }
+          menuMain(sender,"here are more options")
         }
     }
     res.sendStatus(200);
