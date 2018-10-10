@@ -1703,6 +1703,7 @@ function decideMessage(sender, text1){
           json: {
               recipient: {id: sender},
               message: messageData,
+              sender_action: "typing_off"
           }
       }, function(error, response, body) {
           if (error) {
