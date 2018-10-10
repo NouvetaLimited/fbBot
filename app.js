@@ -63,14 +63,10 @@ app.post('/webhook/', function(req, res){
            decideMessage(sender, text)
 
         }
-      else  if(event.postback){
+      if(event.postback){
             let text = JSON.stringify(event.postback.payload)
             decideMessage(sender, text)
             console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',text);
-        }
-      else  if(event.message.attachments){
-          locateAttchment(sender)
-          menuMain(sender,"this are more ")
         }
     }
     res.sendStatus(200);
@@ -280,7 +276,8 @@ function decideMessage(sender, text1){
          const data= response.status
          console.log(response);
          const name = response.data.first_name
-         menuMain(sender,"Hi "+name+",  Welcome back.Below are the services I can offer you here ,")
+         sendText(sender,"Hi "+name+",  Welcome back.")
+         menuMain(sender,"Below are the services I can offer you here , "+name+"")
        })
        .catch(function (error) {
          console.log(error);
