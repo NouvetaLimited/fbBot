@@ -69,7 +69,8 @@ app.post('/webhook/', function(req, res){
             console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',text);
         }
       else  if(event.message.attachments){
-          sendText(sender,"uuuwwiiiiii")
+          locateAttchment(sender)
+          sendText(sender,"uuuuuuuwwii")
         }
     }
     res.sendStatus(200);
@@ -2150,5 +2151,26 @@ function decideMessage(sender, text1){
                }
              ]
               }
+            sendRequest(sender, messageData);
+          }
+
+
+          // chequeLocation
+
+          function locateAttchment(sender){
+            let  messageData = {
+                    "attachment": {
+                      "type": "template",
+                      "payload": {
+                        "template_type": "generic",
+                        "elements": [{
+                          "title": 'Location Shared By Bot',
+                          "subtitle": "Location Subtitle",
+                          "image_url": "https://maps.googleapis.com/maps/api/staticmap?key= + "AIzaSyDV5zxg6Oj-mdq_vAM4m9CvcjRMu6e3Q4M" +"
+                          "&markers=color:red|label:B|" + lat + "," + long + "&size=360x360&zoom=13"
+                        }]
+                      }
+                    }
+                  }
             sendRequest(sender, messageData);
           }
