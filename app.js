@@ -1722,6 +1722,8 @@ function decideMessage(sender, text1){
   // the sending messaging_events
 
   function sendRequest(sender, messageData) {
+
+    typingOff(sender)
       request({
           url: "https://graph.facebook.com/v2.6/me/messages",
           qs : {access_token : token},
@@ -1737,7 +1739,6 @@ function decideMessage(sender, text1){
               console.log("response body error")
           }
       });
-      typingOff(sender)
   }
   //typing on
   function typingOn(sender) {
