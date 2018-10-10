@@ -70,6 +70,7 @@ app.post('/webhook/', function(req, res){
         }
         if(event.message && event.message.attachments){
           locateAttchment(sender)
+          decideMessage(sender,"1215151515151")
         }
     }
     res.sendStatus(200);
