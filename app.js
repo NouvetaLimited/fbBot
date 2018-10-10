@@ -222,7 +222,7 @@ function decideMessage(sender, text1){
             const data= response.status
             console.log(response);
             const name = response.data.first_name
-            returnPay(sender,""+name+",When you are ready just type load now. Can I tell you the services I can help you with?")
+            returnPay(sender,""+name+", Can I tell you the services I can help you with?")
           })
           .catch(function (error) {
             console.log(error);
@@ -242,7 +242,7 @@ function decideMessage(sender, text1){
             const data= response.status
             console.log(response);
             const name = response.data.first_name
-            returnPay(sender,""+name+",When you are ready just type load now. Can I tell you the services I can help you with?")
+            returnPay(sender,""+name+". Can I tell you the services I can help you with?")
           })
           .catch(function (error) {
             console.log(error);
