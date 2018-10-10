@@ -69,16 +69,16 @@ app.post('/webhook/', function(req, res){
         }
       else  if(event.message.attachments){
           sendText(sender,"Hold on! Finding the closest ATM to your location")
-          returnPay(sender,""+name+",is there anything else I can help you with?")
           locateAttchment(sender)
-           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paid/${text}`)
-            .then(function (response) {
-              const data= response.status
-              console.log(response);
-          })
-            .catch(function (error) {
-              console.log(error);
-            });
+          axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paid/${text}`)
+           .then(function (response) {
+             const data= response.status
+             console.log(response);
+             returnPay(sender,"Is there anythinganything else I can help you with?")
+         })
+           .catch(function (error) {
+             console.log(error);
+           });
         }
     }
     res.sendStatus(200);
