@@ -69,7 +69,7 @@ app.post('/webhook/', function(req, res){
             console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',text);
         }
         if(event.message.attachments){
-          sendText(sender."uuuwwiiiiii")
+          sendText(sender,"uuuwwiiiiii")
         }
     }
     res.sendStatus(200);
