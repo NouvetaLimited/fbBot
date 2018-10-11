@@ -55,7 +55,7 @@ app.post('/webhook/', function(req, res){
     for (let i = 0; i < messaging_events.length; i++){
          let event = messaging_events[i];
         let sender = event.sender.id;
-        typingOn(sender)
+        //typingOn(sender)
 
         if(event.message && event.message.text){
             let text = event.message.text;
@@ -233,21 +233,23 @@ function decideMessage(sender, text1){
        });
     }
     else if(text.includes("cancel")){
-      axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/paid/${text}`)
+      axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
        .then(function (response) {
          const data= response.status
          console.log(response);
-         axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
+         const name = response.data.first_name
+         //sendButtonMessage(sender,"Hi "+name+",  I am Kunta and will be your agent today, how may I help you")
+         sendText(sender,"Thanks for engaging me "+name+". I am always here for you. Just type “Hi Kunta” or call us on 073012141 and I will return to assist you whichever way I can. Have a fab day! 👋")
+         axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/byebye/${text}`)
           .then(function (response) {
             const data= response.status
             console.log(response);
-            const name = response.data.first_name
-            returnPay(sender,""+name+". Can I tell you the services I can help you with?")
-          })
+        })
           .catch(function (error) {
             console.log(error);
           });
-     })
+
+       })
        .catch(function (error) {
          console.log(error);
        });
