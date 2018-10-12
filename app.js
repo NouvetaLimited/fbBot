@@ -724,32 +724,33 @@ function decideMessage(sender, text1){
             });
          }
          else if(message === 'reg2'){
-           axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/register/${sender}/${text}`)
-            .then(function (response) {
-              const data= response.status
-              console.log(response);
-              axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/otpreg/${text}`)
-               .then(function (response) {
-                 const data= response.status
-                 console.log(response);
-               })
-               .catch(function (error) {
-                 console.log(error);
-               });
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
             axios.get(`https://graph.facebook.com/${sender}?fields=first_name,last_name,profile_pic&access_token=${token}`)
              .then(function (response) {
                const data= response.status
                console.log(response);
                const name = response.data.first_name
+               const name = response.data.last_name
                quickReplyOTP(sender,"Thanks "+name+". Ok. Before we can proceed, I need to perform a security check. I have sent you a One-Time Passcode to the number given please enter it below")
              })
              .catch(function (error) {
                console.log(error);
              });
+             axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/register/${sender}/${text}/${name}/${name1}`)
+              .then(function (response) {
+                const data= response.status
+                console.log(response);
+                axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/postmessage/${sender}/otpreg/${text}`)
+                 .then(function (response) {
+                   const data= response.status
+                   console.log(response);
+                 })
+                 .catch(function (error) {
+                   console.log(error);
+                 });
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
          }
          else if(message === 'otpreg'){
            axios.get(`https://nouveta.tech/fbbot_BE/public/index.php/api/otp/${sender}/${text}`)
