@@ -729,7 +729,7 @@ function decideMessage(sender, text1){
                const data= response.status
                console.log(response);
                const name = response.data.first_name
-               const name = response.data.last_name
+               const name1 = response.data.first_name
                quickReplyOTP(sender,"Thanks "+name+". Ok. Before we can proceed, I need to perform a security check. I have sent you a One-Time Passcode to the number given please enter it below")
              })
              .catch(function (error) {
